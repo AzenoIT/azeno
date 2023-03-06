@@ -2,7 +2,7 @@
 name = "quiz-venv"
 version = "0.1.0"
 description = "virtual environment for quiz application"
-authors = [""]
+authors = ["Azeno Team"]
 packages = [{include = "quiz_venv"}]
 
 [tool.poetry.dependencies]

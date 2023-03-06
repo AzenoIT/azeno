@@ -1,14 +1,27 @@
 FROM python:3.11
 
+ARG DJANGO_ENV=development
+
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONBUFFERED 1
+
+ENV POETRY_VERSION=1.4.0 \
+POETRY_NO_INTERACTION=1 \
+POETRY_VIRTUALENVS_CREATE=false \
+POETRY_HOME='/usr/local'
+
+RUN apt-get install --no-install-recommends -y  \
+    && curl -sSL 'https://install.python-poetry.org' | python - \
+    && poetry --version
 
 WORKDIR /app
 
 COPY quiz-venv/pyproject.toml quiz-venv/poetry.lock ./
 
-RUN pip install -U poetry
-RUN poetry config virtualenvs.create false && poetry install --no-root
+RUN poetry run pip install -U pip \
+  && poetry install \
+    $(if [ "$DJANGO_ENV" = 'production' ]; then echo '--only main'; fi) \
+    --no-interaction --no-ansi --no-root
 
 COPY . .
 
