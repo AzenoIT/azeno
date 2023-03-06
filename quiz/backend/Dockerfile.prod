@@ -18,7 +18,7 @@ WORKDIR /app
 COPY quiz-venv/pyproject.toml quiz-venv/poetry.lock ./
 
 RUN poetry run pip install -U pip \
-  && poetry install --no-interaction --no-ansi --no-root
+  && poetry install --only main --no-interaction --no-ansi --no-root
 
 COPY . .
 
