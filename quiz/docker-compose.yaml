@@ -2,6 +2,8 @@ services:
   backend_quiz:
     build:
         context: ./backend
+    env_file:
+      - ./backend/.envs/.env
     ports:
       - 8000:8000
     volumes:
