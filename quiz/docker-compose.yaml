@@ -1,0 +1,31 @@
+version: "3"
+services:
+  web:
+    container_name: quiz_web
+    image: node:19.7.0-slim
+    restart: on-failure
+    working_dir: /app
+    volumes:
+      - ./web:/app
+    ports:
+      - "3000:3000"
+    networks:
+      - proxy-web
+    command: ["npm", "run", "dev"]
+
+  proxy:
+    container_name: quiz_proxy
+    build:
+      context: ./proxy
+    restart: on-failure
+    networks:
+      - proxy-web
+    depends_on:
+      - web
+    ports:
+      - "80:80"
+      - "443:443"
+
+networks:
+  proxy-web:
+    driver: bridge
