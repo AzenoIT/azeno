@@ -5,7 +5,3 @@ services:
         dockerfile: Dockerfile.prod
     env_file:
       - ./backend/.envs/.env
-    ports:
-      - 8000:8000
-    volumes:
-      - ./backend:/app
