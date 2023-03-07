@@ -19,6 +19,9 @@ COPY pyproject.toml poetry.lock ./
 
 RUN poetry install --no-interaction --no-ansi --no-root
 
+COPY ./entrypoint.sh .
+RUN chmod +x ./entrypoint.sh
+
 COPY . .
 
-CMD python manage.py runserver 0.0.0.0:8000
+ENTRYPOINT ["./entrypoint.sh"]
