@@ -15,7 +15,7 @@ RUN apt-get install --no-install-recommends -y  \
 
 WORKDIR /app
 
-COPY quiz-venv/pyproject.toml quiz-venv/poetry.lock ./
+COPY pyproject.toml poetry.lock ./
 
 RUN poetry run pip install -U pip \
   && poetry install --no-interaction --no-ansi --no-root
