@@ -1,15 +1,14 @@
-version: "3"
 services:
   web:
-    container_name: quiz_web
     build:
       context: ./web
     restart: on-failure
     networks:
       - proxy-web
+    env_file:
+      - envs/web.env
 
   proxy:
-    container_name: quiz_proxy
     build:
       context: ./proxy
     restart: on-failure

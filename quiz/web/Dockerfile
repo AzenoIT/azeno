@@ -1,15 +1,11 @@
-FROM node:19.7.0-slim as builder
+FROM node:18.14.2-slim as builder
 
 WORKDIR /opt/app
 
 COPY ./package.json ./package-lock.json ./
 RUN npm ci
 
-COPY ./public ./public
-COPY ./nginx ./nginx
-COPY ./src ./src
-COPY ./tsconfig.json ./tsconfig.node.json ./vite.config.ts ./index.html ./
-
+COPY . .
 RUN npm run build
 
 

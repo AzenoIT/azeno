@@ -1,20 +1,20 @@
-version: "3"
 services:
   web:
-    container_name: quiz_web
-    image: node:19.7.0-slim
+    image: node:18.14.2-slim
     restart: on-failure
     working_dir: /app
-    volumes:
-      - ./web:/app
-    ports:
-      - "3000:3000"
     networks:
       - proxy-web
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./web:/app
+    env_file:
+      - envs/web.env
     command: /bin/bash -c "npm ci && npm run dev"
+    stdin_open: true
 
   proxy:
-    container_name: quiz_proxy
     build:
       context: ./proxy
     restart: on-failure
