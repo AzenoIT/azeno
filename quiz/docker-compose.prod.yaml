@@ -1,0 +1,24 @@
+services:
+  web:
+    build:
+      context: ./web
+    restart: on-failure
+    networks:
+      - proxy-web
+    env_file:
+      - envs/web.env
+
+  proxy:
+    build:
+      context: ./proxy
+    restart: on-failure
+    networks:
+      - proxy-web
+    depends_on:
+      - web
+    ports:
+      - "80:80"
+
+networks:
+  proxy-web:
+    driver: bridge

@@ -1,0 +1,30 @@
+services:
+  web:
+    image: node:18.14.2-slim
+    restart: on-failure
+    working_dir: /app
+    networks:
+      - proxy-web
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./web:/app
+    env_file:
+      - envs/web.env
+    command: /bin/bash -c "npm ci && npm run dev"
+    stdin_open: true
+
+  proxy:
+    build:
+      context: ./proxy
+    restart: on-failure
+    networks:
+      - proxy-web
+    depends_on:
+      - web
+    ports:
+      - "80:80"
+
+networks:
+  proxy-web:
+    driver: bridge
