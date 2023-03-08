@@ -21,7 +21,9 @@
     "jsx": "react-jsx",
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "types": ["node"]
+    "types": ["node"],
+    "strictNullChecks": true,
+    "strictFunctionTypes": false
   },
   "include": [
     "src"
