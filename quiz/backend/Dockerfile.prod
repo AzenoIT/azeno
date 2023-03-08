@@ -31,6 +31,7 @@ RUN apt-get install -y \
 
 ENV APP_HOME=/app
 WORKDIR $APP_HOME
+RUN mkdir $APP_HOME/staticfiles
 
 ENV PATH=/app/.venv/bin:$PATH
 COPY --from=build /app/.venv /app/.venv

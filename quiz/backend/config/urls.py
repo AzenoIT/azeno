@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+# TODO: change admin endpoint for production and reverse proxy
+
 urlpatterns = [
     path('admin/', admin.site.urls),
 ]
