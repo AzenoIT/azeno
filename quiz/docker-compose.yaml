@@ -26,6 +26,8 @@ services:
       - backend_quiz
     ports:
       - "80:80"
+    volumes:
+      - ./backend/staticfiles:/app/staticfiles
 
   backend_quiz:
     build:
@@ -41,7 +43,6 @@ services:
     restart: on-failure
     volumes:
       - ./backend:/app
-      - static_volume:/app/staticfiles
     networks:
       - backend_network
       - backend_db_network
@@ -60,7 +61,6 @@ services:
 
 volumes:
   backend_db_volume:
-  static_volume:
 
 networks:
   backend_db_network:
