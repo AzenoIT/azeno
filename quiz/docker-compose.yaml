@@ -2,6 +2,7 @@ services:
   backend_quiz:
     build:
         context: ./backend
+    command: python manage.py runserver 0.0.0.0:8000
     env_file:
       - ./backend/.envs/.env
       - ./.envs/.env_db
@@ -33,6 +34,5 @@ volumes:
 networks:
   backend_db_network:
     driver: bridge
-
   backend_network:
     driver: bridge

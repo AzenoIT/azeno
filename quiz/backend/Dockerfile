@@ -15,7 +15,7 @@ RUN apt-get install --no-install-recommends -y  \
 
 WORKDIR /app
 
-COPY pyproject.toml poetry.lock ./
+COPY ./pyproject.toml ./poetry.lock ./
 
 RUN poetry install --no-interaction --no-ansi --no-root
 
