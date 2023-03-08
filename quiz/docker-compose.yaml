@@ -1,11 +1,39 @@
 services:
+  web:
+    image: node:18.14.2-slim
+    restart: on-failure
+    working_dir: /app
+    networks:
+      - proxy-web
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./web:/app
+    env_file:
+      - envs/web.env
+    command: /bin/bash -c "npm ci && npm run dev"
+    stdin_open: true
+
+  proxy:
+    build:
+      context: ./proxy
+    restart: on-failure
+    networks:
+      - proxy-web
+      - backend_network
+    depends_on:
+      - web
+      - backend_quiz
+    ports:
+      - "80:80"
+
   backend_quiz:
     build:
         context: ./backend
     command: python manage.py runserver 0.0.0.0:8000
     env_file:
       - ./backend/.envs/.env
-      - ./.envs/.env_db
+      - ./envs/.env_db
     ports:
       - 8000:8000
     depends_on:
@@ -13,16 +41,18 @@ services:
     restart: on-failure
     volumes:
       - ./backend:/app
+      - static_volume:/app/staticfiles
     networks:
       - backend_network
       - backend_db_network
+
 
   backend_db:
     image: postgres:15.1
     volumes:
       - backend_db_volume:/var/lib/postgres/data/
     env_file:
-      - .envs/.env_db
+      - ./envs/.env_db
     ports:
       - 5432:5432
     networks:
@@ -30,9 +60,12 @@ services:
 
 volumes:
   backend_db_volume:
+  static_volume:
 
 networks:
   backend_db_network:
     driver: bridge
   backend_network:
+    driver: bridge
+  proxy-web:
     driver: bridge

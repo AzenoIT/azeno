@@ -1,13 +1,25 @@
 services:
+  web:
+    build:
+      context: ./web
+    restart: on-failure
+    networks:
+      - proxy-web
+    env_file:
+      - envs/web.env
+
   proxy:
     build:
-      context: ./nginx
-    ports:
-      - 8081:80
-    depends_on:
-      - backend_quiz
+      context: ./proxy
+    restart: on-failure
     networks:
+      - proxy-web
       - backend_network
+    depends_on:
+      - web
+      - backend_quiz
+    ports:
+      - "80:80"
     volumes:
       - static_volume:/app/staticfiles
 
@@ -17,7 +29,7 @@ services:
       dockerfile: Dockerfile.prod
     env_file:
       - ./backend/.envs/.env
-      - ./.envs/.env_db
+      - ./envs/.env_db
     command: gunicorn config.wsgi:application --bind 0.0.0.0:8000
     restart: on-failure
     depends_on:
@@ -33,7 +45,7 @@ services:
     volumes:
       - backend_db_volume:/var/lib/postgres/data/
     env_file:
-      - ./.envs/.env_db
+      - ./envs/.env_db
     networks:
       - backend_db_network
 
@@ -45,4 +57,6 @@ networks:
   backend_db_network:
     driver: bridge
   backend_network:
+    driver: bridge
+  proxy-web:
     driver: bridge
