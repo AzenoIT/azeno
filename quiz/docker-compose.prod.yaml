@@ -33,28 +33,28 @@ services:
     command: gunicorn config.wsgi:application --bind 0.0.0.0:8000
     restart: on-failure
     depends_on:
-      - backend_db
+      - backend_quiz_db
     networks:
       - backend_network
-      - backend_db_network
+      - backend_quiz_db_network
     volumes:
       - static_volume:/app/staticfiles
 
-  backend_db:
+  backend_quiz_db:
     image: postgres:15.1
     volumes:
-      - backend_db_volume:/var/lib/postgres/data/
+      - backend_quiz_db_volume:/var/lib/postgresql/data
     env_file:
       - envs/.db.env
     networks:
-      - backend_db_network
+      - backend_quiz_db_network
 
 volumes:
-  backend_db_volume:
+  backend_quiz_db_volume:
   static_volume:
 
 networks:
-  backend_db_network:
+  backend_quiz_db_network:
     driver: bridge
   backend_network:
     driver: bridge
