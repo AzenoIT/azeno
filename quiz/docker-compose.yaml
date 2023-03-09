@@ -14,7 +14,7 @@ services:
     command: /bin/bash -c "npm ci && npm run dev"
     stdin_open: true
 
-  proxy:
+  quiz_proxy:
     build:
       context: ./proxy
     restart: on-failure
