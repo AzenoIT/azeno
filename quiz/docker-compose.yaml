@@ -1,10 +1,10 @@
 services:
-  web:
+  quiz_web:
     image: node:18.14.2-slim
     restart: on-failure
     working_dir: /app
     networks:
-      - proxy-web
+      - quiz_web_network
     ports:
       - "3000:3000"
     volumes:
@@ -19,17 +19,17 @@ services:
       context: ./proxy
     restart: on-failure
     networks:
-      - proxy-web
-      - backend_network
+      - quiz_web_network
+      - quiz_backend_network
     depends_on:
-      - web
-      - backend_quiz
+      - quiz_web
+      - quiz_backend
     ports:
       - "80:80"
     volumes:
       - ./backend/staticfiles:/app/staticfiles
 
-  backend_quiz:
+  quiz_backend:
     build:
         context: ./backend
     command: python manage.py runserver 0.0.0.0:8000
@@ -39,16 +39,16 @@ services:
     ports:
       - "8000:8000"
     depends_on:
-      - backend_quiz_db
+      - quiz_postgres
     restart: on-failure
     volumes:
       - ./backend:/app
     networks:
-      - backend_network
-      - backend_quiz_db_network
+      - quiz_backend_network
+      - quiz_postgres_network
 
 
-  backend_quiz_db:
+  quiz_postgres:
     image: postgres:15.1
     volumes:
       - backend_quiz_db_volume:/var/lib/postgresql/data
@@ -57,15 +57,15 @@ services:
     ports:
       - "5432:5432"
     networks:
-      - backend_quiz_db_network
+      - quiz_postgres_network
 
 volumes:
   backend_quiz_db_volume:
 
 networks:
-  backend_quiz_db_network:
+  quiz_postgres_network:
     driver: bridge
-  backend_network:
+  quiz_backend_network:
     driver: bridge
-  proxy-web:
+  quiz_web_network:
     driver: bridge

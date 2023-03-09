@@ -1,10 +1,10 @@
 services:
-  web:
+  quiz_web:
     build:
       context: ./web
     restart: on-failure
     networks:
-      - proxy-web
+      - quiz_web_network
     env_file:
       - envs/web.env
 
@@ -13,17 +13,17 @@ services:
       context: ./proxy
     restart: on-failure
     networks:
-      - proxy-web
-      - backend_network
+      - quiz_web_network
+      - quiz_backend_network
     depends_on:
-      - web
-      - backend_quiz
+      - quiz_web
+      - quiz_backend
     ports:
       - "80:80"
     volumes:
-      - static_volume:/app/staticfiles
+      - quiz_static_volume:/app/staticfiles
 
-  backend_quiz:
+  quiz_backend:
     build:
       context: ./backend
       dockerfile: Dockerfile.prod
@@ -33,30 +33,30 @@ services:
     command: gunicorn config.wsgi:application --bind 0.0.0.0:8000
     restart: on-failure
     depends_on:
-      - backend_quiz_db
+      - quiz_postgres
     networks:
-      - backend_network
-      - backend_quiz_db_network
+      - quiz_backend_network
+      - quiz_postgres_network
     volumes:
-      - static_volume:/app/staticfiles
+      - quiz_static_volume:/app/staticfiles
 
-  backend_quiz_db:
+  quiz_postgres:
     image: postgres:15.1
     volumes:
-      - backend_quiz_db_volume:/var/lib/postgresql/data
+      - quiz_postgres_volume:/var/lib/postgresql/data
     env_file:
       - envs/.db.env
     networks:
-      - backend_quiz_db_network
+      - quiz_postgres_network
 
 volumes:
-  backend_quiz_db_volume:
-  static_volume:
+  quiz_postgres_volume:
+  quiz_static_volume:
 
 networks:
-  backend_quiz_db_network:
+  quiz_postgres_network:
     driver: bridge
-  backend_network:
+  quiz_backend_network:
     driver: bridge
-  proxy-web:
+  quiz_web_network:
     driver: bridge
