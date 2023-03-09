@@ -35,7 +35,7 @@ services:
     command: python manage.py runserver 0.0.0.0:8000
     env_file:
       - ./backend/.envs/.env
-      - ./envs/.env_db
+      - envs/.db.env
     ports:
       - 8000:8000
     depends_on:
@@ -53,7 +53,7 @@ services:
     volumes:
       - backend_db_volume:/var/lib/postgres/data/
     env_file:
-      - ./envs/.env_db
+      - envs/.db.env
     ports:
       - 5432:5432
     networks:
