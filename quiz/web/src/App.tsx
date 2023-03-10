@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import TestQuery from "components/TestQuery";
+import TestQuery from "components/TestQuery/TestQuery";
 
 function App() {
     const queryClient = new QueryClient();
