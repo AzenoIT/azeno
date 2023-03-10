@@ -3,24 +3,24 @@ import useJwtToken from "modules/common/hooks/useJwtToken";
 
 const isoDateFormat = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d*)?$/;
 
-function isIsoDateString(value: any): boolean {
-    return value && typeof value === "string" && isoDateFormat.test(value);
+function isIsoDateString(value: unknown): boolean {
+    return !!value && typeof value === "string" && isoDateFormat.test(value);
 }
 
 /**
- * Converts ISO date time strings into a Date objects
+ * Converts in place ISO datetime strings into a Date objects.
  */
-function handleDates(body: any) {
+function handleDates(body: Record<string, unknown> | null | undefined | string | number | boolean) {
     if (body === null || body === undefined || typeof body !== "object") {
-        return body;
+        return;
     }
 
     for (const key of Object.keys(body)) {
         const value = body[key];
         if (isIsoDateString(value)) {
-            body[key] = new Date(value);
+            body[key] = new Date(value as string);
         } else if (typeof value === "object") {
-            handleDates(value);
+            handleDates(value as Record<string, unknown>);
         }
     }
 }
