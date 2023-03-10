@@ -1,7 +1,7 @@
-FROM python:3.11 AS builder
+FROM python:3.11 AS development
 
 
-ENV PYTHONDONTWRITEBYTECODE 1 \
+ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONBUFFERED 1
 
 ENV POETRY_VERSION=1.4.0 \
@@ -10,7 +10,7 @@ ENV POETRY_VERSION=1.4.0 \
     POETRY_HOME='/usr/local'
 
 COPY ./install-poetry.py ./
-RUN python3 install-poetry.py --version 1.4.0\
+RUN python3 install-poetry.py --version 1.4.0 \
     && $POETRY_HOME/bin/poetry --version
 
 WORKDIR /app
@@ -27,6 +27,6 @@ ENTRYPOINT ["./entrypoint.sh"]
 
 COPY . .
 
-FROM builder as prod
+FROM development as prod
 
-COPY --from=builder /app /app
+COPY --from=development /app /app

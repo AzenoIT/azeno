@@ -32,7 +32,7 @@ services:
   quiz_backend:
     build:
         context: ./backend
-        target: builder
+        target: development
     command: python manage.py runserver 0.0.0.0:8000
     env_file:
       - ./envs/backend.env
