@@ -1,4 +1,4 @@
-import useCatFact from "components/TestQuery/api";
+import useCatFact from "modules/common/components/TestQuery/api";
 
 export default function TestQuery() {
     const { data, isLoading } = useCatFact();
