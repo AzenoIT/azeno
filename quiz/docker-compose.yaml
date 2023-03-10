@@ -32,10 +32,11 @@ services:
   quiz_backend:
     build:
         context: ./backend
+        target: builder
     command: python manage.py runserver 0.0.0.0:8000
     env_file:
-      - ./backend/.envs/.env
-      - envs/.db.env
+      - ./envs/backend.env
+      - ./envs/postgres.env
     ports:
       - "8000:8000"
     depends_on:
@@ -53,7 +54,7 @@ services:
     volumes:
       - backend_quiz_db_volume:/var/lib/postgresql/data
     env_file:
-      - envs/.db.env
+      - envs/postgres.env
     ports:
       - "5432:5432"
     networks:

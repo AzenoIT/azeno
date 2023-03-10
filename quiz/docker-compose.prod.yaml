@@ -26,10 +26,10 @@ services:
   quiz_backend:
     build:
       context: ./backend
-      dockerfile: Dockerfile.prod
+      target: prod
     env_file:
-      - ./backend/.envs/.env
-      - envs/.db.env
+      - ./envs/backend.env
+      - ./envs/postgres.env
     command: gunicorn config.wsgi:application --bind 0.0.0.0:8000
     restart: on-failure
     depends_on:
@@ -45,7 +45,7 @@ services:
     volumes:
       - quiz_postgres_volume:/var/lib/postgresql/data
     env_file:
-      - envs/.db.env
+      - envs/postgres.env
     networks:
       - quiz_postgres_network
 
