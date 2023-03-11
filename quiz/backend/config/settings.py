@@ -132,6 +132,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGGING_CONFIG = None
 LOGLEVEL = os.environ.get('LOGGING_LVL', 'DEBUG')
 
+if not os.path.exists(os.path.join(BASE_DIR, 'logs')):
+    os.mkdir(os.path.join(BASE_DIR, 'logs'))
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -142,7 +145,8 @@ LOGGING = {
             'filename': os.path.join(BASE_DIR, 'logs/debug.log'),
             'maxBytes': 5242880,
             'backupCount': 5,
-            'formatter': 'verbose'
+            'formatter': 'verbose',
+            'delay': True
         },
         'info': {
             'level': 'INFO',
@@ -150,7 +154,8 @@ LOGGING = {
             'filename': os.path.join(BASE_DIR, 'logs/info.log'),
             'maxBytes': 5242880,
             'backupCount': 5,
-            'formatter': 'verbose'
+            'formatter': 'verbose',
+            'delay': True
         },
         'error': {
             'level': 'ERROR',
@@ -158,7 +163,8 @@ LOGGING = {
             'filename': os.path.join(BASE_DIR, 'logs/error.log'),
             'maxBytes': 5242880,
             'backupCount': 5,
-            'formatter': 'verbose'
+            'formatter': 'verbose',
+            'delay': True
         }
     },
     'loggers': {
