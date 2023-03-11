@@ -4,3 +4,7 @@
 db.sqlite3
 .envs/.env
 staticfiles
+docs/_build/
+docs/_static/
+docs/_templates/
+docs/.doctrees
