@@ -24,13 +24,19 @@ export default function useAuthToken(): UseAuthToken {
         refreshToken: "",
     });
 
-    const setAccessToken = useCallback((token: string) => {
-        setTokens((prev) => ({ ...prev, accessToken: token }));
-    }, []);
+    const setAccessToken = useCallback(
+        (token: string) => {
+            setTokens((prev) => ({ ...prev, accessToken: token }));
+        },
+        [setTokens]
+    );
 
-    const setRefreshToken = useCallback((token: string) => {
-        setTokens((prev) => ({ ...prev, refreshToken: token }));
-    }, []);
+    const setRefreshToken = useCallback(
+        (token: string) => {
+            setTokens((prev) => ({ ...prev, refreshToken: token }));
+        },
+        [setTokens]
+    );
 
     const refreshAccessToken = useCallback(async () => {
         const response = await axios.post<{ access_token: string }>(
@@ -42,11 +48,11 @@ export default function useAuthToken(): UseAuthToken {
             { headers: { "content-type": "application/x-www-form-urlencoded" } }
         );
         if (response.status !== 200) {
-            return Promise.reject("Token refresh failed.");
+            return Promise.reject(new Error("Token refresh failed."));
         }
         setAccessToken(response.data.access_token);
         return Promise.resolve(response.data.access_token);
-    }, [config]);
+    }, [config, setAccessToken, refreshToken]);
 
     return { accessToken, refreshToken, refreshAccessToken, setAccessToken, setRefreshToken, setTokens };
 }
