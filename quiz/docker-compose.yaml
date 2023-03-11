@@ -13,6 +13,7 @@ services:
       - envs/web.env
     command: /bin/bash -c "npm ci && npm run dev"
     stdin_open: true
+    tty: true
 
   proxy:
     build:

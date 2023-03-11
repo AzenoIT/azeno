@@ -9,6 +9,7 @@
         "allowSyntheticDefaultImports": true,
         "strict": true,
         "forceConsistentCasingInFileNames": true,
+        "noFallthroughCasesInSwitch": true,
         "module": "ESNext",
         "moduleResolution": "Node",
         "resolveJsonModule": true,
@@ -17,7 +18,8 @@
         "jsx": "react-jsx",
         "noUnusedLocals": true,
         "noUnusedParameters": true,
-        "types": ["node"]
+        "types": ["node"],
+        "baseUrl": "./src"
     },
     "include": ["src"],
     "references": [
