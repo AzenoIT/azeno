@@ -15,7 +15,7 @@ interface UseAuthToken {
 
 /**
  * Hook allowing access to JWT token stored in localstorage.
- * Allows for setting tokens as well as refreshing access token using refresh token.
+ * Allows for setting tokens as well as refreshing accessToken using refreshToken.
  * */
 export default function useAuthToken(): UseAuthToken {
     const config = useAuthTokenConfig();
