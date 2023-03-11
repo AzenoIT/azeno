@@ -13,3 +13,7 @@
 2. Copy `envs/postgres.default.env` to `envs/postgres.env` and fill environmental variables.
 3. Copy `envs/backend.default.env` to `envs/backend.env` and fill environmental variables.
 4. Start services `docker compose -f docker-compose.prod.yaml up --build`.
+
+
+## Run Tests
+1. Run `docker compose exec <docker_service_name> pytest` or `docker compose exec <docker_service_name> poetry run pytest`.
