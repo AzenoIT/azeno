@@ -20,9 +20,7 @@
     "plugins": ["prettier", "simple-import-sort"],
     "settings": {
         "import/resolver": {
-            "node": {
-                "extensions": [".js", ".jsx", ".ts", ".tsx"]
-            }
+            "typescript": {}
         }
     },
     "rules": {
