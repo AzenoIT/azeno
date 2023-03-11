@@ -18,7 +18,6 @@ import dj_database_url
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
@@ -29,7 +28,6 @@ SECRET_KEY = os.environ.get('DJ_SECRET_KEY')
 DEBUG = int(os.environ.get('DJ_DEBUG', 0))
 
 ALLOWED_HOSTS = os.environ.get('DJ_ALLOWED_HOSTS', '').split()
-
 
 # Application definition
 
@@ -72,7 +70,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
@@ -89,7 +86,6 @@ db_from_env = dj_database_url.config(
 )
 
 DATABASES['default'].update(db_from_env)
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -109,7 +105,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
@@ -120,7 +115,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
@@ -137,7 +131,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGGING_CONFIG = None
 LOGLEVEL = os.environ.get('LOGGING_LVL', 'DEBUG')
-
 
 LOGGING = {
     'version': 1,
@@ -181,3 +174,13 @@ LOGGING = {
         },
     },
 }
+
+## Django Debug Toolbar
+
+if DEBUG:
+    INSTALLED_APPS += ['debug_toolbar']
+    MIDDLEWARE.insert(0, 'debug_toolbar.middleware.DebugToolbarMiddleware')
+    import socket
+
+    hostname, _, nginx_ips = socket.gethostbyname_ex("quiz_proxy")
+    INTERNAL_IPS = nginx_ips
