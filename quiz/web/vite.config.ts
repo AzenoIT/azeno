@@ -8,6 +8,12 @@ export default defineConfig({
         port: parseInt(process.env.VITE_PORT),
         host: "0.0.0.0",
     },
+    test: {
+        globals: true,
+        environment: "happy-dom",
+        exclude: ["node_modules"],
+        setupFiles: "src/setupTests.ts",
+    },
     plugins: [
         react(),
         tsconfigPaths(),
