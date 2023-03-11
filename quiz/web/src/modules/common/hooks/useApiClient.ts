@@ -4,6 +4,8 @@ import useAuthToken from "modules/common/AuthToken/useAuthToken";
 /**
  * Hook allowing access to a better Axios, which:
  * - Fills Authorization header with Bearer token, if no Authorization header was provided.
+ * - Attempts to refresh access token if response status was 403 and repeats request.
+ * - TODO parses all ISO date strings to Date objects.
  * */
 export default function useApiClient(): AxiosInstance {
     const { accessToken, refreshAccessToken } = useAuthToken();
