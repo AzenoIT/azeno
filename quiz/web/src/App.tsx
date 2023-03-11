@@ -1,6 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { AuthTokenProvider, AuthConfig } from "modules/common/AuthToken";
-import TestQuery from "modules/common/components/TestQuery/TestQuery";
+import { AuthConfig, AuthTokenProvider } from "modules/common/AuthToken";
 
 function App() {
     const queryClient = new QueryClient();
@@ -9,7 +8,7 @@ function App() {
     return (
         <QueryClientProvider client={queryClient}>
             <AuthTokenProvider config={authConfig}>
-                <TestQuery />
+                <h1>Hello World</h1>
             </AuthTokenProvider>
         </QueryClientProvider>
     );
