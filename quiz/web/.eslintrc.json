@@ -20,7 +20,7 @@
     "plugins": ["prettier", "simple-import-sort"],
     "settings": {
         "import/resolver": {
-                "typescript": {}
+            "typescript": {}
         }
     },
     "rules": {
