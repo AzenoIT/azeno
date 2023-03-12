@@ -1,12 +1,22 @@
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { AuthConfig, AuthTokenProvider } from "modules/common/AuthToken";
 import TailwindTest from "./components/TailwindTest/TailwindTest";
 import FormikTest from "./components/FormikTest/FormikTest";
 
 function App() {
+    const queryClient = new QueryClient();
+    const authConfig: AuthConfig = { tokenEndpoint: "/api/v1/token/" };
+
     return (
-        <div className="App">
-            <TailwindTest />
-            <FormikTest />
-        </div>
+        <QueryClientProvider client={queryClient}>
+            <AuthTokenProvider config={authConfig}>
+                <>
+                    <h1>Hello World</h1>
+                    <TailwindTest />
+                    <FormikTest />
+                </>
+            </AuthTokenProvider>
+        </QueryClientProvider>
     );
 }
 

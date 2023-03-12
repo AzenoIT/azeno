@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "quiz"
+version = "0.1.0"
+description = "virtual environment for quiz application"
+authors = ["Azeno Team"]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+django = "4.1.7"
+psycopg2 = "2.9.5"
+dj-database-url = "1.2.0"
+gunicorn = "20.1.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
