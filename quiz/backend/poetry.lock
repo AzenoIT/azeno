@@ -557,6 +557,26 @@ docs = ["sphinx", "sphinx-rtd-theme"]
 testing = ["Django", "django-configurations (>=2.0)"]
 
 [[package]]
+name = "renku-sphinx-theme"
+version = "0.2.1"
+description = "A Sphinx theme for Renku documentation."
+category = "dev"
+optional = false
+python-versions = "*"
+files = [
+    {file = "renku-sphinx-theme-0.2.1.tar.gz", hash = "sha256:647f8a3aab7d03644e89ea97cdf34af2175ff2031f99d5999e3b1d31c710c657"},
+    {file = "renku_sphinx_theme-0.2.1-py2.py3-none-any.whl", hash = "sha256:48128aa13e043a83ac422eb75f19bf1bfe147049de56f80f600e77a8c860dada"},
+]
+
+[package.dependencies]
+Sphinx = ">=1.6.3"
+
+[package.extras]
+all = ["Sphinx (>=1.6.3)", "check-manifest (>=0.25)", "isort (>=4.2.2)", "pydocstyle (>=1.0.0)"]
+docs = ["Sphinx (>=1.6.3)"]
+tests = ["check-manifest (>=0.25)", "isort (>=4.2.2)", "pydocstyle (>=1.0.0)"]
+
+[[package]]
 name = "requests"
 version = "2.28.2"
 description = "Python HTTP for Humans."
@@ -816,4 +836,4 @@ socks = ["PySocks (>=1.5.6,!=1.5.7,<2.0)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "f00e1118b5661cd5f36902d39e55d7cbd690cfa39a3cc1c915a602227aa73fab"
+content-hash = "d99a875735dc47f131c8bfe97c60df87b7d2ec82a966f53ea7a8867c65ea94aa"
