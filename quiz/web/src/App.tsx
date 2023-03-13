@@ -1,7 +1,7 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AuthConfig, AuthTokenProvider } from "modules/common/AuthToken";
-import TailwindTest from "./modules/genericTests/TailwindTest/TailwindTest";
-import FormikTest from "./modules/genericTests/FormikTest/FormikTest";
+import TailwindTest from "modules/genericTests/TailwindTest/TailwindTest";
+import FormikTest from "modules/genericTests/FormikTest/FormikTest";
 
 function App() {
     const queryClient = new QueryClient();
