@@ -1,6 +1,8 @@
-#!/bin/sh
+#!/bin/bash
 
-if [ "$DATABASE" = "postgres" ]
+set -e
+
+if [ "$POSTGRES_DB" = "azeno_quiz" ]
 then
   echo "Waiting for postgres ..."
 
@@ -8,7 +10,7 @@ then
     sleep 0.1
     done
 
-    echo "Postgres started"
+    echo "PostgreSQL started"
 
 fi
 
