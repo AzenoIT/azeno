@@ -1,7 +1,7 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AuthConfig, AuthTokenProvider } from "modules/common/AuthToken";
+import FakerTest from "./components/FakerTest/FakerTest";
 import TailwindTest from "./components/TailwindTest/TailwindTest";
-import FormikTest from "./components/FormikTest/FormikTest";
 
 function App() {
     const queryClient = new QueryClient();
@@ -11,9 +11,8 @@ function App() {
         <QueryClientProvider client={queryClient}>
             <AuthTokenProvider config={authConfig}>
                 <>
-                    <h1>Hello World</h1>
                     <TailwindTest />
-                    <FormikTest />
+                    <FakerTest />
                 </>
             </AuthTokenProvider>
         </QueryClientProvider>

@@ -2,15 +2,15 @@ import { useState } from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
 
-function FormikTest() {
+function FormikTest({ user }) {
     const [message, setMessage] = useState("");
     const [submitted, setSubmitted] = useState(false);
 
     const formik = useFormik({
         initialValues: {
-            email: "",
-            name: "",
-            message: "",
+            email: `${user.email}`,
+            name: `${user.firstName} ${user.lastName}`,
+            message: "You have something to tell us?",
         },
         onSubmit: () => {
             setMessage("Form submitted");
@@ -25,6 +25,19 @@ function FormikTest() {
 
     return (
         <div className="vh-100 flex flex-col justify-center items-center">
+            <div className="flex flex-col w-96 my-5">
+                <h2 className="text-3xl font-medium">Wielki brat Faker.js mówi:</h2>
+                <p className="mb-2">
+                    Your name is {user.firstName} and your last name is {user.lastName}.
+                </p>
+                <p className="mb-2">We know everything about you even if u dont know we even exist.</p>
+                <p className="mb-2">
+                    You are {user.sex}, your email is {user.email} and you were born
+                    {user.birthday.getMonth()}.
+                </p>
+                <p className="mb-2">Your desired description is {user.subscriptionTier}.</p>
+            </div>
+
             <div
                 hidden={!submitted}
                 className="relative px-3 py-3 mb-4 border rounded bg-blue-200 border-blue-300 text-blue-800"
