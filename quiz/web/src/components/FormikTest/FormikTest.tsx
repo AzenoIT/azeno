@@ -37,48 +37,53 @@ function FormikTest() {
                 <div className="mb-3">
                     <label htmlFor="name" className="form-label">
                         Name
-                        <input
-                            type="text"
-                            name="name"
-                            className="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-gray-800 border border-gray-200 rounded"
-                            placeholder="John Doe"
-                            value={formik.values.name}
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                        />
-                        {formik.errors.name && <div className="text-red-600">{formik.errors.name}</div>}
                     </label>
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        className="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-gray-800 border border-gray-200 rounded"
+                        placeholder="John Doe"
+                        value={formik.values.name}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                    />
+                    {formik.errors.name && <div className="text-red-600">{formik.errors.name}</div>}
                 </div>
 
                 <div className="mb-3">
                     <label htmlFor="email" className="form-label">
                         Email
-                        <input
-                            type="email"
-                            name="email"
-                            className="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-gray-800 border border-gray-200 rounded"
-                            placeholder="john@example.com"
-                            value={formik.values.email}
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                        />
-                        {formik.errors.email && <div className="text-red-600">{formik.errors.email}</div>}
                     </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        className="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-gray-800 border border-gray-200 rounded"
+                        placeholder="john@example.com"
+                        value={formik.values.email}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                    />
+                    {formik.errors.email && <div className="text-red-600">{formik.errors.email}</div>}
                 </div>
 
                 <div className="mb-3">
                     <label htmlFor="message" className="form-label">
                         Message
-                        <textarea
-                            name="message"
-                            className="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-gray-800 border border-gray-200 rounded"
-                            placeholder="Your message ..."
-                            value={formik.values.message}
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                        />
-                        {formik.errors.message && <div className="text-red-600">{formik.errors.message}</div>}
                     </label>
+
+                    <textarea
+                        id="message"
+                        name="message"
+                        className="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-gray-800 border border-gray-200 rounded"
+                        placeholder="Your message ..."
+                        value={formik.values.message}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                    />
+                    {formik.errors.message && <div className="text-red-600">{formik.errors.message}</div>}
                 </div>
 
                 <button
