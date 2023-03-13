@@ -1,6 +1,6 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AuthConfig, AuthTokenProvider } from "modules/common/AuthToken";
-import FakerTest from "./modules/genericTests/FakerTest";
+import FakerTest from "modules/genericTests/FakerTest";
 
 function App() {
     const queryClient = new QueryClient();
