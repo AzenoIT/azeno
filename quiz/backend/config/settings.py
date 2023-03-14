@@ -178,7 +178,7 @@ SIMPLE_JWT = {
     'USER_AUTHENTICATION_RULE': 'rest_framework_simplejwt.authentication.default_user_authentication_rule',
     'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
     'TOKEN_TYPE_CLAIM': 'token_type',
-    # TODO: are we doing stateless user authentication? Beacuet if not than we do not have to set TOKEN_USER_CLASS
+    # TODO: are we doing stateless user authentication? Because if not than we do not have to set TOKEN_USER_CLASS
     'TOKEN_USER_CLASS': 'rest_framework_simplejwt.models.TokenUser',
     'JTI_CLAIM': 'jti',
     # TODO: do we need it?
