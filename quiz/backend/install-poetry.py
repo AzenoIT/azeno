@@ -39,7 +39,7 @@ from contextlib import contextmanager
 from functools import cmp_to_key
 from io import UnsupportedOperation
 from pathlib import Path
-from typing import Optional
+from typing import Optional, cast, Union, Iterator
 from urllib.request import Request
 from urllib.request import urlopen
 
@@ -144,8 +144,10 @@ def string_to_bool(value):
 
 
 def data_dir() -> Path:
-    if os.getenv("POETRY_HOME"):
-        return Path(os.getenv("POETRY_HOME")).expanduser()
+    poetry_home = cast(Union[str, None], os.getenv("POETRY_HOME"))
+
+    if poetry_home is not None:
+        return Path(poetry_home).expanduser()
 
     if WINDOWS:
         base_dir = Path(_get_win_folder("CSIDL_APPDATA"))
@@ -159,8 +161,10 @@ def data_dir() -> Path:
 
 
 def bin_dir() -> Path:
-    if os.getenv("POETRY_HOME"):
-        return Path(os.getenv("POETRY_HOME")).expanduser() / "bin"
+    poetry_home = cast(Union[str, None], os.getenv("POETRY_HOME"))
+
+    if poetry_home is not None:
+        return Path(poetry_home).expanduser() / "bin"
 
     if WINDOWS and not MINGW:
         return Path(_get_win_folder("CSIDL_APPDATA")) / "Python/Scripts"
@@ -215,7 +219,7 @@ def _get_win_folder_with_ctypes(csidl_name):
 
 if WINDOWS:
     try:
-        from ctypes import windll  # noqa: F401
+        from ctypes import windll  # type: ignore
 
         _get_win_folder = _get_win_folder_with_ctypes
     except ImportError:
@@ -484,8 +488,8 @@ class Installer:
         self._path = path
 
         self._cursor = Cursor()
-        self._bin_dir = None
-        self._data_dir = None
+        self._bin_dir: Optional[Path] = None
+        self._data_dir: Optional[Path] = None
 
     @property
     def bin_dir(self) -> Path:
@@ -614,7 +618,7 @@ class Installer:
         )
 
     @contextmanager
-    def make_env(self, version: str) -> VirtualEnvironment:
+    def make_env(self, version: str) -> Iterator[VirtualEnvironment]:
         env_path = self.data_dir.joinpath("venv")
         env_path_saved = env_path.with_suffix(".save")
 
@@ -713,9 +717,9 @@ class Installer:
     def get_windows_path_var(self) -> Optional[str]:
         import winreg
 
-        with winreg.ConnectRegistry(None, winreg.HKEY_CURRENT_USER) as root:
-            with winreg.OpenKey(root, "Environment", 0, winreg.KEY_ALL_ACCESS) as key:
-                path, _ = winreg.QueryValueEx(key, "PATH")
+        with winreg.ConnectRegistry(None, winreg.HKEY_CURRENT_USER) as root:  # type: ignore
+            with winreg.OpenKey(root, "Environment", 0, winreg.KEY_ALL_ACCESS) as key:  # type: ignore
+                path, _ = winreg.QueryValueEx(key, "PATH")  # type: ignore
 
                 return path
 
