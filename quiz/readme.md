@@ -96,7 +96,7 @@ LOGGING_LVL=
 ```bash
 VITE_PORT=
 #    The port number that the dev server will listen on.
-#    Defoult port number for vite is 3000.
+#    Default port number for vite is 3000.
 
 #    e.g:
     VITE_PORT=3000
@@ -131,7 +131,7 @@ POSTGRES_HOST=
 POSTGRES_PORT=
 #    The port number of the database.
 #    If you are using docker-compose, you can use the port number of the service.
-#    Defoult port number for postgres is 5432.
+#    Default port number for postgres is 5432.
 
 #   e.g:
     POSTGRES_PORT=5432
