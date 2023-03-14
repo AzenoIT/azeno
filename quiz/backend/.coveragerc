@@ -1,0 +1,2 @@
+[run]
+omit = *migrations*, *tests*, *settings*, *wsgi*, *asgi*, *conftest*, *manage*, install-poetry.py, *url*
