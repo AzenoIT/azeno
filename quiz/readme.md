@@ -26,5 +26,8 @@
     > docker compose exec <service_name> black .
 
 - To check only one file, run the following command:
-  > docker compose exec <service_name> black <file_name>
+    > docker compose exec <service_name> black <file_name>
   
+## How to use mypy type checker
+1. Run the mypy type checker by using the following command for all files:
+    > docker compose exec <service_name> mypy .
