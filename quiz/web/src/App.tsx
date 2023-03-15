@@ -3,6 +3,8 @@ import { AuthConfig, AuthTokenProvider } from "modules/common/AuthToken";
 import ErrorBoundary from "modules/common/components/ErrorBoundary";
 import { RouterProvider } from "react-router-dom";
 import { router } from "router";
+import TailwindTest from "modules/genericTests/TailwindTest/TailwindTest";
+import FormikTest from "modules/genericTests/FormikTest/FormikTest";
 
 function App() {
     const queryClient = new QueryClient();
@@ -13,6 +15,8 @@ function App() {
             <AuthTokenProvider config={authConfig}>
                 <ErrorBoundary>
                     <RouterProvider router={router} />
+                    <TailwindTest />
+                    <FormikTest />
                 </ErrorBoundary>
             </AuthTokenProvider>
         </QueryClientProvider>
