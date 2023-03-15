@@ -25,8 +25,8 @@ class ErrorBoundary extends Component<Props, State> {
         if (this.state.hasError) {
             return (
                 <div className="flex flex-col h-full justify-center text-center">
-                    <h1 className={"text-4xl text-white"}>Sorry</h1>
-                    <p className={"text-xl text-white mb-10"}>Something went wrong, please try again</p>
+                    <h1 className="text-4xl text-white">Sorry</h1>
+                    <p className="text-xl text-white mb-10">Something went wrong, please try again</p>
                 </div>
             );
         }
