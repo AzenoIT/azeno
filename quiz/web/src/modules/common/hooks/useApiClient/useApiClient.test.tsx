@@ -30,7 +30,9 @@ describe("useApiClient", () => {
         const client = new QueryClient();
         render(
             <QueryClientProvider client={client}>
-                <AuthTokenProvider config={{ tokenEndpoint: "/api/v1/token/" }}>
+                <AuthTokenProvider
+                    config={{ loginEndpoint: "/api/v1/token/", refreshEndpoint: "/api/v1/token/refresh/" }}
+                >
                     <UseApiClientClient />
                 </AuthTokenProvider>
             </QueryClientProvider>
@@ -50,7 +52,7 @@ describe("useApiClient", () => {
                 }
                 return res(ctx.status(200), ctx.json("42"));
             }),
-            rest.post("http://localhost/api/v1/token/", (_, res, ctx) => {
+            rest.post("http://localhost/api/v1/token/refresh/", (_, res, ctx) => {
                 return res(ctx.status(200), ctx.json({ access_token: validAccessToken }));
             })
         );
