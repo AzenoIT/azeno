@@ -19,6 +19,8 @@
         "noUnusedLocals": true,
         "noUnusedParameters": true,
         "types": ["node"],
+        "strictNullChecks": true,
+        "strictFunctionTypes": false,
         "baseUrl": "./src"
     },
     "include": ["src"],
