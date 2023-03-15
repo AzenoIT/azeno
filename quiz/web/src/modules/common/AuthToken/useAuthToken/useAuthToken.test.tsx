@@ -62,15 +62,29 @@ describe("useAuthToken", () => {
         await waitFor(() => expect(screen.getByTestId("accessToken").textContent).toBe("NewAccessToken"));
     });
 
-    test("isTokenValid returns true if access token is valid", () => {
-        localStorage.setItem("authToken", JSON.stringify({ expiresAt: new Date(Date.now() + 60 * 1000) }));
-        renderUseAuthToken();
-        expect(screen.getByTestId("isTokenValid").textContent).toBe("true");
-    });
-
     test("isRefreshTokenValid returns true if refresh token is valid", () => {
-        localStorage.setItem("authToken", JSON.stringify({ refreshExpiresAt: new Date(Date.now() + 60 * 1000) }));
+        localStorage.setItem(
+            "authToken",
+            JSON.stringify({
+                refreshExpiresAt: new Date(Date.now() + 60 * 1000),
+                refreshToken: "ValidRefresh",
+            })
+        );
         renderUseAuthToken();
         expect(screen.getByTestId("isRefreshTokenValid").textContent).toBe("true");
+    });
+
+    test("isTokenValid returns true if access token is valid", () => {
+        localStorage.setItem(
+            "authToken",
+            JSON.stringify({
+                expiresAt: new Date(Date.now() + 60 * 1000),
+                accessToken: "ValidToken",
+                refreshExpiresAt: new Date(Date.now() + 60 * 60 * 1000),
+                refreshToken: "ValidRefresh",
+            })
+        );
+        renderUseAuthToken();
+        expect(screen.getByTestId("isTokenValid").textContent).toBe("true");
     });
 });
