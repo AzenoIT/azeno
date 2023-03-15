@@ -26,8 +26,12 @@ export default function useAuthToken(): UseAuthToken {
         refreshToken: "",
     });
 
-    const isRefreshTokenValid = useCallback(() => new Date(refreshExpiresAt) > new Date(), [refreshExpiresAt]);
-    const isTokenValid = useCallback(() => new Date(expiresAt) > new Date() || isRefreshTokenValid(), [expiresAt]);
+    const isRefreshTokenValid = useCallback(() => {
+        return new Date(refreshExpiresAt) > new Date() && refreshToken !== "";
+    }, [refreshExpiresAt, refreshToken]);
+    const isTokenValid = useCallback(() => {
+        return (new Date(expiresAt) > new Date() && accessToken !== "") || isRefreshTokenValid();
+    }, [expiresAt, isRefreshTokenValid, accessToken]);
 
     const refreshAccessToken = useCallback(async () => {
         let response: AxiosResponse<CreateAuthorizationTokenResponse>;
