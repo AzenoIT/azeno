@@ -1,16 +1,16 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import { useAuthTokenConfig } from "modules/common/AuthToken/AuthTokenProvider";
-import { AuthTokens } from "modules/common/AuthToken/types";
 import useLocalStorage from "modules/common/AuthToken/useLocalStorage";
+import { CreateAuthorizationTokenResponse } from "modules/common/types";
 import { useCallback } from "react";
 
 interface UseAuthToken {
     readonly accessToken: string;
     readonly refreshToken: string;
     refreshAccessToken: () => Promise<string>;
-    setAccessToken: (token: string) => void;
-    setRefreshToken: (token: string) => void;
-    setTokens: (tokens: AuthTokens) => void;
+    isTokenValid: () => boolean;
+    isRefreshTokenValid: () => boolean;
+    login: (username: string, password: string) => Promise<string>;
 }
 
 /**
@@ -19,40 +19,54 @@ interface UseAuthToken {
  * */
 export default function useAuthToken(): UseAuthToken {
     const config = useAuthTokenConfig();
-    const [{ accessToken, refreshToken }, setTokens] = useLocalStorage("authToken", {
+    const [{ accessToken, refreshToken, expiresAt, refreshExpiresAt }, setTokens] = useLocalStorage("authToken", {
         accessToken: "",
+        expiresAt: "1970-01-01T00:00:00.000Z",
+        refreshExpiresAt: "1970-01-01T00:00:00.000Z",
         refreshToken: "",
     });
 
-    const setAccessToken = useCallback(
-        (token: string) => {
-            setTokens((prev) => ({ ...prev, accessToken: token }));
-        },
-        [setTokens]
-    );
-
-    const setRefreshToken = useCallback(
-        (token: string) => {
-            setTokens((prev) => ({ ...prev, refreshToken: token }));
-        },
-        [setTokens]
-    );
+    const isRefreshTokenValid = useCallback(() => new Date(refreshExpiresAt) > new Date(), [refreshExpiresAt]);
+    const isTokenValid = useCallback(() => new Date(expiresAt) > new Date() || isRefreshTokenValid(), [expiresAt]);
 
     const refreshAccessToken = useCallback(async () => {
-        const response = await axios.post<{ access_token: string }>(
-            config.tokenEndpoint,
-            {
-                grant_type: "refresh_token",
+        let response: AxiosResponse<CreateAuthorizationTokenResponse>;
+        try {
+            response = await axios.post<CreateAuthorizationTokenResponse>(config.refreshEndpoint, {
                 refresh_token: refreshToken,
-            },
-            { headers: { "content-type": "application/x-www-form-urlencoded" } }
-        );
-        if (response.status !== 200) {
+            });
+        } catch (error) {
             return Promise.reject(new Error("Token refresh failed."));
         }
-        setAccessToken(response.data.access_token);
-        return Promise.resolve(response.data.access_token);
-    }, [config, setAccessToken, refreshToken]);
 
-    return { accessToken, refreshToken, refreshAccessToken, setAccessToken, setRefreshToken, setTokens };
+        setTokens({
+            accessToken: response.data.access_token,
+            refreshToken: response.data.refresh_token,
+            expiresAt: response.data.expires_at,
+            refreshExpiresAt: response.data.refresh_expires_at,
+        });
+        return Promise.resolve(response.data.access_token);
+    }, [config, refreshToken]);
+
+    const login = useCallback(async (username: string, password: string) => {
+        let response: AxiosResponse<CreateAuthorizationTokenResponse>;
+        try {
+            response = await axios.post<CreateAuthorizationTokenResponse>(config.loginEndpoint, {
+                username,
+                password,
+            });
+        } catch (err) {
+            return Promise.reject(err);
+        }
+
+        setTokens({
+            accessToken: response.data.access_token,
+            refreshToken: response.data.refresh_token,
+            expiresAt: response.data.expires_at,
+            refreshExpiresAt: response.data.refresh_expires_at,
+        });
+        return Promise.resolve("Login successful");
+    }, []);
+
+    return { accessToken, refreshToken, refreshAccessToken, isTokenValid, isRefreshTokenValid, login };
 }
