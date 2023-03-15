@@ -1,18 +1,16 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AuthConfig, AuthTokenProvider } from "modules/common/AuthToken";
 import ErrorBoundary from "modules/common/components/ErrorBoundary";
-import Home from "modules/Home";
-import Login from "modules/Login";
 import { BrowserRouter, createBrowserRouter, RouterProvider } from "react-router-dom";
 
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <Home />,
+        element: <h1>Home</h1>,
     },
     {
         path: "/login",
-        element: <Login />,
+        element: <h1>Login</h1>,
     },
 ]);
 
