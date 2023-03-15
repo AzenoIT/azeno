@@ -50,27 +50,30 @@ export default function useAuthToken(): UseAuthToken {
             refreshExpiresAt: response.data.refresh_expires_at,
         });
         return Promise.resolve(response.data.access_token);
-    }, [config, refreshToken]);
+    }, [config, refreshToken, setTokens]);
 
-    const login = useCallback(async (username: string, password: string) => {
-        let response: AxiosResponse<CreateAuthorizationTokenResponse>;
-        try {
-            response = await axios.post<CreateAuthorizationTokenResponse>(config.loginEndpoint, {
-                username,
-                password,
+    const login = useCallback(
+        async (username: string, password: string) => {
+            let response: AxiosResponse<CreateAuthorizationTokenResponse>;
+            try {
+                response = await axios.post<CreateAuthorizationTokenResponse>(config.loginEndpoint, {
+                    username,
+                    password,
+                });
+            } catch (err) {
+                return Promise.reject(err);
+            }
+
+            setTokens({
+                accessToken: response.data.access_token,
+                refreshToken: response.data.refresh_token,
+                expiresAt: response.data.expires_at,
+                refreshExpiresAt: response.data.refresh_expires_at,
             });
-        } catch (err) {
-            return Promise.reject(err);
-        }
-
-        setTokens({
-            accessToken: response.data.access_token,
-            refreshToken: response.data.refresh_token,
-            expiresAt: response.data.expires_at,
-            refreshExpiresAt: response.data.refresh_expires_at,
-        });
-        return Promise.resolve("Login successful");
-    }, []);
+            return Promise.resolve("Login successful");
+        },
+        [setTokens, config.loginEndpoint]
+    );
 
     return { accessToken, refreshToken, refreshAccessToken, isTokenValid, isRefreshTokenValid, login };
 }
