@@ -5,42 +5,17 @@ import type { SexType } from "@faker-js/faker";
 type SubscriptionTier = "free" | "basic" | "pro";
 
 class User {
-    _id: string;
-
-    avatar: string;
-
-    birthday: Date;
-
-    email: string;
-
-    firstName: string;
-
-    lastName: string;
-
-    sex: SexType;
-
-    subscriptionTier: SubscriptionTier;
-
+    // eslint-disable-next-line no-useless-constructor
     constructor(
-        _id: string,
-        avatar: string,
-        birthday: Date,
-        email: string,
-        firstName: string,
-        lastName: string,
-        sex: SexType,
-        subscriptionTier: SubscriptionTier
-    ) {
-        // eslint-disable-next-line no-underscore-dangle
-        this._id = _id;
-        this.avatar = avatar;
-        this.birthday = birthday;
-        this.email = email;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.sex = sex;
-        this.subscriptionTier = subscriptionTier;
-    }
+        public _id: string,
+        public avatar: string,
+        public birthday: Date,
+        public email: string,
+        public firstName: string,
+        public lastName: string,
+        public sex: SexType,
+        public subscriptionTier: SubscriptionTier
+    ) {}
 }
 
 function createRandomUser(): User {
