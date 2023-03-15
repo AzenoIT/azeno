@@ -7,6 +7,9 @@ import { rest } from "msw";
 import { beforeEach, describe, test } from "vitest";
 
 describe("useAuthToken", () => {
+    const username = "testUser";
+    const password = "testPass";
+
     function UseAuthTokenRendered() {
         const { accessToken, refreshToken, refreshAccessToken, isTokenValid, isRefreshTokenValid, login } =
             useAuthToken();
@@ -20,7 +23,7 @@ describe("useAuthToken", () => {
                 <button type="button" onClick={refreshAccessToken}>
                     refreshAccessToken
                 </button>
-                <button type="button" onClick={() => login("testUser", "testPass")}>
+                <button type="button" onClick={() => login(username, password)}>
                     login
                 </button>
             </div>
@@ -86,5 +89,35 @@ describe("useAuthToken", () => {
         );
         renderUseAuthToken();
         expect(screen.getByTestId("isTokenValid").textContent).toBe("true");
+    });
+
+    test("login sends request to login endpoint", async () => {
+        server.use(
+            rest.post("http://localhost/api/v1/token/", async (req, res, ctx) => {
+                const data = await req.json();
+                if (data.username !== username || data.password !== password) return res(ctx.status(401));
+                return res(
+                    ctx.status(200),
+                    ctx.json({
+                        access_token: "NewAccessToken",
+                        refresh_token: "NewRefreshToken",
+                        expires_at: new Date(Date.now() + 60_000),
+                        refresh_expires_at: new Date(Date.now() + 60 * 60_000),
+                    })
+                );
+            })
+        );
+        renderUseAuthToken();
+
+        expect(screen.getByTestId("accessToken").textContent).toBe("");
+        expect(screen.getByTestId("refreshToken").textContent).toBe("");
+        expect(screen.getByTestId("isTokenValid").textContent).toBe("false");
+        expect(screen.getByTestId("isRefreshTokenValid").textContent).toBe("false");
+
+        await userEvent.click(screen.getByText("login"));
+        await waitFor(() => expect(screen.getByTestId("accessToken").textContent).toBe("NewAccessToken"));
+        expect(screen.getByTestId("refreshToken").textContent).toBe("NewRefreshToken");
+        expect(screen.getByTestId("isTokenValid").textContent).toBe("true");
+        expect(screen.getByTestId("isRefreshTokenValid").textContent).toBe("true");
     });
 });
