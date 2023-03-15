@@ -10,9 +10,10 @@ from django.utils.translation import gettext_lazy as _
 
 class CustomUserManager(BaseUserManager):
     use_in_migrations = True
+
     def create_user(self, email, username, password, **kwargs):
         if not email:
-            raise ValueError(_('Email field is required'))
+            raise ValueError(_("Email field is required"))
 
         email = self.normalize_email(email)
         user = self.model(email=email, **kwargs)
@@ -23,7 +24,7 @@ class CustomUserManager(BaseUserManager):
         return user
 
     def create_superuser(self, email, username, password=None):
-        user = self.create_user(email=email, username=username,password=password)
+        user = self.create_user(email=email, username=username, password=password)
 
         user.is_admin = True
         user.is_staff = True
@@ -31,6 +32,7 @@ class CustomUserManager(BaseUserManager):
         user.is_superuser = True
         user.save(using=self._db)
         return user
+
 
 class QuizCustomUser(AbstractUser):
     id = models.UUIDField(
@@ -40,7 +42,9 @@ class QuizCustomUser(AbstractUser):
     username = models.CharField(max_length=100, validators=[UnicodeUsernameValidator()])
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ["email address"]
+    REQUIRED_FIELDS = [
+        "email address",
+    ]
 
     objects = CustomUserManager()
 

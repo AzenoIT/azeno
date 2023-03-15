@@ -30,7 +30,7 @@ get_random_secret_key()
 ```
 CORS_ALLOWED_ORIGINS=
 Add origins that are alloed to make cross-site HTTP requests. For development you can set this variable to:
-It is imortant to set this this strin is that every origin is SPACE SEPARATED
+It is imortant to set this this string is that every origin is SPACE SEPARATED
 ```
 <span style="color:green">RIGHT:</span>
 "http://localhost:frontend_port http://localhost:backend_port"
