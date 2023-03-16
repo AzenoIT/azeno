@@ -18,6 +18,7 @@
 
 > #### Variables used for Django superuser migration
 > 
+> - Here you have some example data:
 > - **DJ_SU_NAME=** lordOfDarkness 
 > - **DJ_SU_EMAIL=** lordofdarkness@gmail.com
 > - **DJ_SU_PASSWORD=** strongPassword123
@@ -39,9 +40,9 @@
 >
 > #### CORS_ALLOWED_ORIGINS=
 > 
->Add origins that are allowed to make cross-site HTTP requests. For development, you can set this variable to:
+>Add origins that are allowed to make cross-site HTTP requests. *Make sure that origins are SPACE-SEPARATED, not comma-separated*
 > 
->It is important to set this string so every origin is SPACE SEPARATED
+> For development, you can set this variable to:
 >
 ><span style="color:green">RIGHT:</span>
 >"http://localhost:frontend_port http://localhost:backend_port"
