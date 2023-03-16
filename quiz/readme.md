@@ -75,8 +75,8 @@ DJ_SECRET_KEY=
     
 DJ_DEBUG=
 #    A integer that specifies the debug mode.
-#    If 1 is True, Django will use technical error responses when an exception occurs.
-#    If 0 is False, Django will display a standard page for the given exception, provided by the handler for that exception.
+#    If 1, Django will use technical error responses when an exception occurs.
+#    If 0, Django will display a standard page for the given exception, provided by the handler for that exception.
 #    
 #    e.g:
     DJ_DEBUG=True
