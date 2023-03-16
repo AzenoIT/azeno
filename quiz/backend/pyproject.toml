@@ -15,6 +15,33 @@ djangorestframework-simplejwt = "5.2.2"
 django-cors-headers = "3.14.0"
 
 
+[tool.poetry.group.dev.dependencies]
+black = "23.1.0"
+mypy = "^1.1.1"
+django-stubs = "1.15.0"
+djangorestframework-stubs = "1.9.1"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 88
+target-version = ['py311']
+exclude = '''
+/(
+    | \.git/  # exclude a directory
+    | \.mypy_cache/  # exclude a directory
+    | \.pytest_cache/  # exclude a directory
+    | .*\.pyi?  # exclude generated files
+    | .*\.json  # exclude metadata files
+    | .*\.md  # exclude documentation
+    | .*\.toml  # exclude configuration files
+    | .*\.yml  # exclude configuration files
+    | .*\.yaml  # exclude configuration files
+    | .*\.txt  # exclude configuration files
+    | .*\.lock  # exclude configuration files
+    | .*\.sh  # exclude configuration files
+    | .*\.log  # exclude configuration files
+)/
+'''
