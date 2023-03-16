@@ -16,7 +16,14 @@
 
 ### backend.env
 
->JWT_SECRET_KEY=
+> #### Variables used for Django superuser migration
+> 
+> - **DJ_SU_NAME=** lordOfDarkness 
+> - **DJ_SU_EMAIL=** lordofdarkness@gmail.com
+> - **DJ_SU_PASSWORD=** strongPassword123
+>
+> #### Json Web Token veryfying key
+> - **JWT_SECRET_KEY=**
 > 
 >Json Web Token secret key is used for encrypting tokens.
 >``` E.g. JWT_SECRET_KEY=7j523!hiq1@=m!(v88x8!py17qzf7r40%9cy*=_-c7hdy3xb9t```
@@ -29,9 +36,8 @@
 >
 >get_random_secret_key()
 >```
-
-
->CORS_ALLOWED_ORIGINS=
+>
+> #### CORS_ALLOWED_ORIGINS=
 > 
 >Add origins that are allowed to make cross-site HTTP requests. For development, you can set this variable to:
 > 
@@ -41,7 +47,9 @@
 >"http://localhost:frontend_port http://localhost:backend_port"
 >
 ><span style="color:red">WRONG:</span>
->"http://localhost:frontend_port<span style="color:red">,</span> http://localhost:backend_port"
+>"http://localhost:frontend_port<span style="color:red">,</span> http://localhost:backend_port">
+ 
+------
 
 ## How to run black code formatter
 
