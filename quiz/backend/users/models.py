@@ -16,7 +16,7 @@ class CustomUserManager(BaseUserManager):
             raise ValueError(_("Email field is required"))
 
         email = self.normalize_email(email)
-        user = self.model(email=email, **kwargs)
+        user = self.model(email=email, username=username, **kwargs)
         user.is_active = False
         user.password = make_password(password)
         user.save()
@@ -34,7 +34,7 @@ class CustomUserManager(BaseUserManager):
         return user
 
 
-class QuizCustomUser(AbstractUser):
+class CustomUser(AbstractUser):
     id = models.UUIDField(
         default=uuid.uuid4, primary_key=True, editable=False, db_index=True
     )
