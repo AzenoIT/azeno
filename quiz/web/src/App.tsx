@@ -1,5 +1,6 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AuthConfig, AuthTokenProvider } from "modules/common/AuthToken";
+import MaterialUiTest from "./components/MaterialUiTest/MaterialUiTest";
 
 function App() {
     const queryClient = new QueryClient();
@@ -8,7 +9,7 @@ function App() {
     return (
         <QueryClientProvider client={queryClient}>
             <AuthTokenProvider config={authConfig}>
-                <h1>Hello World</h1>
+                <MaterialUiTest />
             </AuthTokenProvider>
         </QueryClientProvider>
     );
