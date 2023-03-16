@@ -16,12 +16,12 @@
 
 ## Testing
 
-| service | type       | command                                       |
-|---------|------------|-----------------------------------------------|
-| web     | unittests  | `docker exec -it quiz-web-1 npm run test`     |
-| web     | coverage   | `docker exec -it quiz-web-1 npm run coverage` |
-| backend | unittest   | `docker exec -it quiz-backend-1 pytest`       |
-| cypress | end to end | `docker run quiz-cypress-1`                   |
+| service | type       | command                                            |
+|---------|------------|----------------------------------------------------|
+| web     | unittests  | `docker compose run --rm -it web npm run test`     |
+| web     | coverage   | `docker compose run --rm -it web npm run coverage` |
+| backend | unittest   | `docker compose run --rm -it backend pytest`       |
+| cypress | end to end | `docker compose run --rm -it cypress`              |
 
 ## Cypress
 
@@ -37,14 +37,14 @@ For this reason suggested approach would be to install cypress locally and run i
 
 ## Helpful commands
 
-| command                                       | description                          |
-|-----------------------------------------------|--------------------------------------|
-| `docker exec -it quiz-web-1 /bin/bash`        | Open terminal within web container   |
-| `docker exec -it quiz-web-1 npm run lint`     | Run prettier to fix errors           |
-| `docker exec -it quiz-web-1 npm run eslint`   | Run eslint in the project            |
-| `docker exec -it quiz-web-1 npm run tsc`      | Open terminal within backend service |
-| `docker exec -it quiz-web-1 npm run watch`    | Run start test runner in watch mode  |
-| `docker exec -it quiz-web-1 npm run coverage` | Run tests with coverage report       |
+| command                                            | description                          |
+|----------------------------------------------------|--------------------------------------|
+| `docker compose run --rm -it web /bin/bash`        | Open terminal within web container   |
+| `docker compose run --rm -it web npm run lint`     | Run prettier to fix errors           |
+| `docker compose run --rm -it web npm run eslint`   | Run eslint in the project            |
+| `docker compose run --rm -it web npm run tsc`      | Open terminal within backend service |
+| `docker compose run --rm -it web npm run watch`    | Run start test runner in watch mode  |
+| `docker compose run --rm -it web npm run coverage` | Run tests with coverage report       |
 
 ### backend.env
 
