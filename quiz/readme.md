@@ -74,9 +74,9 @@ DJ_SECRET_KEY=
     DJ_SECRET_KEY="d_lam4k3w^-mj&tve4u3-nnuzqy9jlw^quw=4!rrw6r#55zq(="
     
 DJ_DEBUG=
-#    A boolean that turns on/off debug mode.
-#    If debug is True, Django will use technical error responses when an exception occurs.
-#    If debug is False, Django will display a standard page for the given exception, provided by the handler for that exception.
+#    A integer that specifies the debug mode.
+#    If 1 is True, Django will use technical error responses when an exception occurs.
+#    If 0 is False, Django will display a standard page for the given exception, provided by the handler for that exception.
 #    
 #    e.g:
     DJ_DEBUG=True
