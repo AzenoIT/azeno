@@ -137,9 +137,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 LOGGING_CONFIG = None
 LOGLEVEL = os.environ.get("LOGGING_LVL", "DEBUG")
 
-if not os.path.exists(os.path.join(BASE_DIR, "logs")):
-    os.mkdir(os.path.join(BASE_DIR, "logs"))
-
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,

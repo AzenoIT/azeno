@@ -7,4 +7,4 @@ staticfiles
 docs/_build/
 docs/.doctrees
 .coverage
-logs/
+logs/*.log
