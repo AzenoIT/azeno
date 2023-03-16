@@ -14,6 +14,7 @@ import socket
 import logging.config
 
 from pathlib import Path
+from . import settings_logging
 
 import dj_database_url
 
@@ -135,55 +136,8 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # Logging
 
 LOGGING_CONFIG = None
-LOGLEVEL = os.environ.get("LOGGING_LVL", "DEBUG")
 
-LOGGING = {
-    "version": 1,
-    "disable_existing_loggers": False,
-    "handlers": {
-        "debug": {
-            "level": "DEBUG",
-            "class": "logging.handlers.RotatingFileHandler",
-            "filename": os.path.join(BASE_DIR, "logs/debug.log"),
-            "maxBytes": 5242880,
-            "backupCount": 5,
-            "formatter": "verbose",
-            "delay": True,
-        },
-        "info": {
-            "level": "INFO",
-            "class": "logging.handlers.RotatingFileHandler",
-            "filename": os.path.join(BASE_DIR, "logs/info.log"),
-            "maxBytes": 5242880,
-            "backupCount": 5,
-            "formatter": "verbose",
-            "delay": True,
-        },
-        "error": {
-            "level": "ERROR",
-            "class": "logging.handlers.RotatingFileHandler",
-            "filename": os.path.join(BASE_DIR, "logs/error.log"),
-            "maxBytes": 5242880,
-            "backupCount": 5,
-            "formatter": "verbose",
-            "delay": True,
-        },
-    },
-    "loggers": {
-        "django": {
-            "handlers": ["debug", "info", "error"],
-            "level": LOGLEVEL,
-            "propagate": True,
-        }
-    },
-    "formatters": {
-        "verbose": {
-            "format": "%(asctime)s %(levelname)s %(module)s %(process)d %(thread)d %(message)s"
-        },
-    },
-}
-
-logging.config.dictConfig(LOGGING)
+logging.config.dictConfig(settings_logging.LOGGING)
 
 ## Django Debug Toolbar
 
