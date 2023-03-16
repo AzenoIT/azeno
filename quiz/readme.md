@@ -34,22 +34,27 @@ logger.warning("Warning message")
 
 1. Open a shell inside the container: `docker compose exec <docker_service_name> sh`.
 2. Navigate to the docs folder: `cd docs`.
-3. To build the documentation, type: `sphinx-build -b html . _build`.
-   - Find the documentation in the docs/_build/html folder.
-   - To view the documentation, open the index.html file in a browser.
-4. To update the documentation, type: `make html` inside the docs folder.
+3. For building the documentation, type: `sphinx-build -b html . _build`.
 
+Additional information:
+- If you add a new Django app, you should run `sphinx-apidoc -o . ..` inside the docs folder.
+- To update the documentation, type `make html` in the docs folder. 
+- Docstrings should be written in reStructuredText format. [Check out this site for more information.](https://docutils.sourceforge.io/rst.html)
+- To view the documentation, open the `docs/_build/index.html` file in a browser.
 
-Example of using sphinx in code:
+Example of using reStructuredText format in code:
 ```python
 def add(a: int, b: int) -> int:
-    """
-    Add two numbers
+    """Add two numbers
 
     :param a: first number
+    :type a: int
     :param b: second number
-    :return: sum of two numbers
+    :type b: int
+    :returns: sum of two numbers
+    :rtype: int
     """
+
     return a + b
 ```
 
