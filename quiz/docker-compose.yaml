@@ -21,8 +21,8 @@ services:
     working_dir: /e2e
     volumes:
       - ./web:/e2e
-    environment:
-      - CYPRESS_baseUrl=http://proxy:80
+    env_file:
+      - envs/cypress.env
     depends_on:
       - proxy
     networks:
