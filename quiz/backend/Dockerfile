@@ -15,7 +15,7 @@ RUN python3 install-poetry.py --version 1.4.0 \
 
 WORKDIR /app
 
-COPY ./pyproject.toml ./
+COPY ./pyproject.toml ./poetry.lock ./
 
 RUN poetry install --no-interaction --no-ansi --no-root
 
