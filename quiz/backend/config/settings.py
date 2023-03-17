@@ -54,6 +54,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
 ROOT_URLCONF = "config.urls"
@@ -137,12 +138,9 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 LOGGING_CONFIG = None
 
-logging.config.dictConfig(settings_logging.LOGGING)
+logging.config.dictConfig(settings_logging.get_logger_config(BASE_DIR))
 
-## Django Debug Toolbar
+# Django Debug Toolbar
 
-if DEBUG:
-    MIDDLEWARE.insert(0, "debug_toolbar.middleware.DebugToolbarMiddleware")
-
-    hostname, _, nginx_ips = socket.gethostbyname_ex("quiz_proxy")
-    INTERNAL_IPS = nginx_ips
+hostname, _, nginx_ips = socket.gethostbyname_ex("quiz_proxy")
+INTERNAL_IPS = nginx_ips

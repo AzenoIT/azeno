@@ -24,3 +24,23 @@ sphinx-rtd-theme = "1.2.0"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "config.settings"
+python_files = "test_*.py"
+
+addopts = [
+    "--cov=.",
+    "--cov-config=.coveragerc",
+    "--cov-report",
+    "term-missing:skip-covered",
+    "--cov-fail-under=80"
+]
+
+[tool.pytest.markers]
+slow = "Run slow unit test e.g. for models"
+unit = "Run unit tests"
+smoke = "Run core unit tests"
+dbtest = "Run database tests"
+
+
