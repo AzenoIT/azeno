@@ -1,34 +1,26 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { AuthConfig, AuthTokenProvider } from "modules/common/AuthToken";
+import ErrorBoundary from "modules/common/components/ErrorBoundary";
+import { RouterProvider } from "react-router-dom";
+import { router } from "router";
+import TailwindTest from "modules/genericTests/TailwindTest/TailwindTest";
+import FormikTest from "modules/genericTests/FormikTest/FormikTest";
 
 function App() {
-  const [count, setCount] = useState(0)
+    const queryClient = new QueryClient();
+    const authConfig: AuthConfig = { loginEndpoint: "/api/v1/token/", refreshEndpoint: "/api/v1/token/refresh/" };
 
-  return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
+    return (
+        <QueryClientProvider client={queryClient}>
+            <AuthTokenProvider config={authConfig}>
+                <ErrorBoundary>
+                    <RouterProvider router={router} />
+                    <TailwindTest />
+                    <FormikTest />
+                </ErrorBoundary>
+            </AuthTokenProvider>
+        </QueryClientProvider>
+    );
 }
 
-export default App
+export default App;
