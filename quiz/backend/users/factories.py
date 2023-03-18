@@ -1,5 +1,4 @@
 from django.contrib.auth import get_user_model
-from django.contrib.auth.hashers import make_password
 from django.utils import timezone
 from factory import Faker, LazyAttribute
 from factory.django import DjangoModelFactory
@@ -7,7 +6,6 @@ from factory.fuzzy import FuzzyDateTime
 
 
 class UserFactory(DjangoModelFactory):
-
     class Meta:
         model = get_user_model()
 

@@ -25,4 +25,4 @@ class Command(BaseCommand):
             )
 
     def add_arguments(self, parser: CommandParser) -> None:
-        parser.add_argument('objects_count', type=int, help='Indicates the number of users to be created')
+        parser.add_argument('objects_count', type=int, help='Indicates the number of objects to be created')

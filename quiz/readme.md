@@ -102,3 +102,11 @@ For this reason suggested approach would be to install cypress locally and run i
 ## How to use mypy type checker
 1. Run the mypy type checker by using the following command for all files:
     > docker compose exec <service_name> mypy .
+   > 
+
+## Test data generator
+1. To add some test data to database run:
+    > docker compose exec <backend_service_name> python manage.py create_test_data
+
+2. To remove test data from database run:
+    > docker compose exec <backend_service_name> python manage.py delete_test_data
