@@ -15,6 +15,166 @@
 3. Copy `envs/backend.default.env` to `envs/backend.env` and fill environmental variables.
 4. Start services `docker compose -f docker-compose.prod.yaml up --build`.
 
+
+## Example of using logging
+```python
+import logging
+
+logger = logging.getLogger('django')
+
+logger.info("Info message")
+logger.debug("Debug message")
+logger.warning("Warning message")
+```
+
+## Building / Updating Documentation
+
+1. Open a shell inside the container: `docker compose exec <docker_service_name> sh`.
+2. Navigate to the docs folder: `cd docs`.
+3. For building the documentation, type: `sphinx-build -b html . _build`.
+
+Additional information:
+- If you add a new Django app, you should run `sphinx-apidoc -o . ..` inside the `docs` folder.
+- To update the documentation, type `make html` in the docs folder. 
+- Docstrings should be written in reStructuredText format. [Check out this site for more information.](https://docutils.sourceforge.io/rst.html)
+- To view the documentation, open the `docs/_build/index.html` file in a browser.
+
+Example of using reStructuredText format in code:
+```python
+def add(a: int, b: int) -> int:
+    """Add two numbers
+
+    :param a: first number
+    :type a: int
+    :param b: second number
+    :type b: int
+    :returns: sum of two numbers
+    :rtype: int
+    """
+
+    return a + b
+```
+
+## Filling environmental variables
+
+### backend.env
+
+>**DJ_SECRET_KEY=**
+ 
+This is a secret key for Django. It is used to provide cryptographic signing, and should be set to a unique, unpredictable value.
+To generate a new secret key, run the following command inside django shell:
+```python
+from django.core.management.utils import get_random_secret_key
+get_random_secret_key()
+```
+
+Also, you can use this site: https://djecrety.ir/
+
+e.g:
+`DJ_SECRET_KEY="d_lam4k3w^-mj&tve4u3-nnuzqy9jlw^quw=4!rrw6r#55zq(="`
+
+>**DJ_DEBUG=**
+ 
+An integer that specifies the debug mode.
+If 1, Django will use technical error responses when an exception occurs.
+If 0, Django will display a standard page for the given exception, provided by the handler for that exception.
+
+e.g:
+`DJ_DEBUG=1`
+
+>**DJ_ALLOWED_HOSTS=**
+ 
+A list of strings representing the host/domain names that this Django site can serve.
+This is a security measure to prevent an attacker from poisoning caches and password reset emails with links to malicious hosts by submitting requests with a fake HTTP Host header, which is possible even under many seemingly-safe web server configurations.
+
+e.g:
+`DJ_ALLOWED_HOSTS = 'localhost 127.0.0.1'`
+
+Hint: Multiple hosts should be separated by a space.
+
+>**LOGGING_LVL=**
+ 
+Logging level. 
+Available options: DEBUG, INFO, ERROR
+
+e.g:
+`LOGGING_LVL=DEBUG`
+
+>**Variables used for Django superuser migration**
+
+E.g.
+
+DJ_SU_NAME=lordOfDarkness 
+DJ_SU_EMAIL=lordofdarkness@gmail.com
+DJ_SU_PASSWORD=strongPassword123
+
+ 
+>**JWT_SECRET_KEY=**
+
+Json Web Token secret key is used for encrypting tokens.
+E.g. `JWT_SECRET_KEY="7j523!hiq1@=m!(v88x8!py17qzf7r40%9cy*=_-c7hdy3xb9t"`
+To make your life easier in development use this [secret key generator](https://djecrety.ir/).
+
+If you are a backend developer, don't be a savage and generate your key with a django built-in function in your terminal.
+
+```python
+from django.core.management.utils import get_random_secret_key
+get_random_secret_key()
+```
+
+>**CORS_ALLOWED_ORIGINS=**
+
+Add origins that are allowed to make cross-site HTTP requests.
+*Make sure that origins are SPACE-SEPARATED, not comma-separated*
+For development, you can set this variable to:
+`CORS_ALLOWED_ORIGINS="http://localhost:frontend_port http://localhost:backend_port"`
+
+### web.env
+
+>**VITE_PORT=**
+
+The port number that the dev server will listen on.
+Default port number for vite is 3000.
+
+e.g:
+`VITE_PORT=3000`
+
+### postgres.env
+
+>POSTGRES_USER=
+
+The username for the database.
+e.g.
+`POSTGRES_USER=custom_username`
+    
+>POSTGRES_PASSWORD=
+
+The password for the database.
+e.g:
+`POSTGRES_PASSWORD=strong_password`
+    
+>POSTGRES_DB=
+
+The name of the database.
+
+e.g:`POSTGRES_DB=fancy_name`
+    
+>POSTGRES_HOST=
+
+The host name of the database.
+If you are using docker-compose, you can use the name of the service.
+
+e.g:
+`POSTGRES_HOST=postgres_service`
+    
+>POSTGRES_PORT=
+> 
+The port number of the database.
+If you are using docker-compose, you can use the port number of the service.
+Default port number for postgres is 5432.
+
+e.g: `POSTGRES_PORT=5432`
+
 ## Testing
 
 | service | type       | command                                            |
@@ -47,43 +207,6 @@ For this reason suggested approach would be to install cypress locally and run i
 | `docker compose run --rm -it web npm run watch`    | Run start test runner in watch mode  |
 | `docker compose run --rm -it web npm run coverage` | Run tests with coverage report       |
 
-### backend.env
-
-> #### Variables used for Django superuser migration
-> 
-> - Here you have some example data:
-> - **DJ_SU_NAME=** lordOfDarkness 
-> - **DJ_SU_EMAIL=** lordofdarkness@gmail.com
-> - **DJ_SU_PASSWORD=** strongPassword123
->
-> #### Json Web Token veryfying key
-> - **JWT_SECRET_KEY=**
-> 
->Json Web Token secret key is used for encrypting tokens.
->``` E.g. JWT_SECRET_KEY=7j523!hiq1@=m!(v88x8!py17qzf7r40%9cy*=_-c7hdy3xb9t```
->To make your life easier in development use this [secret key generator](https://djecrety.ir/).
-> 
->If you are a backend developer, don't be a savage and generate your key with a django built-in function in your terminal.
-> 
->```python
->from django.core.management.utils import get_random_secret_key
->
->get_random_secret_key()
->```
->
-> #### CORS_ALLOWED_ORIGINS=
-> 
->Add origins that are allowed to make cross-site HTTP requests. *Make sure that origins are SPACE-SEPARATED, not comma-separated*
-> 
-> For development, you can set this variable to:
->
-><span style="color:green">RIGHT:</span>
->"http://localhost:frontend_port http://localhost:backend_port"
->
-><span style="color:red">WRONG:</span>
->"http://localhost:frontend_port<span style="color:red">,</span> http://localhost:backend_port">
- 
-------
 
 ## How to run black code formatter
 
@@ -107,7 +230,8 @@ For this reason suggested approach would be to install cypress locally and run i
 ## Test data generator
 1. To add some test data to database run:
     > int_value = how many objects do you want to create
-    >docker compose exec <backend_service_name> python manage.py create_test_data [int_value]
+    > 
+    >`docker compose exec <backend_service_name> python manage.py create_test_data int_value `
 
 2. To remove test data from database run:
-    > docker compose exec <backend_service_name> python manage.py delete_test_data
+    > `docker compose exec <backend_service_name> python manage.py delete_test_data`

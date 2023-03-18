@@ -4,4 +4,8 @@
 db.sqlite3
 .envs/.env
 staticfiles
+docs/_build/
+docs/.doctrees
+.coverage
+logs/*.log
 .mypy_cache/

@@ -1,15 +1,15 @@
 import uuid
-from typing import TypeAlias
 
 from django.contrib.auth.base_user import BaseUserManager
+from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.validators import UnicodeUsernameValidator
-from django.contrib.auth.hashers import make_password
 
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-class CustomUserManager(BaseUserManager):
+
+class CustomUserManager(BaseUserManager['CustomUser']):
     use_in_migrations = True
 
     def create_user(self, email, username, password, **kwargs):
@@ -43,11 +43,11 @@ class CustomUser(AbstractUser):
     username = models.CharField(max_length=100, validators=[UnicodeUsernameValidator()])
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = [
+    REQUIRED_FIELDS: list[str] = [
         "email address",
     ]
 
-    objects = CustomUserManager()
+    objects = CustomUserManager() # type: ignore[assignment]
 
     def __str__(self) -> str:
         return self.email
