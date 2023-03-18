@@ -1,10 +1,12 @@
 import { useFormik } from "formik";
 import { useState } from "react";
 import * as yup from "yup";
+import { useTranslation } from "react-i18next";
 
 function FormikTest() {
     const [message, setMessage] = useState("");
     const [submitted, setSubmitted] = useState(false);
+    const { t } = useTranslation();
 
     const formik = useFormik({
         initialValues: {
@@ -36,7 +38,7 @@ function FormikTest() {
             <form className="w-1/2" onSubmit={formik.handleSubmit}>
                 <div className="mb-3">
                     <label htmlFor="name" className="form-label">
-                        Name
+                        {t("Name")}
                     </label>
                     <input
                         type="text"
@@ -71,7 +73,7 @@ function FormikTest() {
 
                 <div className="mb-3">
                     <label htmlFor="message" className="form-label">
-                        Message
+                        {t("Message")}
                     </label>
 
                     <textarea
@@ -90,7 +92,7 @@ function FormikTest() {
                     type="submit"
                     className="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap rounded py-1 px-3 leading-normal no-underline bg-blue-600 text-white hover:bg-blue-600"
                 >
-                    Send
+                    {t("Send")}
                 </button>
             </form>
         </div>

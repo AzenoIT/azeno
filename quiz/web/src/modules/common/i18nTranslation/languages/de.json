@@ -1,6 +1,9 @@
 {
   "translation": {
     "Learn": "Lerne",
-    "Hello World": "Hallo Welt"
+    "Hello World": "Hallo Welt",
+    "Name": "Name",
+    "Message": "Nachricht",
+    "Send": "Schicken"
   }
 }
