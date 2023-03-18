@@ -1,12 +1,13 @@
 import uuid
+from typing import TypeAlias
 
 from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.contrib.auth.hashers import make_password
+
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-
 
 class CustomUserManager(BaseUserManager):
     use_in_migrations = True
@@ -35,7 +36,7 @@ class CustomUserManager(BaseUserManager):
 
 
 class CustomUser(AbstractUser):
-    id = models.UUIDField(
+    id: models.UUIDField = models.UUIDField(
         default=uuid.uuid4, primary_key=True, editable=False, db_index=True
     )
     email = models.EmailField(_("email address"), unique=True)

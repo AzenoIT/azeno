@@ -106,7 +106,8 @@ For this reason suggested approach would be to install cypress locally and run i
 
 ## Test data generator
 1. To add some test data to database run:
-    > docker compose exec <backend_service_name> python manage.py create_test_data
+    > int_value = how many objects do you want to create
+    >docker compose exec <backend_service_name> python manage.py create_test_data [int_value]
 
 2. To remove test data from database run:
     > docker compose exec <backend_service_name> python manage.py delete_test_data
