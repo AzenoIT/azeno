@@ -13,7 +13,7 @@ class Command(BaseCommand):
             self.stdout.write("Deleting test data")
             models = [CustomUser]
             for item in models:
-                item.objects.all().delete()
+                item.objects.filter(is_superuser=False).delete()
         else:
             self.stdout.write("""
             !!!Deleting data is not possible, because DEBUG is set to False,
