@@ -47,6 +47,12 @@ class CustomUser(AbstractUser):
         "email address",
     ]
 
+    # TODO: Due to unresolved issues in django-stubs project, type checking for CustomUserManager had to be silenced
+    """Link to the issue with this solution recommended as fix
+        https://github.com/typeddjango/django-stubs/issues/174
+    """
+
+
     objects = CustomUserManager() # type: ignore[assignment]
 
     def __str__(self) -> str:
