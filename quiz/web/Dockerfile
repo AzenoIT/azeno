@@ -1,9 +1,11 @@
-FROM node:18.14.2-slim as builder
+FROM node:18.14.2-slim as development
 
 WORKDIR /opt/app
 
 COPY ./package.json ./package-lock.json ./
 RUN npm ci
+
+FROM development as builder
 
 COPY . .
 RUN npm run build

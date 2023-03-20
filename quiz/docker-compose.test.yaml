@@ -17,6 +17,19 @@ services:
     stdin_open: true
     tty: true
 
+    cypress:
+      image: cypress/included:12.8.0
+      restart: on-failure
+      working_dir: /e2e
+      volumes:
+        - ./web:/e2e
+      env_file:
+        - envs/cypress.env
+      depends_on:
+        - proxy
+      networks:
+        - quiz_e2e_network
+
   proxy:
     build:
       context: ./proxy
