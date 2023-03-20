@@ -11,6 +11,7 @@ services:
       - "3000:3000"
     volumes:
       - ./web:/app
+      - node_modules:/app/node_modules
     env_file:
       - envs/web.env
     command: npm run dev
@@ -64,6 +65,7 @@ services:
 
 volumes:
   backend_quiz_db_volume:
+  node_modules:
 
 networks:
   quiz_postgres_network:

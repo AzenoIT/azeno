@@ -6,8 +6,8 @@
 2. Copy `envs/cypress.default.env` to `envs/cypress.env`.
 3. Copy `envs/postgres.default.env` to `envs/postgres.env` and fill environmental variables.
 4. Copy `envs/backend.default.env` to `envs/backend.env` and fill environmental variables.
-5. Install node dependencies `docker run -v ./web:/app/ --workdir /app/ node:18.14.2-slim npm ci`.
-6. Start containers `docker compose up --build`.
+5. Start containers `docker compose up --build`.
+6. __*(OPTIONAL)*__ Copy node dependencies `docker compose cp web:/app/node_modules ./web` *(may require sudo)*.
 
 ## Run Production
 
