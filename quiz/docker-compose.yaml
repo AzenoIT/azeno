@@ -25,7 +25,6 @@ services:
     networks:
       - quiz_web_network
       - quiz_backend_network
-      - quiz_e2e_network
     depends_on:
       - web
       - backend
@@ -65,8 +64,13 @@ services:
       - quiz_postgres_network
 
 volumes:
-  backend_quiz_db_volume:
   node_modules:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: ./web/node_modules/
+  backend_quiz_db_volume:
 
 networks:
   quiz_postgres_network:
@@ -74,6 +78,4 @@ networks:
   quiz_backend_network:
     driver: bridge
   quiz_web_network:
-    driver: bridge
-  quiz_e2e_network:
     driver: bridge
