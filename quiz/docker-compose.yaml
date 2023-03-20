@@ -11,10 +11,9 @@ services:
       - "3000:3000"
     volumes:
       - ./web:/app
-      - node_modules:/app/node_modules
     env_file:
       - envs/web.env
-    command: /bin/bash -c "npm run dev"
+    command: npm run dev
     stdin_open: true
     tty: true
 
@@ -64,12 +63,6 @@ services:
       - quiz_postgres_network
 
 volumes:
-  node_modules:
-    driver: local
-    driver_opts:
-      o: bind
-      type: none
-      device: ./web/node_modules/
   backend_quiz_db_volume:
 
 networks:
