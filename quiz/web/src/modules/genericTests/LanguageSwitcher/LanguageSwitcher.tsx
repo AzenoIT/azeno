@@ -11,7 +11,7 @@ function LanguageSwitcher() {
 
     return (
         <div>
-            {Object.keys(langs).map((lang) => (
+            {Object.keys(langs).map((lang: keyof typeof langs) => (
                 <button
                     type="submit"
                     key={lang}

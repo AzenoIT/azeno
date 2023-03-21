@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 
-function translationTest() {
+function TranslationTest() {
     const { t } = useTranslation();
 
     return (
@@ -11,4 +11,4 @@ function translationTest() {
     );
 }
 
-export default translationTest;
+export default TranslationTest;

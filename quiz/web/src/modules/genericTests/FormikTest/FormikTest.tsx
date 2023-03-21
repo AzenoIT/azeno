@@ -57,7 +57,6 @@ function FormikTest() {
                     <label htmlFor="email" className="form-label">
                         Email
                     </label>
-
                     <input
                         type="email"
                         id="email"
