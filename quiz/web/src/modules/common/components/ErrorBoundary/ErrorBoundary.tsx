@@ -1,7 +1,7 @@
 import { Component, ErrorInfo, ReactNode } from "react";
 
 interface Props {
-    children?: ReactNode;
+    children: ReactNode;
 }
 
 interface State {
@@ -9,20 +9,26 @@ interface State {
 }
 
 class ErrorBoundary extends Component<Props, State> {
-    public state: State = {
-        hasError: false,
-    };
+    public constructor(public props: Props) {
+        super(props);
+        this.state = {
+            hasError: false,
+        };
+    }
 
-    public static getDerivedStateFromError(_: Error): State {
+    public static getDerivedStateFromError(): State {
         return { hasError: true };
     }
 
     public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+        // eslint-disable-next-line no-console
         console.error("Uncaught error:", error, errorInfo);
     }
 
     public render() {
-        if (this.state.hasError) {
+        const { hasError } = this.state;
+        const { children } = this.props;
+        if (hasError) {
             return (
                 <div className="flex flex-col h-full justify-center text-center">
                     <h1 className="text-4xl text-white">Sorry</h1>
@@ -30,8 +36,7 @@ class ErrorBoundary extends Component<Props, State> {
                 </div>
             );
         }
-
-        return this.props.children;
+        return children;
     }
 }
 

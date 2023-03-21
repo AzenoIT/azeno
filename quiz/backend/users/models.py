@@ -1,14 +1,15 @@
 import uuid
 
 from django.contrib.auth.base_user import BaseUserManager
+from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.validators import UnicodeUsernameValidator
-from django.contrib.auth.hashers import make_password
+
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 
-class CustomUserManager(BaseUserManager):
+class CustomUserManager(BaseUserManager['CustomUser']):
     use_in_migrations = True
 
     def create_user(self, email, username, password, **kwargs):
@@ -35,18 +36,24 @@ class CustomUserManager(BaseUserManager):
 
 
 class CustomUser(AbstractUser):
-    id = models.UUIDField(
+    id: models.UUIDField = models.UUIDField(
         default=uuid.uuid4, primary_key=True, editable=False, db_index=True
     )
     email = models.EmailField(_("email address"), unique=True)
     username = models.CharField(max_length=100, validators=[UnicodeUsernameValidator()])
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = [
+    REQUIRED_FIELDS: list[str] = [
         "email address",
     ]
 
-    objects = CustomUserManager()
+    # TODO: Due to unresolved issues in django-stubs project, type checking for CustomUserManager had to be silenced
+    """Link to the issue with this solution recommended as fix
+        https://github.com/typeddjango/django-stubs/issues/174
+    """
+
+
+    objects = CustomUserManager() # type: ignore[assignment]
 
     def __str__(self) -> str:
         return self.email
