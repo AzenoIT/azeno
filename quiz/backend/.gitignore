@@ -1,6 +1,6 @@
 .idea
 .vscode
-*/**.pyc
+**/*.pyc
 db.sqlite3
 .envs/.env
 staticfiles
