@@ -9,7 +9,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 
-class CustomUserManager(BaseUserManager['CustomUser']):
+class CustomUserManager(BaseUserManager["CustomUser"]):
     use_in_migrations = True
 
     def create_user(self, email, username, password, **kwargs):
@@ -52,8 +52,7 @@ class CustomUser(AbstractUser):
         https://github.com/typeddjango/django-stubs/issues/174
     """
 
-
-    objects = CustomUserManager() # type: ignore[assignment]
+    objects = CustomUserManager()  # type: ignore[assignment]
 
     def __str__(self) -> str:
         return self.email

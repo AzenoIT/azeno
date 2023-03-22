@@ -8,9 +8,8 @@ class UserFactory(DjangoModelFactory):
     class Meta:
         model = get_user_model()
 
-
-    last_login: Faker = Faker('date_time', tzinfo=timezone.get_current_timezone())
-    date_joined: Faker = Faker('date_time', tzinfo=timezone.get_current_timezone())
+    last_login: Faker = Faker("date_time", tzinfo=timezone.get_current_timezone())
+    date_joined: Faker = Faker("date_time", tzinfo=timezone.get_current_timezone())
 
     email: Faker = Faker("email")
     username: LazyAttribute = LazyAttribute(lambda a: a.email.split("@")[0])
