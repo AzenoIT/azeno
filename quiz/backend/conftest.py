@@ -24,4 +24,3 @@ def generated_data_with_custom_command():
         "create_test_data",
         "5",
     )
-
