@@ -1,0 +1,57 @@
+services:
+
+  proxy:
+    build:
+      context: ./proxy
+    restart: on-failure
+    networks:
+      - backend_network
+    depends_on:
+      - web
+      - backend
+    ports:
+      - "80:80"
+    volumes:
+      - ./backend/staticfiles:/app/staticfiles
+
+  backend:
+    build:
+      context: ./backend
+      target: development
+    command: python manage.py runserver 0.0.0.0:8000
+    env_file:
+      - ./envs/backend.env
+      - ./envs/postgres.env
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+    restart: on-failure
+    volumes:
+      - ./backend:/app
+    networks:
+      - backend_network
+      - quiz_postgres_network
+
+  postgres:
+    image: postgres:15.1
+    volumes:
+      - backend_quiz_db_volume:/var/lib/postgresql/data
+    env_file:
+      - envs/postgres.env
+    ports:
+      - "5432:5432"
+    networks:
+      - quiz_postgres_network
+
+volumes:
+  backend_quiz_db_volume:
+  node_modules:
+
+networks:
+  quiz_postgres_network:
+    driver: bridge
+  backend_network:
+    driver: bridge
+  quiz_web_network:
+    driver: bridge
