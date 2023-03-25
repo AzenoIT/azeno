@@ -1,0 +1,76 @@
+services:
+  web:
+    build:
+      context: web
+      target: development
+    restart: on-failure
+    working_dir: /app
+    networks:
+      - interview_web_network
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./web:/app
+      - node_modules:/app/node_modules
+    env_file:
+      - envs/web.env
+    command: npm run dev
+    stdin_open: true
+    tty: true
+
+  proxy:
+    build:
+      context: ./proxy
+    restart: on-failure
+    networks:
+      - interview_web_network
+      - interview_backend_network
+    depends_on:
+      - web
+      - backend
+    ports:
+      - "80:80"
+    volumes:
+      - ./backend/staticfiles:/app/staticfiles
+
+  backend:
+    build:
+      context: ./backend
+      target: development
+    command: python manage.py runserver 0.0.0.0:8000
+    env_file:
+      - ./envs/backend.env
+      - ./envs/postgres.env
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+    restart: on-failure
+    volumes:
+      - ./backend:/app
+    networks:
+      - interview_backend_network
+      - interview_postgres_network
+
+  postgres:
+    image: postgres:15.1
+    volumes:
+      - backend_interview_db_volume:/var/lib/postgresql/data
+    env_file:
+      - envs/postgres.env
+    ports:
+      - "5432:5432"
+    networks:
+      - interview_postgres_network
+
+volumes:
+  backend_interview_db_volume:
+  node_modules:
+
+networks:
+  interview_postgres_network:
+    driver: bridge
+  interview_backend_network:
+    driver: bridge
+  interview_web_network:
+    driver: bridge

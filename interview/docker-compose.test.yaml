@@ -1,0 +1,92 @@
+services:
+  web:
+    build:
+      context: web
+      target: development
+    restart: on-failure
+    working_dir: /app
+    networks:
+      - interview_web_network
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./web:/app
+      - node_modules:/app/node_modules
+    env_file:
+      - envs/web.env
+    command: npm run dev
+    stdin_open: true
+    tty: true
+
+    cypress:
+      image: cypress/included:12.8.0
+      restart: on-failure
+      working_dir: /e2e
+      volumes:
+        - ./web:/e2e
+      env_file:
+        - envs/cypress.env
+      depends_on:
+        - proxy
+      networks:
+        - interview_e2e_network
+
+  proxy:
+    build:
+      context: ./proxy
+    restart: on-failure
+    networks:
+      - interview_web_network
+      - interview_backend_network
+      - interview_e2e_network
+    depends_on:
+      - web
+      - backend
+    ports:
+      - "80:80"
+    volumes:
+      - ./backend/staticfiles:/app/staticfiles
+
+  backend:
+    build:
+      context: ./backend
+      target: development
+    command: python manage.py runserver 0.0.0.0:8000
+    env_file:
+      - ./envs/backend.env
+      - ./envs/postgres.env
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+    restart: on-failure
+    volumes:
+      - ./backend:/app
+    networks:
+      - interview_backend_network
+      - interview_postgres_network
+
+  postgres:
+    image: postgres:15.1
+    volumes:
+      - backend_interview_db_volume:/var/lib/postgresql/data
+    env_file:
+      - envs/postgres.env
+    ports:
+      - "5432:5432"
+    networks:
+      - interview_postgres_network
+
+volumes:
+  backend_interview_db_volume:
+  node_modules:
+
+networks:
+  interview_postgres_network:
+    driver: bridge
+  interview_backend_network:
+    driver: bridge
+  interview_web_network:
+    driver: bridge
+  interview_e2e_network:
+    driver: bridge
