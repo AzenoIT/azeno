@@ -5,6 +5,12 @@ from factory.django import DjangoModelFactory
 
 
 class UserFactory(DjangoModelFactory):
+    """Factory for generating user objects.
+
+    It uses AUTH_USER_MODEL for building objects. Usage is automated with custom command,
+    described in :doc:`users.management.commands`.
+    """
+
     class Meta:
         model = get_user_model()
 
@@ -18,5 +24,10 @@ class UserFactory(DjangoModelFactory):
 
     @classmethod
     def _create(cls, model_class, *args, **kwargs):
+        """
+
+        :param .models.CustomUSer model_class: CustomUser
+        :return .models.CustomUser user: user
+        """
         manager = cls._get_manager(model_class)
         return manager.create_user(*args, **kwargs)

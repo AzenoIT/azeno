@@ -4,7 +4,7 @@ from .models import Player
 
 
 class PlayerAdminConfig(admin.ModelAdmin):
-    """Class **PlayerAdminConfig** displays players list in admin panel based on **Player** model."""
+    """Class **PlayerAdminConfig** displays players list in admin panel based on :class:`players.models.Player` model."""
 
     list_display = ("nick", "rank", "is_bot", "created_at", "is_active")
     search_fields = ("nick",)

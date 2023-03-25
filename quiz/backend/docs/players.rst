@@ -1,11 +1,11 @@
-players package
+Players App
 ===============
 
 Subpackages
 -----------
 
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 2
 
    players.migrations
    players.tests
@@ -13,7 +13,7 @@ Subpackages
 Submodules
 ----------
 
-players.admin module
+Admin
 --------------------
 
 .. automodule:: players.admin
@@ -21,7 +21,7 @@ players.admin module
    :undoc-members:
    :show-inheritance:
 
-players.apps module
+Apps
 -------------------
 
 .. automodule:: players.apps
@@ -29,7 +29,7 @@ players.apps module
    :undoc-members:
    :show-inheritance:
 
-players.models module
+Models
 ---------------------
 
 .. automodule:: players.models
@@ -37,15 +37,7 @@ players.models module
    :undoc-members:
    :show-inheritance:
 
-players.tests module
---------------------
-
-.. automodule:: players.tests
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-players.views module
+Views
 --------------------
 
 .. automodule:: players.views

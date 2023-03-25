@@ -1,10 +1,7 @@
-players.tests package
+Tests
 =====================
 
-Submodules
-----------
-
-players.tests.test\_models module
+Test Models
 ---------------------------------
 
 .. automodule:: players.tests.test_models

@@ -1,10 +1,8 @@
-players.migrations package
+Migrations
 ==========================
 
-Submodules
-----------
 
-players.migrations.0001\_initial module
+Initial migration
 ---------------------------------------
 
 .. automodule:: players.migrations.0001_initial

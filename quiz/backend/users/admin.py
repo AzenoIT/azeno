@@ -6,6 +6,11 @@ User = get_user_model()
 
 
 class UserAdminConfig(UserAdmin):
+    """Customized configuration for admin panel prepared for :class:`users.models.CustomUser` model.
+    If order of fields in admin panel is not to your liking
+    it can be changed in list_display class field.
+    """
+
     model = User
     search_fields = ("email", "username")
     list_filter = ("email", "username", "is_active", "is_staff")
