@@ -55,7 +55,7 @@ function FormikTest() {
 
                 <div className="mb-3">
                     <label htmlFor="email" className="form-label">
-                        Email
+                        {t("Email")}
                     </label>
                     <input
                         type="email"
