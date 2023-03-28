@@ -6,6 +6,7 @@ import ErrorBoundary from "modules/common/components/ErrorBoundary";
 import FormikTest from "modules/genericTests/FormikTest/FormikTest";
 import TailwindTest from "modules/genericTests/TailwindTest/TailwindTest";
 import FakerTest from "modules/genericTests/FakerTest/FakerTest";
+import MaterialUITest from "./modules/genericTests/MaterialUITest/MaterialUITest";
 
 function App() {
     const queryClient = new QueryClient();
@@ -19,6 +20,7 @@ function App() {
                     <FakerTest />
                     <TailwindTest />
                     <FormikTest />
+                    <MaterialUITest />
                 </ErrorBoundary>
             </AuthTokenProvider>
         </QueryClientProvider>
