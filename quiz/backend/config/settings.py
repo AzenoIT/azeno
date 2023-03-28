@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     "corsheaders",
     # Local
     "users.apps.UsersConfig",
+    "players.apps.PlayersConfig",
 ]
 
 MIDDLEWARE = [

@@ -1,0 +1,49 @@
+services:
+  proxy:
+    build:
+      context: ./proxy
+    restart: on-failure
+    networks:
+      - backend_network
+    depends_on:
+      - backend
+    ports:
+      - "80:80"
+    volumes:
+      - static_volume:/app/staticfiles
+
+  backend:
+    build:
+      context: ./backend
+      target: prod
+    env_file:
+      - ./envs/backend.env
+      - ./envs/postgres.env
+    command: gunicorn config.wsgi:application --bind 0.0.0.0:8000
+    restart: on-failure
+    depends_on:
+      - postgres
+    networks:
+      - backend_network
+      - postgres_network
+    volumes:
+      - static_volume:/app/staticfiles
+
+  postgres:
+    image: postgres:15.1
+    volumes:
+      - postgres_volume:/var/lib/postgresql/data
+    env_file:
+      - envs/postgres.env
+    networks:
+      - postgres_network
+
+volumes:
+  postgres_volume:
+  static_volume:
+
+networks:
+  postgres_network:
+    driver: bridge
+  backend_network:
+    driver: bridge
