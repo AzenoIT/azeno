@@ -1,0 +1,79 @@
+[
+  {
+    "model": "players.player",
+    "pk": "045dcc73-a329-4b5e-bb9a-d09fa8ce68e0",
+    "fields": {
+      "nick": "Mieciu",
+      "rank": 20,
+      "is_bot": false,
+      "is_active": true,
+      "created_at": "2023-03-22T21:13:33.547Z"
+    }
+  },
+  {
+    "model": "players.player",
+    "pk": "414052bd-d2b1-4ec1-a1aa-ccbc203f73cb",
+    "fields": {
+      "nick": "Julia",
+      "rank": 4,
+      "is_bot": false,
+      "is_active": true,
+      "created_at": "2023-03-22T21:14:06.197Z"
+    }
+  },
+  {
+    "model": "players.player",
+    "pk": "5c8dd373-444e-4756-b165-807e242628cc",
+    "fields": {
+      "nick": "Stefan",
+      "rank": 2,
+      "is_bot": false,
+      "is_active": false,
+      "created_at": "2023-03-22T21:13:22.378Z"
+    }
+  },
+  {
+    "model": "players.player",
+    "pk": "7ee349ab-7607-47d9-8610-3cbfc7274d46",
+    "fields": {
+      "nick": "Antoni",
+      "rank": 5,
+      "is_bot": false,
+      "is_active": true,
+      "created_at": "2023-03-22T21:13:13.139Z"
+    }
+  },
+  {
+    "model": "players.player",
+    "pk": "92eb7229-6bd2-4ca0-86cb-2bb56d902125",
+    "fields": {
+      "nick": "Player1",
+      "rank": 0,
+      "is_bot": false,
+      "is_active": true,
+      "created_at": "2023-03-22T21:12:38.239Z"
+    }
+  },
+  {
+    "model": "players.player",
+    "pk": "abbd8043-285e-4f41-a2f3-8e36b405954c",
+    "fields": {
+      "nick": "Beata",
+      "rank": 1,
+      "is_bot": false,
+      "is_active": false,
+      "created_at": "2023-03-22T21:13:51.976Z"
+    }
+  },
+  {
+    "model": "players.player",
+    "pk": "d8bddb6b-fc2b-4fb8-9914-10ebb1a91a63",
+    "fields": {
+      "nick": "Janusz",
+      "rank": 3,
+      "is_bot": false,
+      "is_active": true,
+      "created_at": "2023-03-22T21:12:54.736Z"
+    }
+  }
+]
