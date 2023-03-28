@@ -35,6 +35,7 @@ function FormikTest() {
 
             <form className="w-1/2" onSubmit={formik.handleSubmit}>
                 <div className="mb-3">
+                    {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
                     <label htmlFor="name" className="form-label">
                         Name
                     </label>
@@ -52,6 +53,7 @@ function FormikTest() {
                 </div>
 
                 <div className="mb-3">
+                    {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
                     <label htmlFor="email" className="form-label">
                         Email
                     </label>
@@ -70,6 +72,7 @@ function FormikTest() {
                 </div>
 
                 <div className="mb-3">
+                    {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
                     <label htmlFor="message" className="form-label">
                         Message
                     </label>
