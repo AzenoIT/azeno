@@ -7,24 +7,8 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "test": "jest",
-    "cy": "cypress run",
     "format": "prettier --write \"./**/*.{js,jsx,ts,tsx}\"",
     "lint": "eslint \"./**/*.{js,jsx,ts,tsx}\" --quiet --fix"
-  },
-  "jest": {
-    "preset": "jest-expo",
-    "transformIgnorePatterns": [
-      "node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg)"
-    ],
-    "collectCoverage": true,
-    "collectCoverageFrom": [
-      "**/*.{js,jsx}",
-      "!**/coverage/**",
-      "!**/node_modules/**",
-      "!**/babel.config.js",
-      "!**/jest.setup.js"
-    ]
   },
   "dependencies": {
     "@expo/webpack-config": "^18.0.1",
@@ -48,10 +32,8 @@
     "@types/jest": "^29.5.0",
     "@types/react": "~18.0.14",
     "@types/react-native": "^0.71.3",
-    "@types/react-test-renderer": "^18.0.0",
     "@typescript-eslint/eslint-plugin": "^5.55.0",
     "@typescript-eslint/parser": "^5.55.0",
-    "cypress": "^12.8.1",
     "eslint": "^8.36.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^17.0.0",
@@ -67,10 +49,7 @@
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-native": "^4.0.0",
-    "jest": "^29.2.1",
-    "jest-expo": "^48.0.2",
     "prettier": "^2.8.4",
-    "react-test-renderer": "^18.2.0",
     "typescript": "^4.9.5"
   },
   "private": true
