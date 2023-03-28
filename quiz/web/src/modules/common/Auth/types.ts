@@ -8,4 +8,4 @@ export interface AnonymousUserData {
     username: string;
 }
 
-export interface RegisteredUserData extends AnonymousUserData {}
+export type RegisteredUserData = AnonymousUserData;

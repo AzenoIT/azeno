@@ -50,8 +50,8 @@ export default function useAuth(): UseAuth {
     }, [authData]);
 
     const setUserDetail = useCallback(
-        (authData: AuthData) => {
-            setAuthData(authData);
+        (value: AuthData) => {
+            setAuthData(value);
         },
         [setAuthData]
     );
