@@ -1,24 +1,34 @@
 import axios, { AxiosResponse } from "axios";
-import { useAuthTokenConfig } from "modules/common/AuthToken/AuthTokenProvider";
-import useLocalStorage from "modules/common/AuthToken/useLocalStorage";
+import { useAuthConfig } from "modules/common/Auth/AuthProvider";
+import { AnonymousUserData, RegisteredUserData } from "modules/common/Auth/types";
+import useLocalStorage from "modules/common/Auth/useLocalStorage";
 import { CreateAuthorizationTokenResponse } from "modules/common/types";
 import { useCallback } from "react";
 
-interface UseAuthToken {
+type AuthData =
+    | { readonly userType: "registered"; readonly data: RegisteredUserData }
+    | { readonly userType: "anonymous"; readonly data: AnonymousUserData }
+    | { readonly userType: null };
+
+interface UseAuth {
     readonly accessToken: string;
     readonly refreshToken: string;
     refreshAccessToken: () => Promise<string>;
     isTokenValid: () => boolean;
     isRefreshTokenValid: () => boolean;
     login: (username: string, password: string) => Promise<string>;
+    getUserDetail: () => AnonymousUserData | RegisteredUserData | null;
+    setUserDetail: (authData: AuthData) => void;
 }
 
 /**
  * Hook allowing access to JWT token stored in localstorage.
  * Allows for setting tokens as well as refreshing accessToken using refreshToken.
  * */
-export default function useAuthToken(): UseAuthToken {
-    const config = useAuthTokenConfig();
+export default function useAuth(): UseAuth {
+    const config = useAuthConfig();
+    const [authData, setAuthData] = useLocalStorage<AuthData>("userData", { userType: null });
+
     const [{ accessToken, refreshToken, expiresAt, refreshExpiresAt }, setTokens] = useLocalStorage("authToken", {
         accessToken: "",
         expiresAt: "1970-01-01T00:00:00.000Z",
@@ -29,9 +39,22 @@ export default function useAuthToken(): UseAuthToken {
     const isRefreshTokenValid = useCallback(() => {
         return new Date(refreshExpiresAt) > new Date() && refreshToken !== "";
     }, [refreshExpiresAt, refreshToken]);
+
     const isTokenValid = useCallback(() => {
         return (new Date(expiresAt) > new Date() && accessToken !== "") || isRefreshTokenValid();
     }, [expiresAt, isRefreshTokenValid, accessToken]);
+
+    const getUserDetail = useCallback(() => {
+        if (authData.userType === null) return null;
+        return authData.data;
+    }, [authData]);
+
+    const setUserDetail = useCallback(
+        (authData: AuthData) => {
+            setAuthData(authData);
+        },
+        [setAuthData]
+    );
 
     const refreshAccessToken = useCallback(async () => {
         let response: AxiosResponse<CreateAuthorizationTokenResponse>;
@@ -75,5 +98,14 @@ export default function useAuthToken(): UseAuthToken {
         [setTokens, config.loginEndpoint]
     );
 
-    return { accessToken, refreshToken, refreshAccessToken, isTokenValid, isRefreshTokenValid, login };
+    return {
+        accessToken,
+        refreshToken,
+        refreshAccessToken,
+        isTokenValid,
+        isRefreshTokenValid,
+        login,
+        getUserDetail,
+        setUserDetail,
+    };
 }

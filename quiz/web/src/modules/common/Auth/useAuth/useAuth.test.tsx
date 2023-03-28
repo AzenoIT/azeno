@@ -1,18 +1,26 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { server } from "mocks/server";
-import { AuthTokenProvider } from "modules/common/AuthToken/AuthTokenProvider";
-import useAuthToken from "modules/common/AuthToken/useAuthToken/useAuthToken";
+import { AuthProvider } from "modules/common/Auth/AuthProvider";
+import useAuth from "modules/common/Auth/useAuth/useAuth";
 import { rest } from "msw";
 import { beforeEach, describe, test } from "vitest";
 
-describe("useAuthToken", () => {
+describe("useAuth", () => {
     const username = "testUser";
     const password = "testPass";
 
-    function UseAuthTokenRendered() {
-        const { accessToken, refreshToken, refreshAccessToken, isTokenValid, isRefreshTokenValid, login } =
-            useAuthToken();
+    function UseAuthRendered() {
+        const {
+            accessToken,
+            refreshToken,
+            refreshAccessToken,
+            isTokenValid,
+            isRefreshTokenValid,
+            login,
+            getUserDetail,
+            setUserDetail,
+        } = useAuth();
 
         return (
             <div>
@@ -20,36 +28,53 @@ describe("useAuthToken", () => {
                 <h2 data-testid="refreshToken">{refreshToken}</h2>
                 <h2 data-testid="isTokenValid">{isTokenValid() ? "true" : "false"}</h2>
                 <h2 data-testid="isRefreshTokenValid">{isRefreshTokenValid() ? "true" : "false"}</h2>
+                <h2 data-testid="getUserDetail">{getUserDetail()?.username || ""}</h2>
                 <button type="button" onClick={refreshAccessToken}>
                     refreshAccessToken
                 </button>
                 <button type="button" onClick={() => login(username, password)}>
                     login
                 </button>
+                <button
+                    type="button"
+                    onClick={() =>
+                        setUserDetail({
+                            userType: "anonymous",
+                            data: { id: "42", username: "Jaro" },
+                        })
+                    }
+                >
+                    setUserDetail
+                </button>
             </div>
         );
     }
 
-    function renderUseAuthToken() {
+    function RenderUseAuth() {
         render(
-            <AuthTokenProvider config={{ loginEndpoint: "/api/v1/token/", refreshEndpoint: "/api/v1/token/refresh/" }}>
-                <UseAuthTokenRendered />
-            </AuthTokenProvider>
+            <AuthProvider config={{ loginEndpoint: "/api/v1/token/", refreshEndpoint: "/api/v1/token/refresh/" }}>
+                <UseAuthRendered />
+            </AuthProvider>
         );
     }
 
     beforeEach(() => {
         localStorage.removeItem("authToken");
-        return () => localStorage.removeItem("authToken");
+        localStorage.removeItem("userData");
+        return () => {
+            localStorage.removeItem("authToken");
+            localStorage.removeItem("userData");
+        };
     });
 
     test("without any setup returns default values", () => {
-        renderUseAuthToken();
+        RenderUseAuth();
 
         expect(screen.getByTestId("accessToken").textContent).toBe("");
         expect(screen.getByTestId("refreshToken").textContent).toBe("");
         expect(screen.getByTestId("isTokenValid").textContent).toBe("false");
         expect(screen.getByTestId("isRefreshTokenValid").textContent).toBe("false");
+        expect(screen.getByTestId("getUserDetail").textContent).toBe("");
     });
 
     test("refreshToken sends request to reload token", async () => {
@@ -58,7 +83,7 @@ describe("useAuthToken", () => {
                 return res(ctx.status(200), ctx.json({ access_token: "NewAccessToken" }));
             })
         );
-        renderUseAuthToken();
+        RenderUseAuth();
 
         await userEvent.click(screen.getByText("refreshAccessToken"));
 
@@ -73,7 +98,7 @@ describe("useAuthToken", () => {
                 refreshToken: "ValidRefresh",
             })
         );
-        renderUseAuthToken();
+        RenderUseAuth();
         expect(screen.getByTestId("isRefreshTokenValid").textContent).toBe("true");
     });
 
@@ -87,7 +112,7 @@ describe("useAuthToken", () => {
                 refreshToken: "ValidRefresh",
             })
         );
-        renderUseAuthToken();
+        RenderUseAuth();
         expect(screen.getByTestId("isTokenValid").textContent).toBe("true");
     });
 
@@ -107,7 +132,7 @@ describe("useAuthToken", () => {
                 );
             })
         );
-        renderUseAuthToken();
+        RenderUseAuth();
 
         expect(screen.getByTestId("accessToken").textContent).toBe("");
         expect(screen.getByTestId("refreshToken").textContent).toBe("");
@@ -119,5 +144,28 @@ describe("useAuthToken", () => {
         expect(screen.getByTestId("refreshToken").textContent).toBe("NewRefreshToken");
         expect(screen.getByTestId("isTokenValid").textContent).toBe("true");
         expect(screen.getByTestId("isRefreshTokenValid").textContent).toBe("true");
+    });
+
+    test("getUserData returns non value from localStorage if present", () => {
+        localStorage.setItem(
+            "userData",
+            JSON.stringify({
+                userType: "anonymous",
+                data: {
+                    id: "11",
+                    username: "Rex",
+                },
+            })
+        );
+        RenderUseAuth();
+        expect(screen.getByTestId("getUserDetail").textContent).toBe("Rex");
+    });
+
+    test("getUserData updates value in localStorage", async () => {
+        RenderUseAuth();
+
+        expect(screen.getByTestId("getUserDetail").textContent).toBe("");
+        await userEvent.click(screen.getByText("setUserDetail"));
+        await waitFor(() => expect(screen.getByTestId("getUserDetail").textContent).toBe("Jaro"));
     });
 });

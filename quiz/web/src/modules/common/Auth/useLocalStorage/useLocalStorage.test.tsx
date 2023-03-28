@@ -1,6 +1,6 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import useLocalStorage from "modules/common/AuthToken/useLocalStorage/useLocalStorage";
+import useLocalStorage from "modules/common/Auth/useLocalStorage/useLocalStorage";
 import { beforeEach, describe, expect } from "vitest";
 
 describe("useLocalStorage", () => {

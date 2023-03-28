@@ -1,52 +1,53 @@
 import { render, screen, waitFor } from "@testing-library/react";
-import { AuthTokenProvider } from "modules/common/AuthToken";
-import ProtectedRoute from "modules/common/components/ProtectedRoute/ProtectedRoute";
+import { AuthProvider } from "modules/common/Auth";
+import UserRequired from "modules/common/components/UserRequired/UserRequired";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { beforeEach, describe, test } from "vitest";
 
-describe("ProtectedRoute", () => {
-    function RenderProtectedRoute() {
+describe("UserRequired", () => {
+    function RenderUserRequired() {
         render(
-            <AuthTokenProvider config={{ loginEndpoint: "/", refreshEndpoint: "/refresh/" }}>
+            <AuthProvider config={{ loginEndpoint: "/", refreshEndpoint: "/refresh/" }}>
                 <MemoryRouter>
                     <Routes>
                         <Route
                             path="/"
                             element={
-                                <ProtectedRoute>
+                                <UserRequired>
                                     <h1>Protected Route</h1>
-                                </ProtectedRoute>
+                                </UserRequired>
                             }
                         />
-                        <Route path="/login" element={<h1>Login</h1>} />
+                        <Route path="/start" element={<h1>Login</h1>} />
                     </Routes>
                 </MemoryRouter>
-            </AuthTokenProvider>
+            </AuthProvider>
         );
     }
 
     beforeEach(() => {
-        localStorage.removeItem("authToken");
-        return () => localStorage.removeItem("authToken");
+        localStorage.removeItem("userData");
+        return () => localStorage.removeItem("userData");
     });
 
     test("redirects to login if token is expired or not present", async () => {
-        RenderProtectedRoute();
+        RenderUserRequired();
 
         await waitFor(() => expect(screen.getByText("Login")));
     });
 
     test("does nothing if token is present", async () => {
         localStorage.setItem(
-            "authToken",
+            "userData",
             JSON.stringify({
-                expiresAt: new Date(Date.now() + 60 * 1000),
-                accessToken: "ValidToken",
-                refreshExpiresAt: new Date(Date.now() + 60 * 60 * 1000),
-                refreshToken: "ValidRefresh",
+                userType: "anonymous",
+                data: {
+                    id: "21",
+                    username: "Chad",
+                },
             })
         );
-        RenderProtectedRoute();
+        RenderUserRequired();
 
         await waitFor(() => expect(screen.getByText("Protected Route")));
     });

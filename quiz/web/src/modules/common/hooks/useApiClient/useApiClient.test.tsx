@@ -1,7 +1,7 @@
 import { QueryClient, QueryClientProvider, useQuery } from "@tanstack/react-query";
 import { render, screen, waitFor } from "@testing-library/react";
 import { server } from "mocks/server";
-import { AuthTokenProvider } from "modules/common/AuthToken";
+import { AuthProvider } from "modules/common/Auth";
 import useApiClient from "modules/common/hooks/useApiClient/useApiClient";
 import { rest } from "msw";
 import { beforeEach, describe } from "vitest";
@@ -30,11 +30,9 @@ describe("useApiClient", () => {
         const client = new QueryClient();
         render(
             <QueryClientProvider client={client}>
-                <AuthTokenProvider
-                    config={{ loginEndpoint: "/api/v1/token/", refreshEndpoint: "/api/v1/token/refresh/" }}
-                >
+                <AuthProvider config={{ loginEndpoint: "/api/v1/token/", refreshEndpoint: "/api/v1/token/refresh/" }}>
                     <UseApiClientClient />
-                </AuthTokenProvider>
+                </AuthProvider>
             </QueryClientProvider>
         );
     }

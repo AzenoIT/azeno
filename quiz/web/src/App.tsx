@@ -1,11 +1,11 @@
-import { router } from "router";
-import { RouterProvider } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { AuthConfig, AuthTokenProvider } from "modules/common/AuthToken";
+import { AuthConfig, AuthProvider } from "modules/common/Auth";
 import ErrorBoundary from "modules/common/components/ErrorBoundary";
+import FakerTest from "modules/genericTests/FakerTest/FakerTest";
 import FormikTest from "modules/genericTests/FormikTest/FormikTest";
 import TailwindTest from "modules/genericTests/TailwindTest/TailwindTest";
-import FakerTest from "modules/genericTests/FakerTest/FakerTest";
+import { RouterProvider } from "react-router-dom";
+import { router } from "router";
 
 function App() {
     const queryClient = new QueryClient();
@@ -13,14 +13,14 @@ function App() {
 
     return (
         <QueryClientProvider client={queryClient}>
-            <AuthTokenProvider config={authConfig}>
+            <AuthProvider config={authConfig}>
                 <ErrorBoundary>
                     <RouterProvider router={router} />
                     <FakerTest />
                     <TailwindTest />
                     <FormikTest />
                 </ErrorBoundary>
-            </AuthTokenProvider>
+            </AuthProvider>
         </QueryClientProvider>
     );
 }
