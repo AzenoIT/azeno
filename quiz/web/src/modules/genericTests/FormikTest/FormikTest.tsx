@@ -1,10 +1,12 @@
 import { useFormik } from "formik";
 import { useState } from "react";
 import * as yup from "yup";
+import { useTranslation } from "react-i18next";
 
 function FormikTest() {
     const [message, setMessage] = useState("");
     const [submitted, setSubmitted] = useState(false);
+    const { t } = useTranslation();
 
     const formik = useFormik({
         initialValues: {
@@ -37,7 +39,7 @@ function FormikTest() {
                 <div className="mb-3">
                     {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
                     <label htmlFor="name" className="form-label">
-                        Name
+                        {t("Name")}
                     </label>
                     <input
                         type="text"
@@ -55,9 +57,8 @@ function FormikTest() {
                 <div className="mb-3">
                     {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
                     <label htmlFor="email" className="form-label">
-                        Email
+                        {t("Email")}
                     </label>
-
                     <input
                         type="email"
                         id="email"
@@ -74,7 +75,7 @@ function FormikTest() {
                 <div className="mb-3">
                     {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
                     <label htmlFor="message" className="form-label">
-                        Message
+                        {t("Message")}
                     </label>
 
                     <textarea
@@ -93,7 +94,7 @@ function FormikTest() {
                     type="submit"
                     className="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap rounded py-1 px-3 leading-normal no-underline bg-blue-600 text-white hover:bg-blue-600"
                 >
-                    Send
+                    {t("Send")}
                 </button>
             </form>
         </div>

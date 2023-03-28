@@ -3,10 +3,12 @@ import { RouterProvider } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AuthConfig, AuthTokenProvider } from "modules/common/AuthToken";
 import ErrorBoundary from "modules/common/components/ErrorBoundary";
+import FakerTest from "modules/genericTests/FakerTest/FakerTest";
 import FormikTest from "modules/genericTests/FormikTest/FormikTest";
 import TailwindTest from "modules/genericTests/TailwindTest/TailwindTest";
-import FakerTest from "modules/genericTests/FakerTest/FakerTest";
-import MaterialUITest from "./modules/genericTests/MaterialUITest/MaterialUITest";
+import MaterialUITest from "modules/genericTests/MaterialUITest/MaterialUITest";
+import TranslationTest from "modules/genericTests/TranslationTest/TranslationTest";
+import LanguageSwitcher from "modules/genericTests/LanguageSwitcher/LanguageSwitcher";
 
 function App() {
     const queryClient = new QueryClient();
@@ -21,6 +23,8 @@ function App() {
                     <TailwindTest />
                     <FormikTest />
                     <MaterialUITest />
+                    <TranslationTest />
+                    <LanguageSwitcher />
                 </ErrorBoundary>
             </AuthTokenProvider>
         </QueryClientProvider>
