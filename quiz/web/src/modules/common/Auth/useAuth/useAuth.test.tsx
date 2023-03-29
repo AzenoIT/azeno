@@ -129,6 +129,12 @@ describe("useAuth", () => {
         expect(screen.getByTestId("refreshToken").textContent).toBe(refreshToken);
     });
 
+    test("getUserData returns non value from localStorage if present", () => {
+        localStorage.setItem("userData", JSON.stringify({ userType: "anonymous", data: anonymousUserData }));
+        render(<UseAuthConsumer />);
+        expect(screen.getByTestId("getUserDetail").textContent).toBe(username);
+    });
+
     test("loginAnonymous updates access tokens", async () => {
         (loginAnonymousPlayer as Mock).mockReturnValueOnce(Promise.resolve(tokenResponse));
         localStorage.setItem("userData", JSON.stringify({ userType: "anonymous", data: anonymousUserData }));
