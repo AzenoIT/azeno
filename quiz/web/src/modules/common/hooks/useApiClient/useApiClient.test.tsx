@@ -1,10 +1,13 @@
+import { faker } from "@faker-js/faker";
 import { QueryClient, QueryClientProvider, useQuery } from "@tanstack/react-query";
 import { render, screen, waitFor } from "@testing-library/react";
 import { server } from "mocks/server";
-import { AuthProvider } from "modules/common/Auth";
+import { refreshAccessToken } from "modules/common/Auth/useAuth/utils";
 import useApiClient from "modules/common/hooks/useApiClient/useApiClient";
 import { rest } from "msw";
-import { beforeEach, describe } from "vitest";
+import { beforeEach, describe, Mock, vi } from "vitest";
+
+vi.mock("modules/common/Auth/useAuth/utils");
 
 describe("useApiClient", () => {
     function UseApiClientClient() {
@@ -30,9 +33,7 @@ describe("useApiClient", () => {
         const client = new QueryClient();
         render(
             <QueryClientProvider client={client}>
-                <AuthProvider config={{ loginEndpoint: "/api/v1/token/", refreshEndpoint: "/api/v1/token/refresh/" }}>
-                    <UseApiClientClient />
-                </AuthProvider>
+                <UseApiClientClient />
             </QueryClientProvider>
         );
     }
@@ -42,16 +43,12 @@ describe("useApiClient", () => {
     beforeEach(() => {
         localStorage.removeItem("authToken");
         server.restoreHandlers();
-        server.restoreHandlers();
         server.use(
             rest.get("http://localhost/api/v1/protected/", (req, res, ctx) => {
                 if (req.headers.get("Authorization") !== `Bearer ${validAccessToken}`) {
                     return res(ctx.status(403));
                 }
                 return res(ctx.status(200), ctx.json("42"));
-            }),
-            rest.post("http://localhost/api/v1/token/refresh/", (_, res, ctx) => {
-                return res(ctx.status(200), ctx.json({ access_token: validAccessToken }));
             })
         );
         return () => localStorage.removeItem("authToken");
@@ -69,6 +66,12 @@ describe("useApiClient", () => {
 
     test("requests new token when 403 is returned", async () => {
         localStorage.setItem("authToken", JSON.stringify({ accessToken: "invalidToken", refreshToken: "12" }));
+        (refreshAccessToken as Mock).mockReturnValueOnce({
+            access_token: validAccessToken,
+            refresh_token: faker.datatype.uuid(),
+            expires_at: faker.date.future(),
+            refresh_expires_at: faker.date.future(),
+        });
 
         renderHook();
 
