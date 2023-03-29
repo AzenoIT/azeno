@@ -118,6 +118,7 @@ describe("refreshAccessToken", () => {
     let tokenResponse: CreateAuthorizationTokenResponse;
 
     beforeEach(() => {
+        server.restoreHandlers();
         refreshToken = faker.datatype.uuid();
         tokenResponse = {
             access_token: faker.datatype.uuid(),
