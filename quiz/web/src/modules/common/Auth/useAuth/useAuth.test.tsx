@@ -71,17 +71,6 @@ describe("useAuth", () => {
                 <button type="button" onClick={() => register(username)}>
                     register
                 </button>
-                {/* <button */}
-                {/*    type="button" */}
-                {/*    onClick={() => */}
-                {/*        setUserDetail({ */}
-                {/*            userType: "anonymous", */}
-                {/*            data: { id: "42", username: "Jaro" }, */}
-                {/*        }) */}
-                {/*    } */}
-                {/* > */}
-                {/*    setUserDetail */}
-                {/* </button> */}
             </div>
         );
     }
