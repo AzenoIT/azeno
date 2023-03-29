@@ -86,3 +86,19 @@ def nouns_temp_file(tmp_path: Path) -> Path:
     noun_temp_file.write_text("\n".join(test_noun))
 
     return noun_temp_file
+
+
+@pytest.fixture
+def profane_words_temp_file(tmp_path: Path) -> Path:
+    """Creates a temporary path for profane words to test
+    the validator function :function:`helpers.validators.validate_profanity`
+
+    :param Path tmp_path: tmp_path fixture provided by pytest
+    :return: Path file for test to use as base.
+    """
+    test_profane_words = ["fuckin", "boobs", "cunt", "kocha dzieci"]
+
+    temp_file = tmp_path / "temp_profane_words.txt"
+    temp_file.write_text("\n".join(test_profane_words))
+
+    return temp_file
