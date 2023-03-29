@@ -1,4 +1,4 @@
 import ErrorBoundary from "modules/common/components/ErrorBoundary";
-import UserRequired from "modules/common/components/UserRequired";
+import PlayerRequired from "modules/common/components/PlayerRequired";
 
-export { ErrorBoundary, UserRequired };
+export { ErrorBoundary, PlayerRequired };

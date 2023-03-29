@@ -1,4 +1,4 @@
-import { UserRequired } from "modules/common/components";
+import { PlayerRequired } from "modules/common/components";
 import { createBrowserRouter } from "react-router-dom";
 
 // eslint-disable-next-line import/prefer-default-export
@@ -6,9 +6,9 @@ export const router = createBrowserRouter([
     {
         path: "/",
         element: (
-            <UserRequired>
+            <PlayerRequired>
                 <h1>HOME</h1>
-            </UserRequired>
+            </PlayerRequired>
         ),
     },
     {

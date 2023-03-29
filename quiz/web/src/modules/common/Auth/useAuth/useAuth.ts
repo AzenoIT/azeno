@@ -25,6 +25,7 @@ interface UseAuth {
  * Hook allowing access to JWT token stored in localstorage.
  * Allows for setting tokens as well as refreshing accessToken using refreshToken.
  * */
+
 export default function useAuth(): UseAuth {
     const config = useAuthConfig();
     const [authData, setAuthData] = useLocalStorage<AuthData>("userData", { userType: null });
@@ -44,18 +45,6 @@ export default function useAuth(): UseAuth {
         return (new Date(expiresAt) > new Date() && accessToken !== "") || isRefreshTokenValid();
     }, [expiresAt, isRefreshTokenValid, accessToken]);
 
-    const getUserDetail = useCallback(() => {
-        if (authData.userType === null) return null;
-        return authData.data;
-    }, [authData]);
-
-    const setUserDetail = useCallback(
-        (value: AuthData) => {
-            setAuthData(value);
-        },
-        [setAuthData]
-    );
-
     const refreshAccessToken = useCallback(async () => {
         let response: AxiosResponse<CreateAuthorizationTokenResponse>;
         try {
@@ -74,6 +63,22 @@ export default function useAuth(): UseAuth {
         });
         return Promise.resolve(response.data.access_token);
     }, [config, refreshToken, setTokens]);
+
+    // TODO update following methods
+    // TODO 1. register -> so that a user can register an anonymous user account
+    // TODO 2. login -> support for anonymous user
+    // TODO 3.
+    const getUserDetail = useCallback(() => {
+        if (authData.userType === null) return null;
+        return authData.data;
+    }, [authData]);
+
+    const setUserDetail = useCallback(
+        (value: AuthData) => {
+            setAuthData(value);
+        },
+        [setAuthData]
+    );
 
     const login = useCallback(
         async (username: string, password: string) => {
