@@ -52,7 +52,7 @@ describe("useAuth", () => {
             isRefreshTokenValid,
             getUserDetail,
             loginAnonymous,
-            // setUserDetail,
+            register,
         } = useAuth();
 
         return (
@@ -67,6 +67,9 @@ describe("useAuth", () => {
                 </button>
                 <button type="button" onClick={loginAnonymous}>
                     loginAnonymous
+                </button>
+                <button type="button" onClick={() => register(username)}>
+                    register
                 </button>
                 {/* <button */}
                 {/*    type="button" */}
@@ -148,60 +151,14 @@ describe("useAuth", () => {
 
     test("register updates authData and access tokens", async () => {
         (registerAnonymousPlayer as Mock).mockReturnValueOnce(Promise.resolve(anonymousUserData));
+        (loginAnonymousPlayer as Mock).mockReturnValueOnce(Promise.resolve(tokenResponse));
 
         render(<UseAuthConsumer />);
-    });
 
-    // test("login sends request to login endpoint", async () => {
-    //     server.use(
-    //         rest.post("http://localhost/api/v1/token/", async (req, res, ctx) => {
-    //             const data = await req.json();
-    //             if (data.username !== username || data.password !== password) return res(ctx.status(401));
-    //             return res(
-    //                 ctx.status(200),
-    //                 ctx.json({
-    //                     access_token: "NewAccessToken",
-    //                     refresh_token: "NewRefreshToken",
-    //                     expires_at: new Date(Date.now() + 60_000),
-    //                     refresh_expires_at: new Date(Date.now() + 60 * 60_000),
-    //                 })
-    //             );
-    //         })
-    //     );
-    //     render(<UseAuthConsumer/>);
-    //
-    //     expect(screen.getByTestId("accessToken").textContent).toBe("");
-    //     expect(screen.getByTestId("refreshToken").textContent).toBe("");
-    //     expect(screen.getByTestId("isTokenValid").textContent).toBe("false");
-    //     expect(screen.getByTestId("isRefreshTokenValid").textContent).toBe("false");
-    //
-    //     await userEvent.click(screen.getByText("login"));
-    //     await waitFor(() => expect(screen.getByTestId("accessToken").textContent).toBe("NewAccessToken"));
-    //     expect(screen.getByTestId("refreshToken").textContent).toBe("NewRefreshToken");
-    //     expect(screen.getByTestId("isTokenValid").textContent).toBe("true");
-    //     expect(screen.getByTestId("isRefreshTokenValid").textContent).toBe("true");
-    // });
-    //
-    // test("getUserData returns non value from localStorage if present", () => {
-    //     localStorage.setItem(
-    //         "userData",
-    //         JSON.stringify({
-    //             userType: "anonymous",
-    //             data: {
-    //                 id: "11",
-    //                 username: "Rex",
-    //             },
-    //         })
-    //     );
-    //     render(<UseAuthConsumer/>);
-    //     expect(screen.getByTestId("getUserDetail").textContent).toBe("Rex");
-    // });
-    //
-    // test("getUserData updates value in localStorage", async () => {
-    //     render(<UseAuthConsumer/>);
-    //
-    //     expect(screen.getByTestId("getUserDetail").textContent).toBe("");
-    //     await userEvent.click(screen.getByText("setUserDetail"));
-    //     await waitFor(() => expect(screen.getByTestId("getUserDetail").textContent).toBe("Jaro"));
-    // });
+        await userEvent.click(screen.getByText("register"));
+
+        await waitFor(() => expect(screen.getByTestId("accessToken").textContent).toBe(accessToken));
+        expect(screen.getByTestId("refreshToken").textContent).toBe(refreshToken);
+        expect(screen.getByTestId("getUserDetail").textContent).toBe(username);
+    });
 });
