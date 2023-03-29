@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     "users.apps.UsersConfig",
     "decks.apps.DecksConfig",
     "players.apps.PlayersConfig",
+    "stats.apps.StatsConfig",
 ]
 
 MIDDLEWARE = [

@@ -13,9 +13,9 @@ class AccountType(models.Model):
     :param name: account type name
     :type name: str
     :param duration: duration of a particular account type
-    :type duration:
+    :type duration: timedelta
     :param cost: monthly cost of a particular account type
-    :type cost: decimal
+    :type cost: Decimal
     """
     name = models.CharField(max_length=150)
     duration = models.DurationField()
