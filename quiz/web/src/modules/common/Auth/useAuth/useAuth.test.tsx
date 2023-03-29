@@ -1,8 +1,9 @@
 import { faker } from "@faker-js/faker";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { AnonymousUserData } from "modules/common/Auth/types";
 import useAuth from "modules/common/Auth/useAuth/useAuth";
-import { refreshAccessToken, registerAnonymousPlayer } from "modules/common/Auth/useAuth/utils";
+import { loginAnonymousPlayer, refreshAccessToken, registerAnonymousPlayer } from "modules/common/Auth/useAuth/utils";
 import { CreateAuthorizationTokenResponse } from "modules/common/types";
 import { beforeEach, describe, Mock, test, vi } from "vitest";
 
@@ -10,14 +11,13 @@ vi.mock("modules/common/Auth/useAuth/utils");
 
 describe("useAuth", () => {
     let username: string;
-    let password: string;
     let accessToken: string;
     let refreshToken: string;
     let tokenResponse: CreateAuthorizationTokenResponse;
+    let anonymousUserData: AnonymousUserData;
 
     beforeEach(() => {
         username = faker.random.word();
-        password = faker.random.word();
         accessToken = faker.datatype.uuid();
         refreshToken = faker.datatype.uuid();
         tokenResponse = {
@@ -28,6 +28,10 @@ describe("useAuth", () => {
             token_type: "Bearer",
             scope: [],
             session_state: faker.datatype.uuid(),
+        };
+        anonymousUserData = {
+            id: faker.datatype.uuid(),
+            username,
         };
 
         vi.resetAllMocks();
@@ -47,7 +51,7 @@ describe("useAuth", () => {
             isTokenValid,
             isRefreshTokenValid,
             getUserDetail,
-            // login,
+            loginAnonymous,
             // setUserDetail,
         } = useAuth();
 
@@ -61,9 +65,9 @@ describe("useAuth", () => {
                 <button type="button" onClick={refreshAccessToken_}>
                     refreshAccessToken
                 </button>
-                {/* <button type="button" onClick={() => login(username, password)}> */}
-                {/*    login */}
-                {/* </button> */}
+                <button type="button" onClick={loginAnonymous}>
+                    loginAnonymous
+                </button>
                 {/* <button */}
                 {/*    type="button" */}
                 {/*    onClick={() => */}
@@ -125,8 +129,19 @@ describe("useAuth", () => {
         expect(screen.getByTestId("refreshToken").textContent).toBe(refreshToken);
     });
 
-    test("register updates authData", async () => {
-        (registerAnonymousPlayer as Mock).mockReturnValueOnce(Promise.resolve(tokenResponse));
+    test("loginAnonymous updates access tokens", async () => {
+        (loginAnonymousPlayer as Mock).mockReturnValueOnce(Promise.resolve(tokenResponse));
+        localStorage.setItem("userData", JSON.stringify({ userType: "anonymous", data: anonymousUserData }));
+        render(<UseAuthConsumer />);
+
+        await userEvent.click(screen.getByText("loginAnonymous"));
+
+        await waitFor(() => expect(screen.getByTestId("accessToken").textContent).toBe(accessToken));
+        expect(screen.getByTestId("refreshToken").textContent).toBe(refreshToken);
+    });
+
+    test("register updates authData and access tokens", async () => {
+        (registerAnonymousPlayer as Mock).mockReturnValueOnce(Promise.resolve(anonymousUserData));
 
         render(<UseAuthConsumer />);
     });

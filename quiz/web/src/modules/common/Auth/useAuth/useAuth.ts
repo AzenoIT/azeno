@@ -16,6 +16,7 @@ interface UseAuth {
     isRefreshTokenValid: () => boolean;
     refreshAccessToken: () => Promise<string>;
     getUserDetail: () => AnonymousUserData | RegisteredUserData | null;
+    loginAnonymous: () => Promise<void>;
     // login: (username: string, password: string) => Promise<string>;
     // setUserDetail: (authData: AuthData) => void;
 }
@@ -58,6 +59,18 @@ export default function useAuth(): UseAuth {
         if (authData.userType === null) return null;
         return authData.data;
     }, [authData]);
+
+    const loginAnonymous = useCallback(async () => {
+        if (authData.userType === "anonymous") {
+            const tokenData: CreateAuthorizationTokenResponse = await utils.loginAnonymousPlayer(authData.data.id);
+            setTokens({
+                accessToken: tokenData.access_token,
+                refreshToken: tokenData.refresh_token,
+                expiresAt: tokenData.expires_at,
+                refreshExpiresAt: tokenData.refresh_expires_at,
+            });
+        }
+    }, [setTokens]);
 
     // const register = useCallback(
     //     async (username: string) => {
@@ -110,6 +123,7 @@ export default function useAuth(): UseAuth {
         isRefreshTokenValid,
         refreshAccessToken,
         getUserDetail,
+        loginAnonymous,
         // login,
         // register,
         // getUserDetail,
