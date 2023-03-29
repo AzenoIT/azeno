@@ -2,7 +2,7 @@ import { faker } from "@faker-js/faker";
 import { server } from "mocks/server";
 import { player, token } from "modules/common/apiUrls";
 import { AnonymousUserData } from "modules/common/Auth/types";
-import { loginAnonymousPlayer, registerAnonymousPlayer } from "modules/common/Auth/useAuth/utils";
+import { loginAnonymousPlayer, refreshAccessToken, registerAnonymousPlayer } from "modules/common/Auth/useAuth/utils";
 import { CreateAuthorizationTokenResponse } from "modules/common/types";
 import { rest } from "msw";
 import { describe, test } from "vitest";
@@ -113,4 +113,52 @@ describe("loginPlayer", () => {
     });
 });
 
-describe("");
+describe("refreshAccessToken", () => {
+    let refreshToken: string;
+    let tokenResponse: CreateAuthorizationTokenResponse;
+
+    beforeEach(() => {
+        refreshToken = faker.datatype.uuid();
+        tokenResponse = {
+            access_token: faker.datatype.uuid(),
+            refresh_token: faker.datatype.uuid(),
+            expires_at: new Date(Date.now() + 60_000).toISOString(),
+            refresh_expires_at: new Date(Date.now() + 60 * 60_000).toISOString(),
+            token_type: "Bearer",
+            scope: [],
+            session_state: faker.datatype.uuid(),
+        };
+    });
+
+    test("can refresh token using refresh_token", async () => {
+        server.use(
+            rest.post(token.refresh(), (_, res, ctx) => {
+                return res(ctx.status(200), ctx.json(tokenResponse));
+            })
+        );
+
+        const tokens = await refreshAccessToken(refreshToken);
+
+        expect(tokens).toMatchObject(tokenResponse);
+    });
+
+    test("error handling for expired refresh token", async () => {
+        server.use(
+            rest.post(token.refresh(), (_, res, ctx) => {
+                return res(ctx.status(401), ctx.json({ message: "Invalid credentials." }));
+            })
+        );
+
+        await expect(refreshAccessToken(refreshToken)).rejects.toThrowError("Invalid credentials.");
+    });
+
+    test("generic error handling", async () => {
+        server.use(
+            rest.post(token.refresh(), (_, res, ctx) => {
+                return res(ctx.status(422));
+            })
+        );
+
+        await expect(refreshAccessToken(refreshToken)).rejects.toThrowError("Unexpected error has occurred.");
+    });
+});

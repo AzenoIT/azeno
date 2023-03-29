@@ -35,4 +35,17 @@ async function loginAnonymousPlayer(id: string): Promise<CreateAuthorizationToke
     return response.data;
 }
 
-export { registerAnonymousPlayer, loginAnonymousPlayer };
+async function refreshAccessToken(refreshToken: string): Promise<CreateAuthorizationTokenResponse> {
+    let response: AxiosResponse<CreateAuthorizationTokenResponse>;
+    try {
+        response = await axios.post(token.refresh(), { refresh_token: refreshToken });
+    } catch (error) {
+        if (error instanceof AxiosError && error.response?.status === 401) {
+            return Promise.reject(new Error(error.response.data.message));
+        }
+        return Promise.reject(new Error("Unexpected error has occurred."));
+    }
+    return response.data;
+}
+
+export { refreshAccessToken, registerAnonymousPlayer, loginAnonymousPlayer };
