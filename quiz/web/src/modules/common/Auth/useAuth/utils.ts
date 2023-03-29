@@ -28,7 +28,7 @@ async function loginAnonymousPlayer(id: string): Promise<CreateAuthorizationToke
         response = await axios.post(token.create(), { id });
     } catch (error) {
         if (error instanceof AxiosError && error.response?.status === 401) {
-            return Promise.reject(new Error(error.response!.data.message));
+            return Promise.reject(new Error(error.response.data.message));
         }
         return Promise.reject(new Error("Unexpected error has occurred."));
     }

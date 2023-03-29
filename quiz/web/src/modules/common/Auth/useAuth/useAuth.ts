@@ -52,7 +52,7 @@ export default function useAuth(): UseAuth {
             refreshExpiresAt: tokenData.refresh_expires_at,
         });
         return Promise.resolve(tokenData.access_token);
-    }, [utils.refreshAccessToken, refreshToken, setTokens]);
+    }, [refreshToken, setTokens]);
 
     const getUserDetail = useCallback(() => {
         if (authData.userType === null) return null;
@@ -61,12 +61,9 @@ export default function useAuth(): UseAuth {
 
     // const register = useCallback(
     //     async (username: string) => {
-    //         try {
-    //             const userData = await registerAnonymousUser(username);
-    //             setAuthData({ userType: "anonymous", data: userData });
-    //         } catch (error) {
-    //             if (error instanceof Error) return Promise.reject(error.message);
-    //         }
+    //         const userData = await utils.registerAnonymousPlayer(username);
+    //         setAuthData({ userType: "anonymous", data: userData });
+    //         return Promise.resolve(userData);
     //     },
     //     [setAuthData]
     // );

@@ -2,7 +2,7 @@ import { faker } from "@faker-js/faker";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import useAuth from "modules/common/Auth/useAuth/useAuth";
-import { refreshAccessToken } from "modules/common/Auth/useAuth/utils";
+import { refreshAccessToken, registerAnonymousPlayer } from "modules/common/Auth/useAuth/utils";
 import { CreateAuthorizationTokenResponse } from "modules/common/types";
 import { beforeEach, describe, Mock, test, vi } from "vitest";
 
@@ -41,9 +41,9 @@ describe("useAuth", () => {
 
     function UseAuthConsumer() {
         const {
-            accessToken,
-            refreshToken,
-            refreshAccessToken,
+            accessToken: accessToken_,
+            refreshToken: refreshToken_,
+            refreshAccessToken: refreshAccessToken_,
             isTokenValid,
             isRefreshTokenValid,
             getUserDetail,
@@ -53,12 +53,12 @@ describe("useAuth", () => {
 
         return (
             <div>
-                <h2 data-testid="accessToken">{accessToken}</h2>
-                <h2 data-testid="refreshToken">{refreshToken}</h2>
+                <h2 data-testid="accessToken">{accessToken_}</h2>
+                <h2 data-testid="refreshToken">{refreshToken_}</h2>
                 <h2 data-testid="isTokenValid">{isTokenValid() ? "true" : "false"}</h2>
                 <h2 data-testid="isRefreshTokenValid">{isRefreshTokenValid() ? "true" : "false"}</h2>
                 <h2 data-testid="getUserDetail">{getUserDetail()?.username || ""}</h2>
-                <button type="button" onClick={refreshAccessToken}>
+                <button type="button" onClick={refreshAccessToken_}>
                     refreshAccessToken
                 </button>
                 {/* <button type="button" onClick={() => login(username, password)}> */}
@@ -125,7 +125,11 @@ describe("useAuth", () => {
         expect(screen.getByTestId("refreshToken").textContent).toBe(refreshToken);
     });
 
-    // test("register updates authData")
+    test("register updates authData", async () => {
+        (registerAnonymousPlayer as Mock).mockReturnValueOnce(Promise.resolve(tokenResponse));
+
+        render(<UseAuthConsumer />);
+    });
 
     // test("login sends request to login endpoint", async () => {
     //     server.use(

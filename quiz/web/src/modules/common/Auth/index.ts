@@ -1,3 +1,3 @@
 import useAuth from "modules/common/Auth/useAuth";
 
-export { useAuth };
+export default useAuth;
