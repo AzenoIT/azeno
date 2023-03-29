@@ -47,7 +47,7 @@ class Player(models.Model):
         blank=True,
         null=True
     )
-    account_type = models.ForeignKey('AccountType', on_delete=models.CASCADE)
+    account_type = models.ForeignKey("AccountType", on_delete=models.CASCADE)
     start_time = models.DateTimeField()
     expiration_time = models.DateTimeField()
     is_active = models.BooleanField(

@@ -3,9 +3,9 @@ from django.db import models
 
 
 class StudyLog(models.Model):
-    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name='%(class)ss')
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name="%(class)ss")
     study_date = models.DateTimeField(auto_now_add=True)
-    correct_answers = models.PositiveIntegerField()
+    correct_answers = models.PositiveIntegerField(verbose_name="Correct answers count")
 
     class Meta:
         abstract = True
@@ -22,7 +22,7 @@ class FlashcardStudyLog(StudyLog):
     :param flashcard: studied flashcard
     :type flashcard: Flashcard
     """
-    flashcard = models.ForeignKey('decks.Flashcard', on_delete=models.CASCADE, related_name='study_logs')
+    flashcard = models.ForeignKey("decks.Flashcard", on_delete=models.CASCADE, related_name="study_logs")
 
     def __str__(self):
         return f'{self.study_date} - {self.flashcard} - {self.user} - {self.correct_answers} correct answers'
@@ -43,7 +43,7 @@ class DeckStudyLog(StudyLog):
     :param realization: deck realization percentage
     :type realization: Decimal
     """
-    deck = models.ForeignKey('decks.Deck', on_delete=models.CASCADE, related_name='study_logs')
+    deck = models.ForeignKey("decks.Deck", on_delete=models.CASCADE, related_name="study_logs")
     study_duration = models.DurationField()
     realization = models.DecimalField(max_digits=4, decimal_places=1)
 
