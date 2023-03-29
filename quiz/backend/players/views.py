@@ -1,3 +1,9 @@
-from django.shortcuts import render
+from rest_framework.generics import CreateAPIView
 
-# Create your views here.
+from . import models
+from . import serializers
+
+
+class PlayerCreateAPIView(CreateAPIView):
+    queryset = models.Player.objects.all()
+    serializer_class = serializers.PlayerSerializer
