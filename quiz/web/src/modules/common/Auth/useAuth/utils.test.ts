@@ -1,13 +1,13 @@
 import { faker } from "@faker-js/faker";
-
 import { server } from "mocks/server";
-import { player } from "modules/common/api_urls";
+import { player, token } from "modules/common/apiUrls";
 import { AnonymousUserData } from "modules/common/Auth/types";
-import { registerAnonymousUser } from "modules/common/Auth/useAuth/utils";
+import { loginAnonymousPlayer, registerAnonymousPlayer } from "modules/common/Auth/useAuth/utils";
+import { CreateAuthorizationTokenResponse } from "modules/common/types";
 import { rest } from "msw";
 import { describe, test } from "vitest";
 
-describe("registerAnonymousUser", () => {
+describe("registerPlayer", () => {
     let userData: AnonymousUserData;
     let username: string;
 
@@ -21,33 +21,96 @@ describe("registerAnonymousUser", () => {
 
     test("sends request to correct endpoint", async () => {
         server.use(
-            rest.post(player.register, (_, res, ctx) => {
+            rest.post(player.register(), (_, res, ctx) => {
                 return res(ctx.status(201), ctx.json(userData));
             })
         );
 
-        const response = await registerAnonymousUser(username);
+        const response = await registerAnonymousPlayer(username);
 
         expect(response).toMatchObject(userData);
     });
 
     test("handling error caused by invalid username", async () => {
         server.use(
-            rest.post(player.register, (_, res, ctx) => {
+            rest.post(player.register(), (_, res, ctx) => {
                 return res(ctx.status(406), ctx.json({ message: "Invalid username." }));
             })
         );
 
-        await expect(registerAnonymousUser(username)).rejects.toThrowError("Invalid username");
+        await expect(registerAnonymousPlayer(username)).rejects.toThrowError("Invalid username");
     });
 
     test("handling generic errors", async () => {
         server.use(
-            rest.post(player.register, (_, res, ctx) => {
+            rest.post(player.register(), (_, res, ctx) => {
                 return res(ctx.status(400), ctx.json({ message: faker.random.word() }));
             })
         );
 
-        await expect(registerAnonymousUser(username)).rejects.toThrowError("Unexpected error has occurred.");
+        await expect(registerAnonymousPlayer(username)).rejects.toThrowError("Unexpected error has occurred.");
     });
 });
+
+describe("loginPlayer", () => {
+    let accessToken: string;
+    let refreshToken: string;
+    let expiresAt: string;
+    let refreshExpiresAt: string;
+    let tokenResponse: CreateAuthorizationTokenResponse;
+    let playerId: string;
+
+    beforeEach(() => {
+        accessToken = faker.datatype.uuid();
+        refreshToken = faker.datatype.uuid();
+        expiresAt = new Date(Date.now() + 60_000).toISOString();
+        refreshExpiresAt = new Date(Date.now() + 60 * 60_000).toISOString();
+        tokenResponse = {
+            access_token: accessToken,
+            refresh_token: refreshToken,
+            expires_at: expiresAt,
+            refresh_expires_at: refreshExpiresAt,
+            token_type: "Bearer",
+            scope: [],
+            session_state: faker.datatype.uuid(),
+        };
+        playerId = faker.datatype.uuid();
+    });
+
+    test("can login anonymous player using uuid", async () => {
+        server.use(
+            rest.post(token.create(), async (_, res, ctx) => {
+                return res(ctx.status(200), ctx.json(tokenResponse));
+            })
+        );
+
+        const tokens = await loginAnonymousPlayer(playerId);
+
+        expect(tokens.access_token).toBe(accessToken);
+        expect(tokens.refresh_token).toBe(refreshToken);
+        expect(tokens.expires_at).toBe(expiresAt);
+        expect(tokens.refresh_expires_at).toBe(refreshExpiresAt);
+    });
+
+    test("error handling for invalid id", async () => {
+        server.use(
+            rest.post(token.create(), async (_, res, ctx) => {
+                return res(ctx.status(401), ctx.json({ message: "Invalid credentials." }));
+            })
+        );
+
+        await expect(loginAnonymousPlayer(playerId)).rejects.toThrowError("Invalid credentials.");
+    });
+
+    test("handling generic errors", async () => {
+        server.use(
+            rest.post(token.create(), async (_, res, ctx) => {
+                return res(ctx.status(407), ctx.json("123"));
+            })
+        );
+
+        await expect(loginAnonymousPlayer(playerId)).rejects.toThrowError("Unexpected error has occurred.");
+    });
+});
+
+describe("");
