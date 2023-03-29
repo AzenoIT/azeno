@@ -30,4 +30,24 @@ describe("registerAnonymousUser", () => {
 
         expect(response).toMatchObject(userData);
     });
+
+    test("handling error caused by invalid username", async () => {
+        server.use(
+            rest.post(player.register, (_, res, ctx) => {
+                return res(ctx.status(406), ctx.json({ message: "Invalid username." }));
+            })
+        );
+
+        await expect(registerAnonymousUser(username)).rejects.toThrowError("Invalid username");
+    });
+
+    test("handling generic errors", async () => {
+        server.use(
+            rest.post(player.register, (_, res, ctx) => {
+                return res(ctx.status(400), ctx.json({ message: faker.random.word() }));
+            })
+        );
+
+        await expect(registerAnonymousUser(username)).rejects.toThrowError("Unexpected error has occurred.");
+    });
 });
