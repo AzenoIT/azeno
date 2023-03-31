@@ -1,4 +1,5 @@
 import json
+from pathlib import Path
 
 import pytest
 
@@ -49,3 +50,39 @@ def player_api(api_rf, db):
         return view(request)
 
     return create_player
+
+
+@pytest.fixture
+def adjectives_temp_file(tmp_path: Path) -> Path:
+    """Fixture for substituting text file with adjectives for username generator.
+
+    :return monkeypatch file: adj_temp_file
+    """
+    test_adj = [
+        "silly",
+        "outstanding",
+        "talented",
+    ]
+
+    adj_temp_file = tmp_path / "temp_adjectives.txt"
+    adj_temp_file.write_text("\n".join(test_adj))
+
+    return adj_temp_file
+
+
+@pytest.fixture
+def nouns_temp_file(tmp_path: Path) -> Path:
+    """Fixture for substituting text file with nouns for username generator.
+
+    :return monkeypatch file: noun_temp_file
+    """
+    test_noun = [
+        "Sod",
+        "Archer",
+        "Craftsman",
+    ]
+
+    noun_temp_file = tmp_path / "temp_nouns.txt"
+    noun_temp_file.write_text("\n".join(test_noun))
+
+    return noun_temp_file
