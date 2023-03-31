@@ -1,5 +1,3 @@
-from rest_framework import serializers
-from rest_framework.fields import UUIDField, IntegerField, DateTimeField
 from rest_framework.serializers import ModelSerializer
 
 from . import models
