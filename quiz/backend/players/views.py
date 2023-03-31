@@ -14,7 +14,7 @@ class NicknameGeneratorAPIView(APIView):
 
     :param count: Number of nicknames to generate.
     :type count: int
-    :returns: A list of 5 nicknames.
+    :returns: A list of nicknames.
     :rtype: list[str]
     """
 
