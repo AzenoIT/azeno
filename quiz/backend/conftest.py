@@ -62,3 +62,10 @@ def nouns_temp_file(tmp_path: Path) -> Path:
     noun_temp_file.write_text("\n".join(test_noun))
 
     return noun_temp_file
+
+
+@pytest.fixture
+def api_rf():
+    from rest_framework.test import APIRequestFactory
+
+    return APIRequestFactory()
