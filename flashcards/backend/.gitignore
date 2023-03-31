@@ -10,4 +10,4 @@ docs/.doctrees
 logs/*.log*
 logs/*.log
 .mypy_cache/
-media/
+media/*/
