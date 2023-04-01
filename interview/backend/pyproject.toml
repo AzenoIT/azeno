@@ -17,6 +17,8 @@ coverage = "7.2.1"
 pytest-cov = "4.0.0"
 djangorestframework = "3.14.0"
 djangorestframework-simplejwt = "5.2.2"
+speechrecognition = "3.10.0"
+gtts = "2.3.1"
 
 [tool.poetry.group.dev.dependencies]
 sphinx = "6.1.3"
