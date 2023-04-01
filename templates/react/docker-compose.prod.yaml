@@ -10,6 +10,5 @@ services:
     ports:
       - "3000:3000"
 
-
 networks:
   quiz_web_network:
