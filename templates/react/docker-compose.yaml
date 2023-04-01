@@ -1,0 +1,26 @@
+services:
+    web:
+        build:
+            context: ./
+            target: development
+        restart: on-failure
+        working_dir: /app
+        networks:
+            - quiz_web_network
+        ports:
+            - "3000:3000"
+        volumes:
+            - ./:/app
+            - node_modules:/app/node_modules
+        env_file:
+            - envs/web.env
+        command: npm run dev
+        stdin_open: true
+        tty: true
+
+volumes:
+    node_modules:
+
+networks:
+    quiz_web_network:
+        driver: bridge
