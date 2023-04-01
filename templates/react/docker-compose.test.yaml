@@ -7,6 +7,7 @@ services:
         working_dir: /app
         networks:
             - quiz_web_network
+            - quiz_e2e_network
         ports:
             - "3000:3000"
         volumes:
@@ -22,12 +23,12 @@ services:
         image: cypress/included:12.8.0
         restart: on-failure
         working_dir: /e2e
+        depends_on:
+            - web
         volumes:
             - ./:/e2e
         env_file:
             - envs/cypress.env
-        depends_on:
-            - proxy
         networks:
             - quiz_e2e_network
 
