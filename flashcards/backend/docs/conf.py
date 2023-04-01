@@ -53,4 +53,4 @@ exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 
 html_theme = "renku"
 html_static_path = ["_static"]
-html_logo = "_static/azeno_logo-10.png"
+html_logo = "_static/azeno_logo.png"
