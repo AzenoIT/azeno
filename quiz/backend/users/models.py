@@ -8,6 +8,8 @@ from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
+from helpers.validators.validators import validate_profanity
+
 
 class CustomUserManager(BaseUserManager["CustomUser"]):
 
@@ -32,6 +34,7 @@ class CustomUserManager(BaseUserManager["CustomUser"]):
         user = self.model(email=email, username=username, **kwargs)
         user.is_active = False
         user.password = make_password(password)
+        user.clean_fields()
         user.save(using=self._db)
 
         return user
@@ -84,12 +87,17 @@ class CustomUser(AbstractUser):
         default=uuid.uuid4, primary_key=True, editable=False, db_index=True
     )
     email = models.EmailField(_("email address"), unique=True)
-    username = models.CharField(max_length=100, validators=[UnicodeUsernameValidator()])
+    username = models.CharField(
+        max_length=100,
+        validators=[
+            validate_profanity,
+            UnicodeUsernameValidator(),
+        ],
+        blank=True,
+    )
 
     USERNAME_FIELD: str = "email"
-    REQUIRED_FIELDS: list[str] = [
-        "email address",
-    ]
+    REQUIRED_FIELDS: list[str] = []
 
     # TODO: Due to unresolved issues in django-stubs project, type checking for CustomUserManager had to be silenced
     # Link to the issue with this solution recommended as fix https://github.com/typeddjango/django-stubs/issues/174

@@ -1,10 +1,12 @@
 from typing import List
-
+from rest_framework.generics import CreateAPIView
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
-
 from helpers.gen_username.generate import generate_username
+
+from . import models
+from . import serializers
 
 
 class NicknameGeneratorAPIView(APIView):
@@ -22,3 +24,15 @@ class NicknameGeneratorAPIView(APIView):
         nicknames: List[str] = generate_username(10)
 
         return Response(nicknames, status=status.HTTP_200_OK)
+
+
+class PlayerCreateAPIView(CreateAPIView):
+    """Create a new player. Only POST method is allowed.
+    No authentication required.
+
+    :returns: PlayerCreateAPIView
+    :rtype: rest_framework.generics.CreateAPIView
+    """
+
+    queryset = models.Player.objects.all()
+    serializer_class = serializers.PlayerSerializer

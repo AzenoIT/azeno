@@ -7,3 +7,4 @@ Apps
 
    users
    players
+   helpers
