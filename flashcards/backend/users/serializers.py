@@ -8,6 +8,7 @@ class CustomUserSerializer(ModelSerializer):
     Password is not displayed in response.
 
     """
+
     class Meta:
         model = get_user_model()
         fields = ("id", "email", "password")

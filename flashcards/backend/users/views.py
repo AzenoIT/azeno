@@ -17,6 +17,7 @@ class CustomUserCreateView(APIView):
     :param str email: User email
     :param str password: User password
     """
+
     permission_classes = [AllowAny]
 
     def post(self, request, *args, **kwargs):
@@ -36,6 +37,7 @@ class LogoutViewWithBlacklistTokenReset(APIView):
 
     :param str refresh: Refresh token
     """
+
     permission_classes = [AllowAny]
 
     def post(self, request):

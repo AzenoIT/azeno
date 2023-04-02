@@ -8,10 +8,7 @@ from users.views import CustomUserCreateView, LogoutViewWithBlacklistTokenReset
 def test_create_user_by_api(db, api_rf):
     url = "/api/v1/users/create/"
     view = CustomUserCreateView.as_view()
-    new_user = {
-        "email": "d@d.pl",
-        "password": "abcdesfg"
-    }
+    new_user = {"email": "d@d.pl", "password": "abcdesfg"}
 
     request = api_rf.post(url, new_user, format="json")
     request2 = api_rf.post(url, new_user, format="json")
@@ -26,10 +23,7 @@ def test_create_user_by_api(db, api_rf):
 def test_create_user_by_api_duplicate_error(db, api_rf):
     url = "/api/v1/users/create/"
     view = CustomUserCreateView.as_view()
-    new_user = {
-        "email": "d@d.pl",
-        "password": "abcdesfg"
-    }
+    new_user = {"email": "d@d.pl", "password": "abcdesfg"}
 
     request = api_rf.post(url, new_user, format="json")
     request2 = api_rf.post(url, new_user, format="json")
@@ -43,10 +37,7 @@ def test_create_user_by_api_duplicate_error(db, api_rf):
 def test_create_user_by_api_invalid_email(db, api_rf):
     url = "/api/v1/users/create/"
     view = CustomUserCreateView.as_view()
-    new_user = {
-        "email": "d.pl",
-        "password": "abcdesfg"
-    }
+    new_user = {"email": "d.pl", "password": "abcdesfg"}
 
     request = api_rf.post(url, new_user, format="json")
     response = view(request)
@@ -57,9 +48,7 @@ def test_create_user_by_api_invalid_email(db, api_rf):
 def test_create_user_by_api_invalid_password(db, api_rf):
     url = "/api/v1/users/create/"
     view = CustomUserCreateView.as_view()
-    new_user = {
-        "email": "test@test.pl"
-    }
+    new_user = {"email": "test@test.pl"}
     request = api_rf.post(url, new_user, format="json")
     response = view(request)
     assert response.status_code == status.HTTP_400_BAD_REQUEST
@@ -68,10 +57,7 @@ def test_create_user_by_api_invalid_password(db, api_rf):
 def test_login_user_by_api_invalid_credentials(db, api_rf):
     url = "/api/v1/users/token/"
     view = TokenObtainPairView.as_view()
-    new_user = {
-        "email": "test@test.pl",
-        "password": "abcdesfg"
-    }
+    new_user = {"email": "test@test.pl", "password": "abcdesfg"}
     request = api_rf.post(url, new_user, format="json")
     response = view(request)
 
@@ -92,10 +78,7 @@ def test_login_user_by_api_create_and_token_endpoint_success(db, api_rf):
     view_verify = TokenVerifyView.as_view()
     view_logout = LogoutViewWithBlacklistTokenReset.as_view()
 
-    new_user = {
-        "email": "test@test.pl",
-        "password": "test"
-    }
+    new_user = {"email": "test@test.pl", "password": "test"}
 
     request_create = api_rf.post(url_create, new_user, format="json")
     request_login = api_rf.post(url_login, new_user, format="json")
@@ -135,10 +118,7 @@ def test_login_user_by_api_create_and_token_endpoint_fail(db, api_rf):
     view_verify = TokenVerifyView.as_view()
     view_logout = LogoutViewWithBlacklistTokenReset.as_view()
 
-    new_user = {
-        "email": "test@test.pl",
-        "password": "test"
-    }
+    new_user = {"email": "test@test.pl", "password": "test"}
 
     request_login = api_rf.post(url_login, new_user, format="json")
     request_refresh = api_rf.post(url_refresh, {"refresh": "test"}, format="json")
