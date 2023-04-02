@@ -47,7 +47,11 @@ function Login() {
                             keyboardType="email-address"
                             data-testid="login__input"
                         />
-                        {errors.email && <Text style={{ fontSize: 10, color: "red" }} data-testid="yup__error"}>{errors.email}</Text>}
+                        {errors.email && (
+                            <Text style={{ fontSize: 10, color: "red" }} data-testid="yupError">
+                                {errors.email}
+                            </Text>
+                        )}
                         <Button onPress={handleSubmit} title="LOGIN" disabled={!isValid} />
                     </>
                 )}
