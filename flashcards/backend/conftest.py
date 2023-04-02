@@ -6,7 +6,7 @@ from _decimal import Decimal
 from django.core.management import call_command
 from django.test import override_settings
 
-from players.models import AccountType
+# from players.models import AccountType
 
 
 @pytest.fixture
@@ -24,3 +24,10 @@ def generated_data_with_custom_command(settings, db):
 @pytest.fixture
 def account_type(db):
     return AccountType.objects.create(name="Basic", duration=timedelta(days=60), cost=Decimal(10))
+
+
+@pytest.fixture
+def api_rf():
+    from rest_framework.test import APIRequestFactory
+
+    return APIRequestFactory()
