@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 
 function NavBar() {
     return (
-        <AppBar position="sticky" sx={{ bgcolor: "#4459A9" }}>
+        <AppBar position="sticky" className="bg-primary40">
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
                     <img className="w-20 h-20" src={Logo} alt="logo" />
