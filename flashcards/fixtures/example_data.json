@@ -1,0 +1,42 @@
+[
+  {
+    "fields": {
+      "name": "hard",
+      "value": 4
+    },
+    "model": "decks.difficultylevel",
+    "pk": 1
+  },
+  {
+    "model": "decks.difficultylevel",
+    "pk": 2,
+    "fields": {
+      "name": "normal",
+      "value": 3
+    }
+  },
+  {
+    "model": "decks.difficultylevel",
+    "pk": 3,
+    "fields": {
+      "name": "very hard",
+      "value": 5
+    }
+  },
+  {
+    "model": "decks.difficultylevel",
+    "pk": 4,
+    "fields": {
+      "name": "easy",
+      "value": 2
+    }
+  },
+  {
+    "model": "decks.difficultylevel",
+    "pk": 5,
+    "fields": {
+      "name": "very easy",
+      "value": 1
+    }
+  }
+]
