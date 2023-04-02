@@ -5,6 +5,6 @@ app_name = "players"
 
 urlpatterns = [
     path(
-        "players/username/", views.NicknameGeneratorAPIView.as_view(), name="nickname"
+        "players/username/", views.NicknameGeneratorAPIView.as_view(), name="username"
     ),
 ]
