@@ -6,8 +6,8 @@ services:
         restart: on-failure
         working_dir: /app
         networks:
-            - quiz_web_network
-            - quiz_e2e_network
+            - web_network
+            - e2e_network
         ports:
             - "3000:3000"
         volumes:
@@ -30,13 +30,13 @@ services:
         env_file:
             - envs/cypress.env
         networks:
-            - quiz_e2e_network
+            - e2e_network
 
 volumes:
     node_modules:
 
 networks:
-    quiz_web_network:
+    web_network:
         driver: bridge
-    quiz_e2e_network:
+    e2e_network:
         driver: bridge

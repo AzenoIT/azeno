@@ -6,7 +6,7 @@ services:
         restart: on-failure
         working_dir: /app
         networks:
-            - quiz_web_network
+            - web_network
         ports:
             - "3000:3000"
         volumes:
@@ -22,5 +22,5 @@ volumes:
     node_modules:
 
 networks:
-    quiz_web_network:
+    web_network:
         driver: bridge
