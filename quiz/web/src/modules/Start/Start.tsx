@@ -11,7 +11,7 @@ function Start() {
         <div className="container h-screen">
             <NavBar />
             <div className="flex flex-col items-center content-center my-5 mt-9">
-                <Typography className="m-2" variant="h2" gutterBottom>
+                <Typography className="mb-3" variant="h2" gutterBottom>
                     Witaj!
                 </Typography>
                 <Typography variant="subtitle1" gutterBottom>
@@ -19,6 +19,7 @@ function Start() {
                 </Typography>
                 <TextField
                     id="standard-helperText"
+                    className="pt-10"
                     placeholder="losowa nazwa"
                     helperText="Nazwę - zawsze możesz zmienić"
                     variant="filled"
@@ -33,7 +34,8 @@ function Start() {
                         ),
                     }}
                     sx={{
-                        "& .MuiInputBase-root": { bgcolor: "#DDE1FF" },
+                        "& .MuiInputBase-root": { bgcolor: "#DDE1FF", textAlign: "center", padding: 0 },
+                        "& .MuiInputBase-input": { padding: 1 },
                         "& .MuiFormHelperText-root ": { textAlign: "center" },
                     }}
                 />
