@@ -4,7 +4,7 @@ from players.views import NicknameGeneratorAPIView
 
 
 def test_nickname_generator_view_returns_correct_data(api_rf):
-    request = api_rf.get("/players/nickname-generator/")
+    request = api_rf.get("/api/v1/players/username/")
     response = NicknameGeneratorAPIView.as_view()(request)
 
     assert response.status_code == status.HTTP_200_OK
