@@ -88,6 +88,7 @@ def nouns_temp_file(tmp_path: Path) -> Path:
     return noun_temp_file
 
 
+@pytest.fixture
 def profane_words_temp_file(tmp_path: Path) -> Path:
     """Creates a temporary path for profane words to test
     the validator function :function:`helpers.validators.validate_profanity`
