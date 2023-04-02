@@ -1,0 +1,14 @@
+services:
+    web:
+        build:
+            context: ./
+        restart: on-failure
+        networks:
+            - web_network
+        env_file:
+            - envs/web.env
+        ports:
+            - "3000:3000"
+
+networks:
+    web_network:
