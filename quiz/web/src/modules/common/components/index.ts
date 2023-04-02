@@ -1,4 +1,4 @@
 import ErrorBoundary from "modules/common/components/ErrorBoundary";
-import ProtectedRoute from "modules/common/components/ProtectedRoute";
+import PlayerRequired from "modules/common/components/PlayerRequired";
 
-export { ErrorBoundary, ProtectedRoute };
+export { ErrorBoundary, PlayerRequired };

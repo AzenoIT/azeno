@@ -1,5 +1,5 @@
 import axios, { AxiosInstance, CreateAxiosDefaults } from "axios";
-import useAuthToken from "modules/common/AuthToken/useAuthToken";
+import useAuth from "modules/common/Auth/useAuth";
 
 /**
  * Hook allowing access to a better Axios, which:
@@ -8,7 +8,7 @@ import useAuthToken from "modules/common/AuthToken/useAuthToken";
  * - TODO parses all ISO date strings to Date objects.
  * */
 export default function useApiClient(): AxiosInstance {
-    const { accessToken, refreshAccessToken } = useAuthToken();
+    const { accessToken, refreshAccessToken } = useAuth();
     const client = axios.create({} satisfies CreateAxiosDefaults);
 
     client.interceptors.request.use((config) => {
