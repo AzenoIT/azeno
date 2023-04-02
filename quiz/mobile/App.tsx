@@ -3,13 +3,14 @@ import React from "react";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import Login from "./src/components/Login";
+// @ts-ignore
+import Login from "components/Login";
 
 // @ts-ignore
-function HomeScreen({ navigation }) {
+function HomeScreen({ navigation }: { navigation: type }) {
     return (
         <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-            <Button title="Go to Login Screen" onPress={() => navigation.navigate("Login")} />
+            <Button title="Go to Login Screen" onPress={() => navigation.navigate("Login")} data-testid="login__btn" />
         </View>
     );
 }

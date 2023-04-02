@@ -5,6 +5,7 @@
   "compilerOptions": {
     "target": "esnext",
     "module": "commonjs",
+    "baseUrl": "src/components",
     "types": [
       "react-native",
       "jest"
