@@ -1,5 +1,5 @@
 import { PlayerRequired } from "modules/common/components";
-import Start from "modules/Start/Start";
+import Start from "modules/Start";
 import { createBrowserRouter } from "react-router-dom";
 
 // eslint-disable-next-line import/prefer-default-export
