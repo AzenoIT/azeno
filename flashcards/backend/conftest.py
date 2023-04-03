@@ -6,7 +6,7 @@ from _decimal import Decimal
 from django.core.management import call_command
 from django.test import override_settings
 
-# from players.models import AccountType
+from players.models import AccountType
 
 
 @pytest.fixture
