@@ -1,11 +1,14 @@
+from django.contrib.auth import get_user_model
 from rest_framework import status
-from rest_framework.permissions import AllowAny
+from rest_framework.generics import UpdateAPIView
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.exceptions import TokenError
 
-from users.serializers import CustomUserSerializer
+
+from users.serializers import CustomUserSerializer, UpdatePasswordSerializer
 
 
 class CustomUserCreateView(APIView):
@@ -29,7 +32,23 @@ class CustomUserCreateView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class LogoutViewWithBlacklistTokenReset(APIView):
+class CustomUserUpdatePasswordView(UpdateAPIView):
+    """Custom Update Password View. To change the password, the user must be authenticated.
+
+    :param str current_password: Current password
+    :param str new_password: New password
+    :param str password_confirmation: Password confirmation
+    """
+
+    queryset = get_user_model().objects.all()
+    permission_classes = (IsAuthenticated,)
+    serializer_class = UpdatePasswordSerializer
+
+    def get_object(self):
+        return self.request.user
+
+
+class CustomUserLogoutViewWithBlacklistTokenReset(APIView):
     """Logout View With Blacklist Token Reset.
     Logs out the user by blacklisting the refresh token. The refresh token is sent in the request body
     as a JSON object with the key "refresh".
@@ -38,7 +57,7 @@ class LogoutViewWithBlacklistTokenReset(APIView):
     :param str refresh: Refresh token
     """
 
-    permission_classes = [AllowAny]
+    permission_classes = (AllowAny,)
 
     def post(self, request):
         try:
