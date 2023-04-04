@@ -32,6 +32,7 @@ services:
       - "80:80"
     volumes:
       - ./backend/staticfiles:/app/staticfiles
+      - ./backend/media:/app/media
 
   backend:
     build:

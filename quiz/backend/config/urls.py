@@ -26,8 +26,11 @@ urlpatterns = [
     path("api/v1/", include("players.urls")),
 ]
 
+admin.site.site_header = "Azeno Quiz"
+admin.site.index_title = "Quiz Dashboard"
+admin.site.site_title = "Quiz"
+
 if settings.DEBUG:
     urlpatterns += [
         path("__debug__/", include(debug_toolbar.urls)),
-        path("api/v1/", include("players.urls")),
     ]

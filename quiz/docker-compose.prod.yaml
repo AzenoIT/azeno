@@ -39,6 +39,7 @@ services:
       - quiz_postgres_network
     volumes:
       - quiz_static_volume:/app/staticfiles
+      - quiz_media_volume:/app/media
 
   quiz_postgres:
     image: postgres:15.1
@@ -51,6 +52,7 @@ services:
 
 volumes:
   quiz_postgres_volume:
+  quiz_media_volume:
   quiz_static_volume:
 
 networks:

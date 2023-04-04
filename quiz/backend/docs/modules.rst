@@ -7,4 +7,5 @@ Apps
 
    users
    players
+   stats
    helpers
