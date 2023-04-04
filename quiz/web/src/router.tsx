@@ -1,4 +1,5 @@
 import { PlayerRequired } from "modules/common/components";
+import Start from "modules/Start";
 import { createBrowserRouter } from "react-router-dom";
 
 // eslint-disable-next-line import/prefer-default-export
@@ -13,7 +14,7 @@ export const router = createBrowserRouter([
     },
     {
         path: "/start/",
-        element: <h1>Start</h1>,
+        element: <Start />,
     },
     {
         path: "/login/",

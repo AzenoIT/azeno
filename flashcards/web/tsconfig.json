@@ -3,7 +3,7 @@
         "target": "ESNext",
         "useDefineForClassFields": true,
         "lib": ["DOM", "DOM.Iterable", "ESNext"],
-        "allowJs": false,
+        "allowJs": true,
         "skipLibCheck": true,
         "esModuleInterop": true,
         "allowSyntheticDefaultImports": true,
@@ -21,7 +21,12 @@
         "types": ["node"],
         "strictNullChecks": true,
         "strictFunctionTypes": false,
-        "baseUrl": "./src"
+        "noImplicitAny": true,
+        "noImplicitThis": true,
+        "baseUrl": "./src",
+        "paths": {
+            "@mui/styled-engine": ["./node_modules/@mui/styled-engine-sc"]
+        }
     },
     "include": ["src"],
     "references": [

@@ -1,4 +1,13 @@
-from players.views import PlayerCreateAPIView
+from rest_framework import status
+from players.views import NicknameGeneratorAPIView, PlayerCreateAPIView
+
+
+def test_nickname_generator_view_returns_correct_data(api_rf):
+    request = api_rf.get("/api/v1/players/username/")
+    response = NicknameGeneratorAPIView.as_view()(request)
+
+    assert response.status_code == status.HTTP_200_OK
+    assert len(response.data) == 10
 
 
 def test_player_view_return_201_status_code_and_correct_data(player_api):
