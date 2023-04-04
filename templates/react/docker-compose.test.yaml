@@ -1,0 +1,42 @@
+services:
+    web:
+        build:
+            context: ./
+            target: development
+        restart: on-failure
+        working_dir: /app
+        networks:
+            - web_network
+            - e2e_network
+        ports:
+            - "3000:3000"
+        volumes:
+            - ./:/app
+            - node_modules:/app/node_modules
+        env_file:
+            - envs/web.env
+        command: npm run dev
+        stdin_open: true
+        tty: true
+
+    cypress:
+        image: cypress/included:12.8.0
+        restart: on-failure
+        working_dir: /e2e
+        depends_on:
+            - web
+        volumes:
+            - ./:/e2e
+        env_file:
+            - envs/cypress.env
+        networks:
+            - e2e_network
+
+volumes:
+    node_modules:
+
+networks:
+    web_network:
+        driver: bridge
+    e2e_network:
+        driver: bridge

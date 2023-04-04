@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
 import { useState } from "react";
-import * as yup from "yup";
 import { useTranslation } from "react-i18next";
+import * as yup from "yup";
 
 function FormikTest() {
     const [message, setMessage] = useState("");

@@ -1,6 +1,8 @@
 import uuid
 from django.db import models
 
+from helpers.validators.validators import validate_profanity
+
 
 class Player(models.Model):
     """Model for representing player data for logged and not logged users
@@ -19,7 +21,12 @@ class Player(models.Model):
     uuid = models.UUIDField(
         editable=False, db_index=True, default=uuid.uuid4, primary_key=True
     )
-    nick = models.CharField(max_length=30)
+    nick = models.CharField(
+        max_length=30,
+        validators=[
+            validate_profanity,
+        ],
+    )
     rank = models.PositiveIntegerField(
         default=0, help_text="Calculated with Elo system."
     )
@@ -39,3 +46,7 @@ class Player(models.Model):
     class Meta:
         verbose_name = "player"
         verbose_name_plural = "players"
+
+    def save(self, *args, **kwargs):
+        self.clean_fields()
+        super().save(*args, **kwargs)
