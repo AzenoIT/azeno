@@ -1,6 +1,11 @@
 from django.urls import path
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenVerifyView
-from .views import CustomUserCreateView, CustomUserLogoutViewWithBlacklistTokenReset, CustomUserUpdatePasswordView
+from .views import (
+    CustomUserCreateView,
+    CustomUserLogoutViewWithBlacklistTokenReset,
+    CustomUserUpdatePasswordView,
+    CustomUserCurrentUserAPIView,
+)
 
 app_name = "users"
 
@@ -11,4 +16,5 @@ urlpatterns = [
     path("users/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
     path("users/token/verify/", TokenVerifyView.as_view(), name="token_verify"),
     path("users/logout/", CustomUserLogoutViewWithBlacklistTokenReset.as_view(), name="logout_user"),
+    path("users/", CustomUserCurrentUserAPIView.as_view(), name="user"),
 ]

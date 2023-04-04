@@ -21,6 +21,14 @@ class CustomUserSerializer(ModelSerializer):
         return instance
 
 
+class CustomUserGetCurrentUserSerializer(ModelSerializer):
+    """Custom user serializer for getting current user."""
+
+    class Meta:
+        model = get_user_model()
+        fields = ("id", "email", "username", "is_staff", "is_superuser", "is_active")
+
+
 class UpdatePasswordSerializer(serializers.ModelSerializer):
     """Custom update password serializer for updating user password. Verifies current password,
     new password and asks for password confirmation.

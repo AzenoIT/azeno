@@ -7,8 +7,7 @@ from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.exceptions import TokenError
 
-
-from users.serializers import CustomUserSerializer, UpdatePasswordSerializer
+from users.serializers import CustomUserSerializer, UpdatePasswordSerializer, CustomUserGetCurrentUserSerializer
 
 
 class CustomUserCreateView(APIView):
@@ -46,6 +45,20 @@ class CustomUserUpdatePasswordView(UpdateAPIView):
 
     def get_object(self):
         return self.request.user
+
+
+class CustomUserCurrentUserAPIView(APIView):
+    """Custom Current User API View. Returns the currently logged-in user.
+
+    :param str email: User email
+    :param str password: User password
+    """
+
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, request):
+        serializer = CustomUserGetCurrentUserSerializer(request.user)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class CustomUserLogoutViewWithBlacklistTokenReset(APIView):
