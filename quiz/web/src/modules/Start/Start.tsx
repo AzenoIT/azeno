@@ -6,6 +6,7 @@ import CachedIcon from "@mui/icons-material/Cached";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import { faker } from "@faker-js/faker";
+import { Link } from "react-router-dom";
 import NavBar from "./NavBar";
 
 function Start() {
@@ -83,10 +84,10 @@ function Start() {
                     Zacznij grać
                 </Button>
                 <Button variant="contained" className="bg-secondary90 rounded-full mt-16 text-black">
-                    Logowanie
+                    <Link to="/login">Logowanie</Link>
                 </Button>
                 <Button variant="contained" className="bg-secondary90 rounded-full mt-9 text-black">
-                    Rejestracja
+                    <Link to="/register">Rejestracja</Link>
                 </Button>
             </div>
         </div>
