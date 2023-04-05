@@ -1,12 +1,15 @@
+import { useState } from "react";
 import Typography from "@mui/material/Typography";
 import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
 import CachedIcon from "@mui/icons-material/Cached";
-import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
 import NavBar from "./NavBar";
 
 function Start() {
+    const [nickname, setNickname] = useState("");
+
     return (
         <div className="container h-screen">
             <NavBar />
@@ -21,9 +24,11 @@ function Start() {
                     id="standard-helperText"
                     className="pt-10"
                     placeholder="losowa nazwa"
-                    helperText="Nazwę - zawsze możesz zmienić"
+                    helperText="Nazwę zawsze możesz zmienić"
                     variant="filled"
                     size="small"
+                    value={nickname}
+                    onChange={(event) => setNickname(event.target.value)}
                     InputProps={{
                         endAdornment: (
                             <InputAdornment position="end">
@@ -39,7 +44,7 @@ function Start() {
                         "& .MuiFormHelperText-root ": { textAlign: "center" },
                     }}
                 />
-                <Button variant="contained" className="bg-primary40 rounded-full mt-6">
+                <Button variant="contained" className="bg-primary40 rounded-full mt-6" disabled={!nickname}>
                     Zacznij grać
                 </Button>
                 <Button variant="contained" className="bg-secondary90 rounded-full mt-16 text-black">
