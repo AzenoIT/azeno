@@ -68,12 +68,14 @@ function Start() {
                 />
                 <Typography align="center" variant="body1">
                     Dobre nazwy są krótkie i łatwe do zapamiętania! Potrzebujesz inspiracji? Co ty na{" "}
-                    <span
-                        style={{ color: "green", cursor: "pointer" }}
+                    <button
+                        type="button"
+                        style={{ color: "green", cursor: "pointer", border: "none" }}
                         onClick={() => setUserNickname(suggestedNickname)}
+                        onKeyUp={() => setUserNickname(suggestedNickname)}
                     >
                         {suggestedNickname}
-                    </span>
+                    </button>
                     ?
                 </Typography>
                 <Button
