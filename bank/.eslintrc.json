@@ -26,6 +26,13 @@
     "rules": {
         "prettier/prettier": "error",
         "react/react-in-jsx-scope": "off",
+        "react/require-default-props": [
+            "error",
+            {
+                "forbidDefaultForRequired": true,
+                "functions": "defaultArguments"
+            }
+        ],
         "react/jsx-filename-extension": [
             1,
             {
