@@ -16,7 +16,7 @@ const colorConfig = {
 };
 
 const sizeConfig = {
-    sm: "px-1 py-2 min-w-[100px]",
+    sm: "py-1 px-2 min-w-[100px]",
     md: "py-2 px-4 min-w-[125px]",
     lg: "py-4 px-8 min-w-[150px]",
 };
@@ -29,7 +29,7 @@ export default function Button({ onClick, children, color = "primary", size = "m
     const sizeClasses = sizeConfig[size];
 
     return (
-        <button type="button" className={` ${colorClasses} ${sizeClasses}`} onClick={onClick}>
+        <button type="button" className={`hover:opacity-90 ${colorClasses} ${sizeClasses}`} onClick={onClick}>
             {children}
         </button>
     );

@@ -14,7 +14,8 @@
     "coverage": "vitest run --coverage",
     "watch": "vitest watch",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "test-storybook": "test-storybook"
   },
   "dependencies": {
     "@emotion/react": "^11.10.6",
@@ -50,8 +51,10 @@
     "@storybook/addon-links": "^7.0.2",
     "@storybook/addon-postcss": "^2.0.0",
     "@storybook/blocks": "^7.0.2",
+    "@storybook/jest": "^0.1.0",
     "@storybook/react": "^7.0.2",
     "@storybook/react-vite": "^7.0.2",
+    "@storybook/test-runner": "^0.10.0",
     "@storybook/testing-library": "^0.0.14-next.2",
     "@tanstack/react-query-devtools": "^4.26.1",
     "@testing-library/dom": "^9.0.1",

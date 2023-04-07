@@ -1,4 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { within, userEvent } from "@storybook/testing-library";
+
+import { expect } from "@storybook/jest";
+
 import "index.css";
 
 import Button from "components/Button";
@@ -6,69 +10,52 @@ import Button from "components/Button";
 const meta: Meta<typeof Button> = {
     title: "Button",
     component: Button,
-    args: {
-        color: "primary",
-        size: "sm",
-        children: "Button",
-    },
+    tags: ["autodocs"],
 };
 
 export default meta;
 type Story = StoryObj<typeof Button>;
-export const Buttons: Story = {
-    render: ({ onClick }) => (
-        <div className="flex flex-col justify-evenly h-96">
-            <div className="flex justify-evenly">
-                <Button size="sm" color="primary" onClick={onClick}>
-                    Primary
-                </Button>
-                <Button size="sm" color="secondary" onClick={onClick}>
-                    Secondary
-                </Button>
-                <Button size="sm" color="success" onClick={onClick}>
-                    Success
-                </Button>
-                <Button size="sm" color="warning" onClick={onClick}>
-                    Warning
-                </Button>
-                <Button size="sm" color="error" onClick={onClick}>
-                    Error
-                </Button>
-            </div>
-            <div className="flex justify-evenly">
-                <Button size="md" color="primary" onClick={onClick}>
-                    Primary
-                </Button>
-                <Button size="md" color="secondary" onClick={onClick}>
-                    Secondary
-                </Button>
-                <Button size="md" color="success" onClick={onClick}>
-                    Success
-                </Button>
-                <Button size="md" color="warning" onClick={onClick}>
-                    Warning
-                </Button>
-                <Button size="md" color="error" onClick={onClick}>
-                    Error
-                </Button>
-            </div>
-            <div className="flex justify-evenly">
-                <Button size="lg" color="primary" onClick={onClick}>
-                    Primary
-                </Button>
-                <Button size="lg" color="secondary" onClick={onClick}>
-                    Secondary
-                </Button>
-                <Button size="lg" color="success" onClick={onClick}>
-                    Success
-                </Button>
-                <Button size="lg" color="warning" onClick={onClick}>
-                    Warning
-                </Button>
-                <Button size="lg" color="error" onClick={onClick}>
-                    Error
-                </Button>
-            </div>
+export const AllVariants: Story = {
+    render: ({ onClick }) => {
+        const rows = ["primary", "secondary", "success", "warning", "error"].flatMap(
+            (color: "primary" | "secondary" | "success" | "warning" | "error") =>
+                ["sm", "md", "lg"].map((size: "sm" | "md" | "lg") => (
+                    <div key={size + color} className="flex items-center justify-center">
+                        <Button size={size} color={color} onClick={onClick}>
+                            {`${color} ${size}`}
+                        </Button>
+                    </div>
+                ))
+        );
+        return <div className="grid grid-cols-3 gap-x-10 gap-y-5">{rows}</div>;
+    },
+    argTypes: {
+        size: { control: false },
+        color: { control: false },
+        onClick: { control: false },
+        children: { control: false },
+    },
+};
+
+export const PlayGround: Story = {
+    render: ({ onClick, color, size, children }) => (
+        <div className="flex items-center justify-center min-h-[300px]">
+            <Button onClick={onClick} color={color} size={size}>
+                {children}
+            </Button>
         </div>
     ),
+    play: async ({ canvasElement }) => {
+        const canvas = within(canvasElement);
+
+        const button: HTMLButtonElement = canvas.getByRole("button");
+        await userEvent.hover(button);
+
+        expect(button.textContent).toBe("Button");
+    },
+    args: {
+        size: "md",
+        color: "primary",
+        children: "Button",
+    },
 };
