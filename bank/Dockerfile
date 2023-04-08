@@ -8,7 +8,7 @@ RUN npm ci
 FROM development as builder
 
 COPY . .
-RUN npm run build
+RUN npm run build-storybook
 
 
 FROM nginx:1.23.3 as production

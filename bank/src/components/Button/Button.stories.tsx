@@ -15,6 +15,30 @@ const meta: Meta<typeof Button> = {
 
 export default meta;
 type Story = StoryObj<typeof Button>;
+
+export const Playground: Story = {
+    render: ({ onClick, color, size, children }) => (
+        <div className="flex items-center justify-center min-h-[300px]">
+            <Button onClick={onClick} color={color} size={size}>
+                {children}
+            </Button>
+        </div>
+    ),
+    args: {
+        size: "md",
+        color: "primary",
+        children: "Button",
+    },
+    play: async ({ canvasElement }) => {
+        const canvas = within(canvasElement);
+
+        const button: HTMLButtonElement = canvas.getByRole("button");
+        await userEvent.hover(button);
+
+        expect(button.textContent).toBe("Button");
+    },
+};
+
 export const AllVariants: Story = {
     render: ({ onClick }) => {
         const rows = ["primary", "secondary", "success", "warning", "error"].flatMap(
@@ -34,28 +58,5 @@ export const AllVariants: Story = {
         color: { control: false },
         onClick: { control: false },
         children: { control: false },
-    },
-};
-
-export const PlayGround: Story = {
-    render: ({ onClick, color, size, children }) => (
-        <div className="flex items-center justify-center min-h-[300px]">
-            <Button onClick={onClick} color={color} size={size}>
-                {children}
-            </Button>
-        </div>
-    ),
-    play: async ({ canvasElement }) => {
-        const canvas = within(canvasElement);
-
-        const button: HTMLButtonElement = canvas.getByRole("button");
-        await userEvent.hover(button);
-
-        expect(button.textContent).toBe("Button");
-    },
-    args: {
-        size: "md",
-        color: "primary",
-        children: "Button",
     },
 };

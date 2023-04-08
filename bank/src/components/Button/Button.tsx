@@ -22,7 +22,7 @@ const sizeConfig = {
 };
 
 /**
- * This is an example of dummy button component
+ * This is a mockup of Button component with simple test example.
  */
 export default function Button({ onClick, children, color = "primary", size = "md" }: ButtonProps) {
     const colorClasses = colorConfig[color];

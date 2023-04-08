@@ -8,8 +8,8 @@ module.exports = {
                 secondary: "#DBE1FF",
                 success: "#65A014",
                 warning: "#FDBC11",
-                error: "#BA1A1A"
-            }
+                error: "#BA1A1A",
+            },
         },
     },
     plugins: [],
