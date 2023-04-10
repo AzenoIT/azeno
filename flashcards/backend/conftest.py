@@ -13,7 +13,8 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 from django.core.management import call_command
 from django.test import override_settings
 
-from decks.models import Category, Deck
+
+from decks.models import Category, Deck, Flashcard, Tag
 from config import settings
 
 
@@ -102,3 +103,17 @@ def remove_test_data():
     """
     yield
     shutil.rmtree(os.path.join(settings.BASE_DIR, "test_dir"), ignore_errors=True)
+
+
+@pytest.fixture
+def tag_db(db, deck, flashcard):
+    name = "tag_2"
+    deck = deck
+    flashcard = flashcard
+
+    return Tag.objects.create(name=name, deck=deck, flashcard=flashcard)
+
+
+@pytest.fixture
+def flashcard(db):
+    return Flashcard.objects.create()
