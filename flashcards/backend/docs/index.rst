@@ -13,7 +13,6 @@ Welcome to Azeno's documentation!
    modules
 
 
-
 Indices and tables
 ==================
 

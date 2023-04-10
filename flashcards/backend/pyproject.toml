@@ -17,6 +17,8 @@ coverage = "7.2.1"
 pytest-cov = "4.0.0"
 djangorestframework = "3.14.0"
 djangorestframework-simplejwt = "5.2.2"
+python-magic = "0.4.27"
+pillow = "9.4.0"
 
 [tool.poetry.group.dev.dependencies]
 sphinx = "6.1.3"
