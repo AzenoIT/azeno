@@ -14,7 +14,7 @@ describe("ErrorBoundary", () => {
             </ErrorBoundary>
         );
 
-        expect(screen.getByRole("h1").textContent).toBe("Sorry");
-        expect(screen.getByRole("p").textContent).toBe("Something went wrong, please try again");
+        expect(screen.getByRole("heading", { name: "Sorry" })).toBeInTheDocument();
+        expect(screen.getByText("Something went wrong, please try again")).toBeInTheDocument();
     });
 });
