@@ -2,6 +2,9 @@ from django.contrib.auth import get_user_model
 from django.core.validators import MinValueValidator
 from django.db import models
 from decimal import Decimal
+
+from django.db.models.functions import Lower
+
 from . import validators
 
 User = get_user_model()
@@ -91,3 +94,30 @@ class Deck(TimeStampModel):
     class Meta:
         verbose_name = "deck"
         verbose_name_plural = "decks"
+
+
+class Tag(models.Model):
+    """Model for representing tags for decks
+    :param name: Tag name
+    :type name: str
+    :param deck: Foreign Key for Deck model
+    :type deck: int
+    :param flashcard: Foreign Key for Flashcard model
+    :type flashcard: int
+    """
+
+    name = models.CharField(max_length=24)
+    deck = models.ForeignKey("Deck", on_delete=models.DO_NOTHING)
+    flashcard = models.ForeignKey("Flashcard", on_delete=models.DO_NOTHING)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        constraints = [models.UniqueConstraint(Lower("name"), name="unique_lower_name_tag")]
+        verbose_name = "tag"
+        verbose_name_plural = "tags"
+
+
+class Flashcard(models.Model):
+    pass
