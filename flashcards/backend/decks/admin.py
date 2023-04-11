@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Category, Deck
+from .models import Category, Tag, Deck
 
 
 class CategoryAdminConfig(admin.ModelAdmin):
@@ -15,7 +15,14 @@ class CategoryAdminConfig(admin.ModelAdmin):
     list_per_page = 50
 
 
-admin.site.register(Category, CategoryAdminConfig)
+class TagAdminConfig(admin.ModelAdmin):
+    """Class **TagAdminConfig** displays tags list in admin panel based on :class:`decks.models.Tag` model."""
+
+    list_display = ("name",)
+    search_fields = ("name",)
+    list_display_links = ("name",)
+    list_filter = ("name",)
+    list_per_page = 50
 
 
 class DeckAdminConfig(admin.ModelAdmin):
@@ -30,4 +37,6 @@ class DeckAdminConfig(admin.ModelAdmin):
     list_per_page = 50
 
 
+admin.site.register(Tag, TagAdminConfig)
+admin.site.register(Category, CategoryAdminConfig)
 admin.site.register(Deck, DeckAdminConfig)
