@@ -1,5 +1,5 @@
 import react from "@vitejs/plugin-react-swc";
-import { defineConfig } from "vite";
+import { defineConfig } from "vitest/config";
 import eslint from "vite-eslint-plugin";
 import tsconfigPaths from "vite-tsconfig-paths";
 
@@ -18,7 +18,7 @@ export default defineConfig({
         },
     },
     server: {
-        port: parseInt(process.env.VITE_PORT),
+        port: parseInt(process.env.VITE_PORT, 10),
         host: "0.0.0.0",
     },
     plugins: [

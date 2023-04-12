@@ -11,7 +11,9 @@
   },
   "workspaces": [
     "utils",
-    "views"
+    "views",
+    "bank",
+    "web"
   ],
   "bugs": {
     "url": "https://github.com/AzenoIT/azeno/issues"
@@ -35,6 +37,8 @@
     "typescript": "^4.9.3"
   },
   "dependencies": {
-    "@azeno/utils": "^1.0.0"
+    "@azeno/bank": "^0.0.0",
+    "@azeno/utils": "^1.0.0",
+    "azeno-quiz": "file:quiz/web"
   }
 }
