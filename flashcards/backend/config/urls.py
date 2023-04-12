@@ -23,9 +23,9 @@ from django.urls import path, include
 # TODO: change admin endpoint for production and reverse proxy
 
 urlpatterns = [
-                  path("admin/", admin.site.urls),
-                  path("api/v1/", include("decks.urls")),
-              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path("admin/", admin.site.urls),
+    path("api/v1/", include("decks.urls")),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:
     urlpatterns += [

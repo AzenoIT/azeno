@@ -1,13 +1,11 @@
 import io
 import os
 import shutil
-import tempfile
 from datetime import datetime
 
 import pytest
 from PIL import Image
 from django.contrib.auth import get_user_model
-from django.core.files.base import ContentFile
 from django.core.files.uploadedfile import SimpleUploadedFile
 
 from django.core.management import call_command
@@ -102,3 +100,14 @@ def remove_test_data():
     """
     yield
     shutil.rmtree(os.path.join(settings.BASE_DIR, "test_dir"), ignore_errors=True)
+
+
+@pytest.fixture
+def api_request_factory():
+    """Fixture for creating request instance.
+    :return: APIRequestFactory instance.
+    :rtype: APIRequestFactory
+    """
+    from rest_framework.test import APIRequestFactory
+
+    return APIRequestFactory()
