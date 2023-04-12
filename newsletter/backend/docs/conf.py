@@ -22,7 +22,7 @@ django.setup()
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 author = "Azeno Team"
-project = "newsletter"
+project = "newsletters"
 
 year = datetime.now().year
 if year > 2023:

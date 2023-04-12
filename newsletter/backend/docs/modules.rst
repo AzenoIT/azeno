@@ -5,3 +5,4 @@ users
    :maxdepth: 4
 
    users
+   newsletters
