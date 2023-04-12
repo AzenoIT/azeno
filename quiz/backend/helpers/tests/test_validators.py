@@ -3,7 +3,11 @@ from io import BytesIO
 import pytest
 from django.core.exceptions import ValidationError
 
-from helpers.validators.validators import validate_profanity, validate_badge_file_type
+from helpers.validators.validators import (
+    validate_profanity,
+    validate_badge_file_type,
+    validate_avatar_file_type_and_dimensions,
+)
 
 
 @pytest.mark.parametrize(
@@ -50,3 +54,24 @@ def test_valid_badge_file_type_invalid_file_type(test_image):
         validate_badge_file_type(test_image)
 
     assert "File type not supported. Use: svg+xml" in exc_info.value.message
+
+
+def test_valid_avatar_type_valid_image(test_image):
+    assert validate_avatar_file_type_and_dimensions(test_image) is None
+
+
+def test_valid_avatar_type_invalid_image_type(uploaded_svg):
+    with pytest.raises(ValidationError) as exc_info:
+        validate_avatar_file_type_and_dimensions(uploaded_svg)
+
+    assert "File type not supported. Use one of: jpeg, png." in exc_info.value.message
+
+
+@pytest.mark.parametrize("avatar_valid_type", [141, 150, 200], indirect=True)
+def test_valid_avatar_invalid_image_dimensions(avatar_valid_type):
+    with pytest.raises(ValidationError) as exc_info:
+        validate_avatar_file_type_and_dimensions(avatar_valid_type)
+
+    assert "Image exceeds maximum dimensions. Maximum width:" in str(
+        exc_info.value.messages
+    )

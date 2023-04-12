@@ -21,6 +21,29 @@ class TimestampModel(models.Model):
         abstract = True
 
 
+class PlayerBadge(models.Model):
+    """Model for linking badges :class:`stats.models.Badge` with player :class:`players.models.Player`
+
+    :param badge: ID of badge
+    :type badge: models.ForeignKey
+
+    :param player: ID of player
+    :type player: models.ForeignKey
+
+    :param obtained_on: Date when player obtained given badge.
+    :type obtained_on: models.DateTimeField
+
+    """
+
+    badge = models.ForeignKey("Badge", on_delete=models.DO_NOTHING)
+    player = models.ForeignKey("players.Player", on_delete=models.DO_NOTHING)
+    obtained_on = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = "badge obtained by player"
+        verbose_name_plural = "badges obtained by players"
+
+
 class Badge(TimestampModel):
     """Represents badges that players/users can earn during games.
     Inherits from TimestampModel and :class:`stats.models.TimestampModel`
@@ -62,6 +85,9 @@ class Badge(TimestampModel):
         validators=[
             validate_badge_file_type,
         ],
+    )
+    players = models.ManyToManyField(
+        "players.Player", related_name="badges", through="PlayerBadge"
     )
 
     def __str__(self):
