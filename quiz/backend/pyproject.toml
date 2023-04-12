@@ -18,6 +18,8 @@ pytest-cov = "4.0.0"
 djangorestframework = "3.14.0"
 djangorestframework-simplejwt = "5.2.2"
 django-cors-headers = "3.14.0"
+pillow = "9.5.0"
+python-magic = "0.4.27"
 
 [tool.poetry.group.dev.dependencies]
 sphinx = "6.1.3"

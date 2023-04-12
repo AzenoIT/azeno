@@ -11,6 +11,7 @@ services:
       - "80:80"
     volumes:
       - static_volume:/app/staticfiles
+      - media_volume:/app/media
 
   backend:
     build:
@@ -28,6 +29,7 @@ services:
       - postgres_network
     volumes:
       - static_volume:/app/staticfiles
+      - media_volume:/app/media
 
   postgres:
     image: postgres:15.1
@@ -41,6 +43,7 @@ services:
 volumes:
   postgres_volume:
   static_volume:
+  media_volume:
 
 networks:
   postgres_network:
