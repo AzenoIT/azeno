@@ -5,7 +5,7 @@ from stats.models import Badge
 
 
 def test_badge_gui_representation():
-    badge = Badge(name="Good Badge Name", weight=1, points=10)
+    badge = Badge(name="Good Badge Name", points=10)
 
     assert str(badge) == "Good Badge Name"
 
