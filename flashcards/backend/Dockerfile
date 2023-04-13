@@ -23,7 +23,7 @@ RUN apt-get update && apt-get install -y netcat
 
 COPY ./entrypoint.sh ./
 
-ENTRYPOINT ["./entrypoint.sh"]
+ENTRYPOINT ["sh", "./entrypoint.sh"]
 
 COPY . .
 
