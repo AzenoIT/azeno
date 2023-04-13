@@ -1,0 +1,124 @@
+{
+    "decks": [
+        {
+            "id": 1,
+            "name": "python advanced",
+            "flashcards": 26,
+            "mastered": 15,
+            "lastViewed": "2 days ago",
+            "status": ["all", "new"],
+            "image": "https://loremflickr.com/640/480/nature"
+        },
+        {
+            "id": 2,
+            "name": "react hooks",
+            "flashcards": 21,
+            "mastered": 19,
+            "lastViewed": "7 days ago",
+            "status": ["all", "in progress"],
+            "image": "https://loremflickr.com/640/480/nature"
+        },
+        {
+            "id": 3,
+            "name": "react basics",
+            "flashcards": 28,
+            "mastered": 5,
+            "lastViewed": "32 days ago",
+            "status": ["all", "finished"]
+        },
+        {
+            "id": 4,
+            "name": "python basics",
+            "flashcards": 30,
+            "mastered": 10,
+            "lastViewed": "2 days ago",
+            "status": ["all", "new"],
+            "image": "https://loremflickr.com/640/480/nature"
+        },
+        {
+            "id": 5,
+            "name": "js advanced",
+            "flashcards": 24,
+            "mastered": 24,
+            "lastViewed": "1 day ago",
+            "status": ["all", "finished"]
+        },
+        {
+            "id": 6,
+            "name": "js basics",
+            "flashcards": 21,
+            "mastered": 19,
+            "lastViewed": "8 days ago",
+            "status": ["all", "in progress"],
+            "image": "https://loremflickr.com/640/480/nature"
+        }
+    ],
+    "flashcards": [
+        {
+            "id": 1,
+            "decks": [1, 2],
+            "question": "Test question 1",
+            "answer": "Test answer 1"
+        },
+        {
+            "id": 2,
+            "decks": [1, 5],
+            "questionImage": "https://loremflickr.com/cache/resized/65535_52577433028_03981836de_c_640_480_nofilter.jpg",
+            "answer": "Test answer 2"
+        },
+        {
+            "id": 3,
+            "decks": [2, 6],
+            "question": "Test question 3",
+            "answer": "Test answer 3"
+        },
+        {
+            "id": 4,
+            "decks": [3, 5],
+            "questionImage": "https://loremflickr.com/cache/resized/65535_52653192095_42870b0ee6_c_640_480_nofilter.jpg",
+            "answer": "Test answer 4"
+        },
+        {
+            "id": 5,
+            "decks": [4, 6],
+            "question": "Test question 5",
+            "answerImage": "https://loremflickr.com/cache/resized/65535_52577433028_03981836de_c_640_480_nofilter.jpg"
+        },
+        {
+            "id": 6,
+            "decks": [5, 6],
+            "questionImage": "https://loremflickr.com/cache/resized/65535_52577178555_f38ed21c3e_b_640_480_nofilter.jpg",
+            "answerImage": "https://loremflickr.com/cache/resized/65535_52747902192_11973635d9_c_640_480_nofilter.jpg"
+        },
+        {
+            "id": 6,
+            "decks": [3, 4, 2],
+            "questionImage": "https://loremflickr.com/cache/resized/65535_52577178555_f38ed21c3e_b_640_480_nofilter.jpg",
+            "answer": "Test answer 7"
+        },
+        {
+            "id": 7,
+            "decks": [3, 6],
+            "question": "Test question 8",
+            "answerImage": "https://loremflickr.com/cache/resized/65535_52577433028_03981836de_c_640_480_nofilter.jpg"
+        },
+        {
+            "id": 9,
+            "decks": [4, 5],
+            "questionImage": "https://loremflickr.com/cache/resized/65535_52577433028_03981836de_c_640_480_nofilter.jpg",
+            "answer": "Test answer 9"
+        },
+        {
+            "id": 10,
+            "decks": [2, 1, 4],
+            "question": "Test question 10",
+            "answerImage": "https://loremflickr.com/cache/resized/65535_52577178555_f38ed21c3e_b_640_480_nofilter.jpg"
+        },
+        {
+            "id": 11,
+            "decks": [3, 1],
+            "questionImage": "https://loremflickr.com/cache/resized/65535_52747902192_11973635d9_c_640_480_nofilter.jpg",
+            "answer": "Test answer 11"
+        }
+    ]
+}
