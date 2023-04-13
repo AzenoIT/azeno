@@ -1,7 +1,10 @@
+import io
 import json
 from pathlib import Path
 
 import pytest
+from PIL import Image
+from django.core.files.uploadedfile import SimpleUploadedFile
 
 from players.models import Player
 from django.core.management import call_command
@@ -102,3 +105,63 @@ def profane_words_temp_file(tmp_path: Path) -> Path:
     temp_file.write_text("\n".join(test_profane_words))
 
     return temp_file
+
+
+@pytest.fixture
+def svg_content():
+    """Content for uploaded_svg file.
+
+    :return: Multiline string containing svg content
+    """
+    return """
+        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50">
+          <rect width="50" height="50" style="fill:rgb(255,0,0);" />
+        </svg>
+        """
+
+
+@pytest.fixture
+def uploaded_svg(svg_content):
+    """Instance of uploaded svg file
+
+    :param svg_content: Content for svg file.
+    :type svg_content: str
+    :return: SimpleUploadedFile instance
+    """
+    return SimpleUploadedFile(
+        "test_image.svg",
+        svg_content.strip().encode("utf-8"),
+        content_type="image/svg+xml",
+    )
+
+
+@pytest.fixture(params=["jpeg", "png"])
+def test_image(request):
+    """Fixture for wrong types of files to validate by :class:`stats.models.Badge`
+
+    :param request: fixture for providing information about executing test function.
+    :type request: FixtureRequest
+    :returns uploaded_image: Object of class SimpleUploadedFile
+    """
+    img = Image.new("RGB", (50, 50), color=(255, 0, 0))
+    image_data = io.BytesIO()
+    img.save(image_data, format=request.param)
+
+    uploaded_image = SimpleUploadedFile(
+        f"test_image.{request.param}",
+        image_data.getvalue(),
+        content_type=f"image/{request.param}",
+    )
+    yield uploaded_image
+
+
+@pytest.fixture
+def temp_media_root(settings, tmpdir):
+    """Temporary django media directory.
+
+    :param settings: Django setting fixture
+    :param tmpdir: Temporary directory fixture
+    :return: Setting media root variable
+    """
+    settings.MEDIA_ROOT = tmpdir.strpath
+    return settings.MEDIA_ROOT

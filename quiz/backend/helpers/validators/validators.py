@@ -2,7 +2,12 @@ import os
 import re
 from typing import List
 
+import magic
+from django.conf import settings
 from django.core.exceptions import ValidationError
+from django.core.files.base import ContentFile
+from django.core.files.storage import default_storage
+from django.core.files.uploadedfile import UploadedFile
 
 from config.settings import BASE_DIR
 
@@ -44,3 +49,31 @@ def validate_profanity(value: str) -> None:
             raise ValidationError(
                 f"This name contains profane word: {word}. Please choose another one."
             )
+
+
+def validate_badge_file_type(upload: UploadedFile) -> None:
+    """Validate type of given file to uploaded by user.
+
+    :param upload: UploadedFile instance containing the file uploaded by the user
+    :type upload: UploadedFile
+    :return: None
+    :raise: ValidationError
+    """
+    if upload.name is None:
+        raise ValidationError("No file name provided.")
+
+    tmp_path = "tmp/%s" % upload.name[2:]
+
+    if upload.file is None:
+        raise ValidationError("No file content provided.")
+
+    default_storage.save(tmp_path, ContentFile(upload.file.read()))
+    full_tmp_path = os.path.join(settings.MEDIA_ROOT, tmp_path)
+    file_type = magic.from_file(full_tmp_path, mime=True)
+    default_storage.delete(tmp_path)
+    image_types = [f"image/{img}" for img in settings.BADGE_IMAGE_TYPES]
+
+    if file_type not in image_types:
+        raise ValidationError(
+            f'File type not supported. Use: {", ".join(settings.BADGE_IMAGE_TYPES)}'
+        )
