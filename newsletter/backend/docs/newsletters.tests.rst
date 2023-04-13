@@ -1,10 +1,7 @@
-newsletters.tests package
+Tests
 =========================
 
-Submodules
-----------
-
-newsletters.tests.test\_models module
+Test Models
 -------------------------------------
 
 .. automodule:: newsletters.tests.test_models

@@ -16,8 +16,3 @@ def generated_data_with_custom_command(settings, db):
         "create_test_data",
         "5",
     )
-
-
-@pytest.fixture
-def newsletter(db):
-    return Agreements.objects.create(email="test_fixture_newsletter@newsletters.com", checkbox_1=True)

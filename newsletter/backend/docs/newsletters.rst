@@ -1,11 +1,11 @@
-newsletters package
+Newsletters App
 ===================
 
 Subpackages
 -----------
 
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 2
 
    newsletters.migrations
    newsletters.tests
@@ -13,7 +13,7 @@ Subpackages
 Submodules
 ----------
 
-newsletters.admin module
+Admin
 ------------------------
 
 .. automodule:: newsletters.admin
@@ -21,7 +21,7 @@ newsletters.admin module
    :undoc-members:
    :show-inheritance:
 
-newsletters.apps module
+Apps
 -----------------------
 
 .. automodule:: newsletters.apps
@@ -29,7 +29,7 @@ newsletters.apps module
    :undoc-members:
    :show-inheritance:
 
-newsletters.models module
+Models
 -------------------------
 
 .. automodule:: newsletters.models
@@ -37,7 +37,7 @@ newsletters.models module
    :undoc-members:
    :show-inheritance:
 
-newsletters.tests module
+Tests
 ------------------------
 
 .. automodule:: newsletters.tests
@@ -45,7 +45,7 @@ newsletters.tests module
    :undoc-members:
    :show-inheritance:
 
-newsletters.views module
+Views
 ------------------------
 
 .. automodule:: newsletters.views

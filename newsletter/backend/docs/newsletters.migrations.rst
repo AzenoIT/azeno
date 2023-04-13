@@ -1,10 +1,8 @@
-newsletters.migrations package
+Migrations
 ==============================
 
-Submodules
-----------
 
-newsletters.migrations.0001\_initial module
+Initial Migration
 -------------------------------------------
 
 .. automodule:: newsletters.migrations.0001_initial
