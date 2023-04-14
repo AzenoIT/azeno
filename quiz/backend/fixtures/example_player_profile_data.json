@@ -1,0 +1,74 @@
+[
+  {
+    "model": "players.player",
+    "pk": "42c021bf-5e5b-40f9-a452-213e7abf0cbf",
+    "fields": {
+      "nick": "niki",
+      "rank": 0,
+      "is_bot": false,
+      "is_active": true,
+      "created_at": "2023-04-24T11:58:29.174Z"
+    }
+  },
+  {
+    "model": "players.player",
+    "pk": "bcf06c27-4102-4386-8f3b-ed25846c7a5a",
+    "fields": {
+      "nick": "kiki",
+      "rank": 0,
+      "is_bot": false,
+      "is_active": true,
+      "created_at": "2023-04-24T11:58:16.680Z"
+    }
+  },
+  {
+    "model": "players.player",
+    "pk": "d24bc55c-cfc4-4b7d-8344-d2b68e5f28c1",
+    "fields": {
+      "nick": "miki",
+      "rank": 0,
+      "is_bot": false,
+      "is_active": true,
+      "created_at": "2023-04-24T11:58:22.484Z"
+    }
+  },
+  {
+    "model": "players.profile",
+    "pk": 1,
+    "fields": {
+      "player": "bcf06c27-4102-4386-8f3b-ed25846c7a5a",
+      "avatar": "players_avatars/49027_z17ig6l.jpg",
+      "score": 0,
+      "status": false,
+      "is_push_notification": false,
+      "is_findable": false,
+      "is_invitable": false
+    }
+  },
+  {
+    "model": "players.profile",
+    "pk": 2,
+    "fields": {
+      "player": "d24bc55c-cfc4-4b7d-8344-d2b68e5f28c1",
+      "avatar": "players_avatars/56549_0Tuxhev.jpg",
+      "score": 50,
+      "status": true,
+      "is_push_notification": false,
+      "is_findable": false,
+      "is_invitable": true
+    }
+  },
+  {
+    "model": "players.profile",
+    "pk": 3,
+    "fields": {
+      "player": "42c021bf-5e5b-40f9-a452-213e7abf0cbf",
+      "avatar": "players_avatars/58526_vRILKP7.jpg",
+      "score": 99,
+      "status": true,
+      "is_push_notification": true,
+      "is_findable": true,
+      "is_invitable": true
+    }
+  }
+]
