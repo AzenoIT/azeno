@@ -9,4 +9,9 @@ urlpatterns = [
         "players/username/", views.NicknameGeneratorAPIView.as_view(), name="username"
     ),
     path("players/", views.PlayerCreateAPIView.as_view(), name="create-player"),
+    path(
+        "players/<uuid:uuid>/",
+        views.PlayerRetrieveAPIView.as_view(),
+        name="player_profile",
+    ),
 ]
