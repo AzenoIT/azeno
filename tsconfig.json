@@ -31,14 +31,10 @@
     "composite": true,
   },
   "include": [
-    "views",
-    "utils",
     "bank",
     "quiz/web"
   ],
   "references": [
-    { "path": "utils" },
-    { "path": "views" },
     { "path": "bank" },
     { "path": "quiz/web" }
   ]

@@ -7,11 +7,9 @@
   "type": "module",
   "license": "",
   "scripts": {
-    "build": "tsc --build utils"
+    "dev": "vite"
   },
   "workspaces": [
-    "utils",
-    "views",
     "bank",
     "web"
   ],
@@ -37,8 +35,6 @@
     "typescript": "^4.9.3"
   },
   "dependencies": {
-    "@azeno/bank": "^0.0.0",
-    "@azeno/utils": "^1.0.0",
-    "azeno-quiz": "file:quiz/web"
+    "@azeno/bank": "^0.0.0"
   }
 }

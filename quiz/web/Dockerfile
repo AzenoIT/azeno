@@ -1,13 +1,16 @@
 FROM node:18.14.2-slim as development
 
-WORKDIR /app
+WORKDIR /project
 
-COPY ./package.json ./package-lock.json ./
-RUN npm ci
+COPY ../bank ./bank
+COPY ./ ./quiz/web
+COPY ../package.json ../package-lock.json ./
+RUN npm ci -W
 
 FROM development as builder
 
-COPY . .
+COPY ../../bank ../../bank
+COPY ../../.eslintignore ../../.eslintrc.json ../../.prettierrc.json ../../tsconfig.json ./ ./
 RUN npm run build
 
 

@@ -1,0 +1,18 @@
+services:
+  web:
+    build:
+      context: ./
+      target: development
+    restart: on-failure
+    working_dir: /project
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./:/project/
+#    env_file:
+#      - envs/web.env
+    environment:
+      - VITE_PORT=3000
+    command: npm run dev -W quiz/web
+    stdin_open: true
+    tty: true
