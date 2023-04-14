@@ -1,5 +1,5 @@
 from typing import List
-from rest_framework.generics import CreateAPIView
+from rest_framework.generics import CreateAPIView, RetrieveAPIView
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -36,3 +36,17 @@ class PlayerCreateAPIView(CreateAPIView):
 
     queryset = models.Player.objects.all()
     serializer_class = serializers.PlayerSerializer
+
+
+# TODO add authentication to the view below when auth type is decided on
+class PlayerRetrieveAPIView(RetrieveAPIView):
+    """Retrieve profile data for a specific player.
+    No authentication required.
+
+    :returns: PlayerRetrieveAPIView
+    :rtype: rest.framework.generics.RetrieveAPIView
+    """
+
+    queryset = models.Player.objects.all()
+    serializer_class = serializers.PlayerSerializer
+    lookup_field = "uuid"
