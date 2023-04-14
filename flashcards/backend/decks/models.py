@@ -43,7 +43,8 @@ class DifficultyLevel(models.Model):
         verbose_name_plural = "difficulty level`s"
 
     def save(self, *args, **kwargs):
-        name = DifficultyLevel.objects.filter(name__iexact=self.name)
+        name = DifficultyLevel.objects.filter(name__iexact=self.name).first()
         if not name:
             super().save(*args, **kwargs)
+            return self
         return name

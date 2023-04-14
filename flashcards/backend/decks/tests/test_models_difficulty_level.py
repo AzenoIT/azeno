@@ -24,6 +24,6 @@ def test_difficulty_level_custom_save(db, difficulty_level):
     will not be added to DB, and existing record will be returned
     """
 
-    difficulty_level_2 = DifficultyLevel.objects.create(name=difficulty_level.name.lower(), value=2)
+    difficulty_level_2 = DifficultyLevel(name=difficulty_level.name.lower(), value=2).save()
 
     assert difficulty_level_2.name == difficulty_level.name
