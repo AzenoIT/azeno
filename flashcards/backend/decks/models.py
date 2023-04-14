@@ -47,4 +47,7 @@ class DifficultyLevel(models.Model):
         if not name:
             super().save(*args, **kwargs)
             return self
+        if name and self.id:
+            super().save(*args, **kwargs)
+            return self
         return name
