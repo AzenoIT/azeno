@@ -1,5 +1,5 @@
 from factory import Faker, Sequence, SubFactory
-from factory.django import DjangoModelFactory
+from factory.django import DjangoModelFactory, ImageField
 from .models import Category, Deck, Flashcard, Tag
 from users.factories import UserFactory
 
@@ -10,8 +10,9 @@ class CategoryFactory(DjangoModelFactory):
     """
     class Meta:
         model = Category
+        django_get_or_create = ("name",)
 
-    name: Faker = Faker("language_name")
+    name: Sequence = Sequence(lambda n: f"Category {n:0>4}")
     description: Faker = Faker("sentence", nb_words=5)
 
 
@@ -22,7 +23,8 @@ class DeckFactory(DjangoModelFactory):
     class Meta:
         model = Deck
 
-    name: Sequence = Sequence(lambda n: "Deck %04d" % n)
+    image: ImageField = ImageField(color="blue")
+    name: Faker = Faker("language_name")
     category: SubFactory = SubFactory(CategoryFactory)
     is_public: bool = True
     price: Faker = Faker("pydecimal", right_digits=2, min_value=1, max_value=99)
