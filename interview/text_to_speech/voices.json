@@ -1,0 +1,1010 @@
+{
+    "0": {
+        "name": "Albert",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "en_US"
+        ]
+    },
+    "1": {
+        "name": "Alice",
+        "gender": "VoiceGenderFemale",
+        "languages": [
+            "it_IT"
+        ]
+    },
+    "2": {
+        "name": "Alva",
+        "gender": "VoiceGenderFemale",
+        "languages": [
+            "sv_SE"
+        ]
+    },
+    "3": {
+        "name": "Am\u00e9lie",
+        "gender": "VoiceGenderFemale",
+        "languages": [
+            "fr_CA"
+        ]
+    },
+    "4": {
+        "name": "Amira",
+        "gender": "VoiceGenderFemale",
+        "languages": [
+            "ms_MY"
+        ]
+    },
+    "5": {
+        "name": "Anna",
+        "gender": "VoiceGenderFemale",
+        "languages": [
+            "de_DE"
+        ]
+    },
+    "6": {
+        "name": "Bad News",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "en_US"
+        ]
+    },
+    "7": {
+        "name": "Bahh",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "en_US"
+        ]
+    },
+    "8": {
+        "name": "Bells",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "en_US"
+        ]
+    },
+    "9": {
+        "name": "Boing",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "en_US"
+        ]
+    },
+    "10": {
+        "name": "Bubbles",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "en_US"
+        ]
+    },
+    "11": {
+        "name": "Carmit",
+        "gender": "VoiceGenderFemale",
+        "languages": [
+            "he_IL"
+        ]
+    },
+    "12": {
+        "name": "Cellos",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "en_US"
+        ]
+    },
+    "13": {
+        "name": "Damayanti",
+        "gender": "VoiceGenderFemale",
+        "languages": [
+            "id_ID"
+        ]
+    },
+    "14": {
+        "name": "Daniel",
+        "gender": "VoiceGenderMale",
+        "languages": [
+            "en_GB"
+        ]
+    },
+    "15": {
+        "name": "Daria",
+        "gender": "VoiceGenderFemale",
+        "languages": [
+            "bg_BG"
+        ]
+    },
+    "16": {
+        "name": "Wobble",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "en_US"
+        ]
+    },
+    "17": {
+        "name": "Eddy (Italian (Italy))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "it_IT"
+        ]
+    },
+    "18": {
+        "name": "Eddy (French (France))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "fr_FR"
+        ]
+    },
+    "19": {
+        "name": "Eddy (German (Germany))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "de_DE"
+        ]
+    },
+    "20": {
+        "name": "Eddy (French (Canada))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "fr_CA"
+        ]
+    },
+    "21": {
+        "name": "Eddy (English (US))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "en_US"
+        ]
+    },
+    "22": {
+        "name": "Eddy (Spanish (Mexico))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "es_MX"
+        ]
+    },
+    "23": {
+        "name": "Eddy (Finnish (Finland))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "fi_FI"
+        ]
+    },
+    "24": {
+        "name": "Eddy (English (UK))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "en_GB"
+        ]
+    },
+    "25": {
+        "name": "Eddy (Spanish (Spain))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "es_ES"
+        ]
+    },
+    "26": {
+        "name": "Eddy (Portuguese (Brazil))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "pt_BR"
+        ]
+    },
+    "27": {
+        "name": "Ellen",
+        "gender": "VoiceGenderFemale",
+        "languages": [
+            "nl_BE"
+        ]
+    },
+    "28": {
+        "name": "Flo (French (France))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "fr_FR"
+        ]
+    },
+    "29": {
+        "name": "Flo (English (US))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "en_US"
+        ]
+    },
+    "30": {
+        "name": "Flo (Spanish (Mexico))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "es_MX"
+        ]
+    },
+    "31": {
+        "name": "Flo (English (UK))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "en_GB"
+        ]
+    },
+    "32": {
+        "name": "Flo (Spanish (Spain))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "es_ES"
+        ]
+    },
+    "33": {
+        "name": "Flo (Italian (Italy))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "it_IT"
+        ]
+    },
+    "34": {
+        "name": "Flo (French (Canada))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "fr_CA"
+        ]
+    },
+    "35": {
+        "name": "Flo (Portuguese (Brazil))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "pt_BR"
+        ]
+    },
+    "36": {
+        "name": "Flo (German (Germany))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "de_DE"
+        ]
+    },
+    "37": {
+        "name": "Flo (Finnish (Finland))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "fi_FI"
+        ]
+    },
+    "38": {
+        "name": "Fred",
+        "gender": "VoiceGenderMale",
+        "languages": [
+            "en_US"
+        ]
+    },
+    "39": {
+        "name": "Good News",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "en_US"
+        ]
+    },
+    "40": {
+        "name": "Grandma (French (France))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "fr_FR"
+        ]
+    },
+    "41": {
+        "name": "Grandma (French (Canada))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "fr_CA"
+        ]
+    },
+    "42": {
+        "name": "Grandma (Finnish (Finland))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "fi_FI"
+        ]
+    },
+    "43": {
+        "name": "Grandma (German (Germany))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "de_DE"
+        ]
+    },
+    "44": {
+        "name": "Grandma (Portuguese (Brazil))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "pt_BR"
+        ]
+    },
+    "45": {
+        "name": "Grandma (English (US))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "en_US"
+        ]
+    },
+    "46": {
+        "name": "Grandma (Spanish (Spain))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "es_ES"
+        ]
+    },
+    "47": {
+        "name": "Grandma (English (UK))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "en_GB"
+        ]
+    },
+    "48": {
+        "name": "Grandma (Italian (Italy))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "it_IT"
+        ]
+    },
+    "49": {
+        "name": "Grandma (Spanish (Mexico))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "es_MX"
+        ]
+    },
+    "50": {
+        "name": "Grandpa (French (France))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "fr_FR"
+        ]
+    },
+    "51": {
+        "name": "Grandpa (French (Canada))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "fr_CA"
+        ]
+    },
+    "52": {
+        "name": "Grandpa (Finnish (Finland))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "fi_FI"
+        ]
+    },
+    "53": {
+        "name": "Grandpa (German (Germany))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "de_DE"
+        ]
+    },
+    "54": {
+        "name": "Grandpa (Portuguese (Brazil))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "pt_BR"
+        ]
+    },
+    "55": {
+        "name": "Grandpa (English (US))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "en_US"
+        ]
+    },
+    "56": {
+        "name": "Grandpa (Spanish (Spain))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "es_ES"
+        ]
+    },
+    "57": {
+        "name": "Grandpa (English (UK))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "en_GB"
+        ]
+    },
+    "58": {
+        "name": "Grandpa (Italian (Italy))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "it_IT"
+        ]
+    },
+    "59": {
+        "name": "Grandpa (Spanish (Mexico))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "es_MX"
+        ]
+    },
+    "60": {
+        "name": "Jester",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "en_US"
+        ]
+    },
+    "61": {
+        "name": "Ioana",
+        "gender": "VoiceGenderFemale",
+        "languages": [
+            "ro_RO"
+        ]
+    },
+    "62": {
+        "name": "Jacques",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "fr_FR"
+        ]
+    },
+    "63": {
+        "name": "Joana",
+        "gender": "VoiceGenderFemale",
+        "languages": [
+            "pt_PT"
+        ]
+    },
+    "64": {
+        "name": "Junior",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "en_US"
+        ]
+    },
+    "65": {
+        "name": "Kanya",
+        "gender": "VoiceGenderFemale",
+        "languages": [
+            "th_TH"
+        ]
+    },
+    "66": {
+        "name": "Karen",
+        "gender": "VoiceGenderFemale",
+        "languages": [
+            "en_AU"
+        ]
+    },
+    "67": {
+        "name": "Kathy",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "en_US"
+        ]
+    },
+    "68": {
+        "name": "Kyoko",
+        "gender": "VoiceGenderFemale",
+        "languages": [
+            "ja_JP"
+        ]
+    },
+    "69": {
+        "name": "Lana",
+        "gender": "VoiceGenderFemale",
+        "languages": [
+            "hr_HR"
+        ]
+    },
+    "70": {
+        "name": "Laura",
+        "gender": "VoiceGenderFemale",
+        "languages": [
+            "sk_SK"
+        ]
+    },
+    "71": {
+        "name": "Lekha",
+        "gender": "VoiceGenderFemale",
+        "languages": [
+            "hi_IN"
+        ]
+    },
+    "72": {
+        "name": "Lesya",
+        "gender": "VoiceGenderFemale",
+        "languages": [
+            "uk_UA"
+        ]
+    },
+    "73": {
+        "name": "Linh",
+        "gender": "VoiceGenderFemale",
+        "languages": [
+            "vi_VN"
+        ]
+    },
+    "74": {
+        "name": "Luciana",
+        "gender": "VoiceGenderFemale",
+        "languages": [
+            "pt_BR"
+        ]
+    },
+    "75": {
+        "name": "Majed",
+        "gender": "VoiceGenderMale",
+        "languages": [
+            "ar_001"
+        ]
+    },
+    "76": {
+        "name": "T\u00fcnde",
+        "gender": "VoiceGenderFemale",
+        "languages": [
+            "hu_HU"
+        ]
+    },
+    "77": {
+        "name": "Meijia",
+        "gender": "VoiceGenderFemale",
+        "languages": [
+            "zh_TW"
+        ]
+    },
+    "78": {
+        "name": "Melina",
+        "gender": "VoiceGenderFemale",
+        "languages": [
+            "el_GR"
+        ]
+    },
+    "79": {
+        "name": "Milena",
+        "gender": "VoiceGenderFemale",
+        "languages": [
+            "ru_RU"
+        ]
+    },
+    "80": {
+        "name": "Moira",
+        "gender": "VoiceGenderFemale",
+        "languages": [
+            "en_IE"
+        ]
+    },
+    "81": {
+        "name": "M\u00f3nica",
+        "gender": "VoiceGenderFemale",
+        "languages": [
+            "es_ES"
+        ]
+    },
+    "82": {
+        "name": "Montse",
+        "gender": "VoiceGenderFemale",
+        "languages": [
+            "ca_ES"
+        ]
+    },
+    "83": {
+        "name": "Nora",
+        "gender": "VoiceGenderFemale",
+        "languages": [
+            "nb_NO"
+        ]
+    },
+    "84": {
+        "name": "Organ",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "en_US"
+        ]
+    },
+    "85": {
+        "name": "Paulina",
+        "gender": "VoiceGenderFemale",
+        "languages": [
+            "es_MX"
+        ]
+    },
+    "86": {
+        "name": "Superstar",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "en_US"
+        ]
+    },
+    "87": {
+        "name": "Ralph",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "en_US"
+        ]
+    },
+    "88": {
+        "name": "Reed (Portuguese (Brazil))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "pt_BR"
+        ]
+    },
+    "89": {
+        "name": "Reed (Italian (Italy))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "it_IT"
+        ]
+    },
+    "90": {
+        "name": "Reed (German (Germany))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "de_DE"
+        ]
+    },
+    "91": {
+        "name": "Reed (English (US))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "en_US"
+        ]
+    },
+    "92": {
+        "name": "Reed (French (Canada))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "fr_CA"
+        ]
+    },
+    "93": {
+        "name": "Reed (Spanish (Mexico))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "es_MX"
+        ]
+    },
+    "94": {
+        "name": "Reed (Finnish (Finland))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "fi_FI"
+        ]
+    },
+    "95": {
+        "name": "Reed (English (UK))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "en_GB"
+        ]
+    },
+    "96": {
+        "name": "Reed (Spanish (Spain))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "es_ES"
+        ]
+    },
+    "97": {
+        "name": "Rishi",
+        "gender": "VoiceGenderMale",
+        "languages": [
+            "en_IN"
+        ]
+    },
+    "98": {
+        "name": "Rocko (Spanish (Mexico))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "es_MX"
+        ]
+    },
+    "99": {
+        "name": "Rocko (French (France))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "fr_FR"
+        ]
+    },
+    "100": {
+        "name": "Rocko (French (Canada))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "fr_CA"
+        ]
+    },
+    "101": {
+        "name": "Rocko (English (US))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "en_US"
+        ]
+    },
+    "102": {
+        "name": "Rocko (English (UK))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "en_GB"
+        ]
+    },
+    "103": {
+        "name": "Rocko (Portuguese (Brazil))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "pt_BR"
+        ]
+    },
+    "104": {
+        "name": "Rocko (Spanish (Spain))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "es_ES"
+        ]
+    },
+    "105": {
+        "name": "Rocko (German (Germany))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "de_DE"
+        ]
+    },
+    "106": {
+        "name": "Rocko (Italian (Italy))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "it_IT"
+        ]
+    },
+    "107": {
+        "name": "Rocko (Finnish (Finland))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "fi_FI"
+        ]
+    },
+    "108": {
+        "name": "Samantha",
+        "gender": "VoiceGenderFemale",
+        "languages": [
+            "en_US"
+        ]
+    },
+    "109": {
+        "name": "Sandy (German (Germany))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "de_DE"
+        ]
+    },
+    "110": {
+        "name": "Sandy (French (France))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "fr_FR"
+        ]
+    },
+    "111": {
+        "name": "Sandy (Italian (Italy))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "it_IT"
+        ]
+    },
+    "112": {
+        "name": "Sandy (Finnish (Finland))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "fi_FI"
+        ]
+    },
+    "113": {
+        "name": "Sandy (Spanish (Mexico))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "es_MX"
+        ]
+    },
+    "114": {
+        "name": "Sandy (Spanish (Spain))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "es_ES"
+        ]
+    },
+    "115": {
+        "name": "Sandy (French (Canada))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "fr_CA"
+        ]
+    },
+    "116": {
+        "name": "Sandy (English (US))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "en_US"
+        ]
+    },
+    "117": {
+        "name": "Sandy (English (UK))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "en_GB"
+        ]
+    },
+    "118": {
+        "name": "Sandy (Portuguese (Brazil))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "pt_BR"
+        ]
+    },
+    "119": {
+        "name": "Sara",
+        "gender": "VoiceGenderFemale",
+        "languages": [
+            "da_DK"
+        ]
+    },
+    "120": {
+        "name": "Satu",
+        "gender": "VoiceGenderFemale",
+        "languages": [
+            "fi_FI"
+        ]
+    },
+    "121": {
+        "name": "Shelley (French (Canada))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "fr_CA"
+        ]
+    },
+    "122": {
+        "name": "Shelley (Finnish (Finland))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "fi_FI"
+        ]
+    },
+    "123": {
+        "name": "Shelley (German (Germany))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "de_DE"
+        ]
+    },
+    "124": {
+        "name": "Shelley (Portuguese (Brazil))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "pt_BR"
+        ]
+    },
+    "125": {
+        "name": "Shelley (English (US))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "en_US"
+        ]
+    },
+    "126": {
+        "name": "Shelley (Spanish (Spain))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "es_ES"
+        ]
+    },
+    "127": {
+        "name": "Shelley (English (UK))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "en_GB"
+        ]
+    },
+    "128": {
+        "name": "Shelley (Italian (Italy))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "it_IT"
+        ]
+    },
+    "129": {
+        "name": "Shelley (Spanish (Mexico))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "es_MX"
+        ]
+    },
+    "130": {
+        "name": "Shelley (French (France))",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "fr_FR"
+        ]
+    },
+    "131": {
+        "name": "Sinji",
+        "gender": "VoiceGenderFemale",
+        "languages": [
+            "zh_HK"
+        ]
+    },
+    "132": {
+        "name": "Tessa",
+        "gender": "VoiceGenderFemale",
+        "languages": [
+            "en_ZA"
+        ]
+    },
+    "133": {
+        "name": "Thomas",
+        "gender": "VoiceGenderMale",
+        "languages": [
+            "fr_FR"
+        ]
+    },
+    "134": {
+        "name": "Tingting",
+        "gender": "VoiceGenderFemale",
+        "languages": [
+            "zh_CN"
+        ]
+    },
+    "135": {
+        "name": "Trinoids",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "en_US"
+        ]
+    },
+    "136": {
+        "name": "Whisper",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "en_US"
+        ]
+    },
+    "137": {
+        "name": "Xander",
+        "gender": "VoiceGenderMale",
+        "languages": [
+            "nl_NL"
+        ]
+    },
+    "138": {
+        "name": "Yelda",
+        "gender": "VoiceGenderFemale",
+        "languages": [
+            "tr_TR"
+        ]
+    },
+    "139": {
+        "name": "Yuna",
+        "gender": "VoiceGenderFemale",
+        "languages": [
+            "ko_KR"
+        ]
+    },
+    "140": {
+        "name": "Zarvox",
+        "gender": "VoiceGenderNeuter",
+        "languages": [
+            "en_US"
+        ]
+    },
+    "141": {
+        "name": "Zosia (Enhanced)",
+        "gender": "VoiceGenderFemale",
+        "languages": [
+            "pl_PL"
+        ]
+    },
+    "142": {
+        "name": "Zosia",
+        "gender": "VoiceGenderFemale",
+        "languages": [
+            "pl_PL"
+        ]
+    },
+    "143": {
+        "name": "Zuzana",
+        "gender": "VoiceGenderFemale",
+        "languages": [
+            "cs_CZ"
+        ]
+    }
+}
