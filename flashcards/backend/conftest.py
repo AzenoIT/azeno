@@ -2,7 +2,7 @@ import io
 import os
 import shutil
 import tempfile
-from datetime import datetime
+from datetime import datetime, date
 
 import pytest
 from PIL import Image
@@ -14,7 +14,7 @@ from django.core.management import call_command
 from django.test import override_settings
 
 
-from decks.models import Category, Deck, Flashcard, Tag
+from decks.models import Category, Deck, Flashcard, Tag, DifficultyLevel
 from config import settings
 
 
@@ -115,5 +115,24 @@ def tag_db(db, deck, flashcard):
 
 
 @pytest.fixture
-def flashcard(db):
-    return Flashcard.objects.create()
+def flashcard(db, deck, category, user, difficulty):
+    """Fixture for creating Flashcard
+
+    """
+    flashcard = Flashcard.objects.create(
+        deck=deck,
+        category=category,
+        rating_flashcard=1,
+        question="test question",
+        answer="test answer",
+        date_added=date.today,
+        date_modification=date.today,
+        author=user,
+        difficulty=difficulty
+    )
+
+    return flashcard
+
+@pytest.fixture
+def difficulty(db):
+    return DifficultyLevel.objects.create()

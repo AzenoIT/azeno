@@ -120,4 +120,42 @@ class Tag(models.Model):
 
 
 class Flashcard(models.Model):
+    """Model for representing flashcards in decks
+    :param deck: Foreign Key for Deck model
+    :type deck: int
+    :param category: Foreign Key for Category model
+    :type category: int
+    :param rating_flashcard: Flashcard rating
+    :type rating_flashcard: int
+    :param is_active: indicates if flashcard is active
+    :type is_active: bool, optional
+    :param question: Flashcard question text
+    :type question: str
+    :param answer: Flashcard answer text
+    :type answer: str
+    :param date_added: Flashcard added date
+    :type date_added: date
+    :param date_modification: Flashcard modification date
+    :type date_modification: date
+    :param author: Foreign Key for User model
+    :type author: int
+    :param difficulty: Foreign Key for DifficultyLevel model
+    :type difficulty: int
+    """
+
+    deck = models.ForeignKey("Deck", on_delete=models.DO_NOTHING)
+    category = models.ForeignKey("Category", on_delete=models.DO_NOTHING)
+    rating_flashcard = models.PositiveIntegerField(default=0)
+    is_active = models.BooleanField(default=True)
+    question = models.TextField()
+    answer = models.TextField()
+    date_added = models.DateField(auto_now_add=True)
+    date_modification = models.DateField(auto_now=True)
+    author = models.ForeignKey("User", on_delete=models.DO_NOTHING)
+    difficulty = models.ForeignKey("DifficultyLevel", on_delete=models.DO_NOTHING)
+
+    def __str__(self):
+        return self.question
+
+class DifficultyLevel(models.Model):
     pass
