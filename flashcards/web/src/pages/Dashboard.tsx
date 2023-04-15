@@ -12,56 +12,88 @@ function Dashboard(): FC {
         setFilterDecks(e.target.value);
     };
 
-    type Deck = {
+    type DeckJson = {
+        id: number;
         title: string;
         flashcards: number;
-        completed: number;
-        lastVisited: string;
+        mastered: number;
+        lastViewed: string;
         status?: string[];
+        image: string;
     };
 
-    const decksArr: Deck[] = [
+    const decksJsonServer: DeckJson[] = [
         {
-            title: "Tytuł 1 - bardzo długi aby sprawdzić, jak zachowuje się UI",
-            flashcards: 25,
-            completed: 40,
-            lastVisited: "2 days ago",
-            status: ["all", "new", "started"],
+            id: 1,
+            title: "python advanced",
+            flashcards: 26,
+            mastered: 15,
+            lastViewed: "2 days ago",
+            status: ["all", "new"],
+            image: "https://loremflickr.com/640/480/all",
         },
         {
-            title: "Tytuł 2",
-            flashcards: 20,
-            completed: 15,
-            lastVisited: "5 days ago",
-            status: ["all", "new", "started"],
+            id: 2,
+            title: "react hooks",
+            flashcards: 21,
+            mastered: 19,
+            lastViewed: "7 days ago",
+            status: ["all", "in progress"],
+            image: "https://loremflickr.com/640/480/nature",
         },
         {
-            title: "Tytuł 3",
-            flashcards: 30,
-            completed: 63,
-            lastVisited: "10 days ago",
-            status: ["all", "started"],
-        },
-        {
-            title: "Tytuł 4",
+            id: 3,
+            title: "react basics",
             flashcards: 28,
-            completed: 50,
-            lastVisited: "2 weeks ago",
-            status: ["all", "started"],
-        },
-        {
-            title: "Tytuł 5",
-            flashcards: 40,
-            completed: 0,
-            lastVisited: "never",
-            status: ["all"],
-        },
-        {
-            title: "Tytuł 6",
-            flashcards: 13,
-            completed: 100,
-            lastVisited: "4 weeks ago",
+            mastered: 5,
+            lastViewed: "32 days ago",
             status: ["all", "finished"],
+            image: "https://loremflickr.com/640/480/berlin",
+        },
+        {
+            id: 4,
+            title: "python basics",
+            flashcards: 30,
+            mastered: 10,
+            lastViewed: "2 days ago",
+            status: ["all", "new"],
+            image: "https://loremflickr.com/640/480/dog",
+        },
+        {
+            id: 5,
+            title: "js advanced",
+            flashcards: 24,
+            mastered: 24,
+            lastViewed: "1 day ago",
+            status: ["all", "finished"],
+            image: "https://loremflickr.com/640/480/poland",
+        },
+        {
+            id: 6,
+            title: "js basics",
+            flashcards: 21,
+            mastered: 19,
+            lastViewed: "8 days ago",
+            status: ["all", "in progress"],
+            image: "https://loremflickr.com/640/480/paris",
+        },
+        {
+            id: 7,
+            title: "django basics",
+            flashcards: 25,
+            mastered: 25,
+            lastViewed: "15 days ago",
+            status: ["all", "finished"],
+            image: "https://loremflickr.com/640/480/london",
+        },
+        {
+            id: 8,
+            title: "django advanced",
+            flashcards: 21,
+            mastered: 19,
+            lastViewed: "3 days ago",
+            status: ["all", "in progress"],
+            image: "https://loremflickr.com/640/480/girl",
         },
     ];
 
@@ -110,23 +142,28 @@ function Dashboard(): FC {
                         </a>
                     </div>
                     <div className="pt-8 md:pt-14 grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {decksArr
+                        {decksJsonServer
                             .filter((item) => item.status.includes(filterDecks))
                             .map((deck) => (
                                 <div key={deck.title} className="bg-white p-2 rounded-md border-2 border-stone-400">
-                                    <div className="bg-stone-100 w-full h-32 rounded-md" />
+                                    <div className="bg-stone-100 w-full h-32 rounded-md">
+                                        <img className="w-full h-full" src={deck.image} />
+                                    </div>
                                     <div className="space-y-2 py-4">
                                         <p className="text-xl pb-2">{deck.title}</p>
                                         <div className="text-xs flex justify-between gap-4">
                                             <p>{deck.flashcards} flashcards</p>
                                             <p>
-                                                <span className="font-bold">{deck.completed}%</span> mastered
+                                                <span className="font-bold">
+                                                    {Math.round((deck.mastered / deck.flashcards) * 100)}%
+                                                </span>{" "}
+                                                mastered
                                             </p>
                                         </div>
                                         <p className="text-xs">
                                             {deck.lastVisited === "never"
                                                 ? "Never visited"
-                                                : `Last visited ${deck.lastVisited}`}
+                                                : `Last visited ${deck.lastViewed}`}
                                         </p>
                                     </div>
                                 </div>
