@@ -157,5 +157,10 @@ class Flashcard(models.Model):
     def __str__(self):
         return self.question
 
+    class Meta:
+        verbose_name = "flashcard"
+        verbose_name_plural = "flashcards"
+
+
 class DifficultyLevel(models.Model):
     pass

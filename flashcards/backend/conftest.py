@@ -116,9 +116,7 @@ def tag_db(db, deck, flashcard):
 
 @pytest.fixture
 def flashcard(db, deck, category, user, difficulty):
-    """Fixture for creating Flashcard
-
-    """
+    """Fixture for creating Flashcard"""
     flashcard = Flashcard.objects.create(
         deck=deck,
         category=category,
@@ -128,10 +126,11 @@ def flashcard(db, deck, category, user, difficulty):
         date_added=date.today,
         date_modification=date.today,
         author=user,
-        difficulty=difficulty
+        difficulty=difficulty,
     )
 
     return flashcard
+
 
 @pytest.fixture
 def difficulty(db):
