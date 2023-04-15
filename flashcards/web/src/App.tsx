@@ -8,8 +8,6 @@ import TailwindTest from "modules/genericTests/TailwindTest/TailwindTest";
 import FakerTest from "modules/genericTests/FakerTest/FakerTest";
 import MaterialUITest from "modules/genericTests/MaterialUITest/MaterialUITest";
 
-import { Button } from "@azeno/bank/components";
-
 function App() {
     const queryClient = new QueryClient();
     const authConfig: AuthConfig = { loginEndpoint: "/api/v1/token/", refreshEndpoint: "/api/v1/token/refresh/" };
