@@ -1,14 +1,15 @@
 services:
-  quiz_web:
+  web:
     build:
-      context: ./web
+      context: ../
+      dockerfile: quiz/web/Dockerfile
     restart: on-failure
     networks:
       - quiz_web_network
     env_file:
       - envs/web.env
 
-  quiz_proxy:
+  proxy:
     build:
       context: ./proxy
     restart: on-failure
@@ -23,7 +24,7 @@ services:
     volumes:
       - quiz_static_volume:/app/staticfiles
 
-  quiz_backend:
+  backend:
     build:
       context: ./backend
       target: prod
@@ -40,7 +41,7 @@ services:
     volumes:
       - quiz_static_volume:/app/staticfiles
 
-  quiz_postgres:
+  postgres:
     image: postgres:15.1
     volumes:
       - quiz_postgres_volume:/var/lib/postgresql/data

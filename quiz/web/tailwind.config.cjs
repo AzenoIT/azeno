@@ -1,24 +1,22 @@
 /** @type {import("tailwindcss").Config} */
 
+import config from "@azeno/bank/tailwind.config.cjs";
+
 module.exports = {
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}", "../../node_modules/@azeno/bank/**/*.{js,ts,jsx,tsx}"],
-  theme: {
-    extend: {
-      container: {
-        center: true
-      },
-      colors: {
-        primary40: "#4459a9",
-        primary70: "#92A7FD",
-        primary90: "#DDE1FF",
-        secondary90: "#DBE1FF",
-        primary: "#4459A9",
-        secondary: "#DBE1FF",
-        success: "#65A014",
-        warning: "#FDBC11",
-        error: "#BA1A1A"
-      }
-    }
-  },
-  plugins: []
+    content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}", "../../node_modules/@azeno/bank/**/*.{js,ts,jsx,tsx}"],
+    theme: {
+        extend: {
+            container: {
+                center: true,
+            },
+            colors: {
+                ...config.theme.extend.colors,
+                primary40: "#4459a9",
+                primary70: "#92A7FD",
+                primary90: "#DDE1FF",
+                secondary90: "#DBE1FF",
+            },
+        },
+    },
+    plugins: [],
 };

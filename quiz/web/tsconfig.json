@@ -1,6 +1,7 @@
 {
     "extends": "../../tsconfig.json",
     "compilerOptions": {
+        "noEmit": true,
         "composite": true,
         "rootDir": "src",
         "outDir": "dist",
@@ -9,7 +10,7 @@
             "@mui/styled-engine": ["./node_modules/@mui/styled-engine-sc"]
         }
     },
-    "include": ["src"],
+    "include": ["src", "src/**/*.json"],
     "references": [
         {
             "path": "./tsconfig.node.json"

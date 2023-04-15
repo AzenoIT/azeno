@@ -2,8 +2,6 @@ import { PlayerRequired } from "modules/common/components";
 import Start from "modules/Start";
 import { createBrowserRouter } from "react-router-dom";
 
-import { Button } from "@azeno/bank/src/components";
-
 // eslint-disable-next-line import/prefer-default-export
 export const router = createBrowserRouter([
     {
@@ -16,7 +14,7 @@ export const router = createBrowserRouter([
     },
     {
         path: "/start/",
-        element: <Button onClick={() => console.log("Hello World")}>HI</Button>,
+        element: <Start />,
     },
     {
         path: "/login/",
