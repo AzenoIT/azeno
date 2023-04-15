@@ -3,6 +3,17 @@ from django.db import models
 
 
 class StudyLog(models.Model):
+    """Abstract model for tracking user's study progress.
+
+    Inherits only from Model class.
+
+    :param user: related user object
+    :type user: User
+    :param study_date: flashcard study timestamp
+    :type study_date: datetime
+    :param correct_answers: correct answers count
+    :type correct_answers: int
+    """
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name="%(class)ss")
     study_date = models.DateTimeField(auto_now_add=True)
     correct_answers = models.PositiveIntegerField(verbose_name="Correct answers count")
@@ -13,12 +24,7 @@ class StudyLog(models.Model):
 
 class FlashcardStudyLog(StudyLog):
     """Model for acquisition of data regarding flashcard study
-    :param user: related user object
-    :type user: CustomUser
-    :param study_date: flashcard study timestamp
-    :type study_date: datetime
-    :param correct_answers: correct answers count
-    :type correct_answers: int
+
     :param flashcard: studied flashcard
     :type flashcard: Flashcard
     """
@@ -30,12 +36,7 @@ class FlashcardStudyLog(StudyLog):
 
 class DeckStudyLog(StudyLog):
     """Model for acquisition of data regarding deck study
-    :param user: related user object
-    :type user: CustomUser
-    :param study_date: flashcard study timestamp
-    :type study_date: datetime
-    :param correct_answers: correct answers count
-    :type correct_answers: int
+
     :param deck: studied deck name
     :type deck: Deck
     :param study_duration: duration of a deck study session

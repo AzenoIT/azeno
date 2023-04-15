@@ -10,6 +10,7 @@ from config import settings
 
 class AccountType(models.Model):
     """Model for representing account types (tiers).
+
     :param name: account type name
     :type name: str
     :param duration: duration of a particular account type
@@ -31,9 +32,9 @@ class Player(models.Model):
     :param nick: player name
     :type nick: str
     :param user: related user object
-    :type user: foreign key
+    :type user: User
     :param account_type: player's account type
-    :type account_type: foreign key
+    :type account_type: AccountType
     :param is_active: indicates if player is able to play
     :type is_active: bool, optional
     """

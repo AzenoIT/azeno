@@ -143,8 +143,14 @@ STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 AUTH_USER_MODEL = "users.CustomUser"
 
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
-# Logging
+IMAGES_TYPES = ["jpg", "png", "jpeg"]
+
+MAX_UPLOAD_SIZE = 512000  # 500kb
+
+# LoggingF
 
 LOGGING_CONFIG = None
 

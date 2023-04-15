@@ -5,10 +5,12 @@ Subpackages
 -----------
 
 .. toctree::
-   :maxdepth: 4
+
+   :maxdepth: 2
 
    decks.migrations
    decks.tests
+
 
 Admin
 ------------------
@@ -34,13 +36,15 @@ Models
    :undoc-members:
    :show-inheritance:
 
-Tests
-------------------
 
-.. automodule:: decks.tests
+Validators
+-----------------------
+
+.. automodule:: decks.validators
    :members:
    :undoc-members:
    :show-inheritance:
+
 
 Views
 ------------------

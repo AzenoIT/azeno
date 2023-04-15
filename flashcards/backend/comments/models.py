@@ -6,7 +6,7 @@ class Comment(models.Model):
     """Model for representing user's comments in response to flashcards and decks
 
     :param user: related user object
-    :type user: CustomUser
+    :type user: User
     :param flashcard: related flashcard object
     :type flashcard: Flashcard
     :param deck: related deck object

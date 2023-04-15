@@ -1,10 +1,10 @@
 Migrations
 ========================
 
-decks.migrations.0001\_initial module
+Initial Migration
 -------------------------------------
 
-.. automodule:: decks.migrations.0001_initial
+.. automodule:: stats.migrations.0001_initial
    :members:
    :undoc-members:
    :show-inheritance:
@@ -12,7 +12,7 @@ decks.migrations.0001\_initial module
 Module contents
 ---------------
 
-.. automodule:: decks.migrations
+.. automodule:: stats.migrations
    :members:
    :undoc-members:
    :show-inheritance:

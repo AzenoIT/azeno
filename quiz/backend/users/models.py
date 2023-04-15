@@ -63,6 +63,12 @@ class CustomUser(AbstractUser):
     CustomUser uses email field as the USERNAME_FIELD for authentication. It is still possible to set username,
     but it is not required field.
 
+    .. attention::
+
+        Due to unresolved issues in django-stubs project, type checking for CustomUserManager had to be silenced.
+        Link to the issue with this solution recommended as fix https://github.com/typeddjango/django-stubs/issues/174
+
+
     Inherits only from AbstractUser.
 
     Following attributes are inherited from baseclasses:
@@ -98,9 +104,6 @@ class CustomUser(AbstractUser):
 
     USERNAME_FIELD: str = "email"
     REQUIRED_FIELDS: list[str] = []
-
-    # TODO: Due to unresolved issues in django-stubs project, type checking for CustomUserManager had to be silenced
-    # Link to the issue with this solution recommended as fix https://github.com/typeddjango/django-stubs/issues/174
 
     objects = CustomUserManager()  # type: ignore[assignment]
 
