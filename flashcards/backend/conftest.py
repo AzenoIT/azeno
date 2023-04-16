@@ -14,7 +14,7 @@ from django.test import override_settings
 
 from comments.models import Comment
 from players.models import AccountType
-from decks.models import Category, Deck, Flashcard, Tag
+from decks.models import Category, Deck, Flashcard, Tag, DifficultyLevel
 from config import settings
 from stats.models import FlashcardStudy, DeckStudy
 
@@ -29,11 +29,6 @@ def generated_data_with_custom_command(settings, db):
         "create_test_data",
         "5",
     )
-
-
-@pytest.fixture
-def account_type(db):
-    return AccountType.objects.create(name="Basic", duration=timedelta(days=60), cost=Decimal(10))
 
 
 @pytest.fixture
@@ -126,7 +121,20 @@ def flashcard(db):
 
 
 @pytest.fixture
+def account_type(db):
+    """Fixture for creating account type with saving to database.
+    :return: Object of class AccountType representing a row in table.
+    :rtype: AccountType
+    """
+    return AccountType.objects.create(name="Basic", duration=timedelta(days=60), cost=Decimal(10))
+
+
+@pytest.fixture
 def flashcard_study(db, user, flashcard):
+    """Fixture for creating a flashcard study instance with saving to database.
+    :return: Object of class FlashcardStudy representing a row in table.
+    :rtype: FlashcardStudy
+    """
     return FlashcardStudy.objects.create(
         user=user,
         study_date=datetime.now(),
@@ -137,6 +145,10 @@ def flashcard_study(db, user, flashcard):
 
 @pytest.fixture
 def deck_study(db, user, deck):
+    """Fixture for creating a deck study instance with saving to database.
+    :return: Object of class DeckStudy representing a row in table.
+    :rtype: DeckStudy
+    """
     return DeckStudy.objects.create(
         user=user,
         study_date=datetime.now(),
@@ -149,9 +161,22 @@ def deck_study(db, user, deck):
 
 @pytest.fixture
 def comment(db, user, flashcard, deck):
+    """Fixture for creating a comment with saving to database.
+    :return: Object of class Comment representing a row in table.
+    :rtype: Comment
+    """
     return Comment.objects.create(
         user=user,
         flashcard=flashcard,
         deck=deck,
         description="This is a test comment."
     )
+
+
+@pytest.fixture
+def difficulty_level(db):
+    """Fixture that will create databased saved difficulty object.
+    :return: Object of class DifficultyLevel representing a row in table.
+    :rtype: DifficultyLevel
+    """
+    return DifficultyLevel.objects.create(name="Hard", value=1)
