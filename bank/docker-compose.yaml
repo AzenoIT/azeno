@@ -1,0 +1,26 @@
+services:
+    web:
+        build:
+            context: ./
+            target: development
+        restart: on-failure
+        working_dir: /app
+        networks:
+            - web_network
+        ports:
+            - "6006:6006"
+        volumes:
+            - ./:/app
+            - node_modules:/app/node_modules
+        env_file:
+            - envs/web.env
+        command: npm run storybook
+        stdin_open: true
+        tty: true
+
+volumes:
+    node_modules:
+
+networks:
+    web_network:
+        driver: bridge

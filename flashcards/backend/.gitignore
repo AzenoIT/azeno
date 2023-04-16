@@ -7,5 +7,7 @@ staticfiles
 docs/_build/
 docs/.doctrees
 .coverage
+logs/*.log*
 logs/*.log
 .mypy_cache/
+media/
