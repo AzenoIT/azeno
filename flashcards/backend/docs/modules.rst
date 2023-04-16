@@ -6,3 +6,6 @@ Flashcards
 
    users
    decks
+   comments
+   players
+   stats

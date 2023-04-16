@@ -11,9 +11,12 @@ from django.core.files.base import ContentFile
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.core.management import call_command
 from django.test import override_settings
+
+from comments.models import Comment
 from players.models import AccountType
 from decks.models import Category, Deck, Flashcard, Tag
 from config import settings
+from stats.models import FlashcardStudy, DeckStudy
 
 
 @pytest.fixture
@@ -120,3 +123,35 @@ def tag_db(db, deck, flashcard):
 @pytest.fixture
 def flashcard(db):
     return Flashcard.objects.create()
+
+
+@pytest.fixture
+def flashcard_study(db, user, flashcard):
+    return FlashcardStudy.objects.create(
+        user=user,
+        study_date=datetime.now(),
+        correct_answers=2,
+        flashcard=flashcard
+    )
+
+
+@pytest.fixture
+def deck_study(db, user, deck):
+    return DeckStudy.objects.create(
+        user=user,
+        study_date=datetime.now(),
+        correct_answers=3,
+        deck=deck,
+        study_duration=timedelta(hours=1),
+        realization=Decimal(42)
+    )
+
+
+@pytest.fixture
+def comment(db, user, flashcard, deck):
+    return Comment.objects.create(
+        user=user,
+        flashcard=flashcard,
+        deck=deck,
+        description="This is a test comment."
+    )

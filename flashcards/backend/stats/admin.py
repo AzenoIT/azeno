@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from stats.models import DeckStudyLog, FlashcardStudyLog
+from stats.models import DeckStudy, FlashcardStudy
 
 
 class FlashcardStudyAdminConfig(admin.ModelAdmin):
@@ -33,5 +33,5 @@ class DeckStudyAdminConfig(admin.ModelAdmin):
     list_per_page = 50
 
 
-admin.site.register(FlashcardStudyLog, FlashcardStudyAdminConfig)
-admin.site.register(DeckStudyLog, DeckStudyAdminConfig)
+admin.site.register(FlashcardStudy, FlashcardStudyAdminConfig)
+admin.site.register(DeckStudy, DeckStudyAdminConfig)

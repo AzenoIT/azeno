@@ -18,6 +18,7 @@ class AccountType(models.Model):
     :param cost: monthly cost of a particular account type
     :type cost: Decimal
     """
+
     name = models.CharField(max_length=150)
     duration = models.DurationField()
     cost = models.DecimalField(max_digits=6, decimal_places=2)
@@ -35,25 +36,21 @@ class Player(models.Model):
     :type user: User
     :param account_type: player's account type
     :type account_type: AccountType
+    :param start_time: player's account start time
+    :type start_time: datetime
+    :param expiration_time: player's account expiration time, depends on account type
+    :type expiration_time: datetime
     :param is_active: indicates if player is able to play
     :type is_active: bool, optional
     """
-    uuid = models.UUIDField(
-        editable=False, db_index=True, default=uuid.uuid4, primary_key=True
-    )
+
+    uuid = models.UUIDField(editable=False, db_index=True, default=uuid.uuid4, primary_key=True)
     nick = models.CharField(max_length=30)
-    user = models.ForeignKey(
-        get_user_model(),
-        on_delete=models.CASCADE,
-        blank=True,
-        null=True
-    )
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, blank=True, null=True)
     account_type = models.ForeignKey("AccountType", on_delete=models.CASCADE)
-    start_time = models.DateTimeField()
-    expiration_time = models.DateTimeField()
-    is_active = models.BooleanField(
-        default=True, help_text="Indicates if player is active."
-    )
+    start_time = models.DateTimeField(auto_now_add=True)
+    expiration_time = models.DateTimeField(blank=True, null=True)
+    is_active = models.BooleanField(default=True, help_text="Indicates if player is active.")
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
