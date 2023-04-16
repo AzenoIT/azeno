@@ -52,4 +52,3 @@ admin.site.register(Category, CategoryAdminConfig)
 admin.site.register(Tag, TagAdminConfig)
 admin.site.register(Deck, DeckAdminConfig)
 admin.site.register(DifficultyLevel, DifficultyLevelAdminConfig)
-
