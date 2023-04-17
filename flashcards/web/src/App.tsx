@@ -7,7 +7,7 @@ import FormikTest from "modules/genericTests/FormikTest/FormikTest";
 import TailwindTest from "modules/genericTests/TailwindTest/TailwindTest";
 import FakerTest from "modules/genericTests/FakerTest/FakerTest";
 import MaterialUITest from "modules/genericTests/MaterialUITest/MaterialUITest";
-import AddDecksForm from "./components/AddDecksForm";
+import AddDecksForm from "components/AddDecksForm";
 
 function App() {
     const queryClient = new QueryClient();
