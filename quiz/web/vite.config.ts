@@ -23,7 +23,7 @@ export default defineConfig({
     },
     plugins: [
         react(),
-        tsconfigPaths(),
+        tsconfigPaths({ root: "/project/quiz/web" }),
         { ...eslint({ failOnError: true, failOnWarning: false }), apply: "build" },
         { ...eslint({ failOnError: false, failOnWarning: false, fix: true }), apply: "serve", enforce: "post" },
     ],
