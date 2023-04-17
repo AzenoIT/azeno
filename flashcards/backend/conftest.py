@@ -12,7 +12,7 @@ from django.core.management import call_command
 from django.test import override_settings
 
 
-from decks.models import Category, Deck, Flashcard, Tag
+from decks.models import Category, Deck, Flashcard, Tag, DifficultyLevel
 from config import settings
 
 
@@ -114,6 +114,14 @@ def tag_db(db, deck, flashcard):
 @pytest.fixture
 def flashcard(db):
     return Flashcard.objects.create()
+
+
+def difficulty_level(db):
+    """Fixture that will create databased saved difficulty object.
+    :return: Object of class DifficultyLevel representing a row in table.
+    :rtype: DifficultyLevel
+    """
+    return DifficultyLevel.objects.create(name="Hard", value=1)
 
 
 @pytest.fixture
