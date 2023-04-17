@@ -11,7 +11,7 @@
   },
   "workspaces": [
     "bank",
-    "web"
+    "web/quiz"
   ],
   "bugs": {
     "url": "https://github.com/AzenoIT/azeno/issues"
