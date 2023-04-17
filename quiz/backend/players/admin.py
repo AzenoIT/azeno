@@ -1,6 +1,11 @@
 from django.contrib import admin
 
+from stats.models import PlayerBadge
 from .models import Player, Profile
+
+
+class BadgeInline(admin.TabularInline):
+    model = PlayerBadge
 
 
 class PlayerAdminConfig(admin.ModelAdmin):
@@ -9,6 +14,9 @@ class PlayerAdminConfig(admin.ModelAdmin):
 
     """
 
+    inlines = (
+        BadgeInline,
+    )
     list_display = ("nick", "rank", "is_bot", "created_at", "is_active")
     search_fields = ("nick",)
     list_editable = (

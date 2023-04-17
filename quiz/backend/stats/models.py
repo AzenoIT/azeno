@@ -43,6 +43,9 @@ class PlayerBadge(models.Model):
         verbose_name = "badge obtained by player"
         verbose_name_plural = "badges obtained by players"
 
+    def __str__(self):
+        return f"{self.badge.name} obtained by {self.player.nick}"
+
 
 class Badge(TimestampModel):
     """Represents badges that players/users can earn during games.
@@ -64,7 +67,8 @@ class Badge(TimestampModel):
     :param points: How many points is given badge worth.
     :type points: models.PositiveSmallIntegerField(default=0)
 
-    :param created_at: Date and time when badge was created.
+    :param created_at: Date and
+    time when badge was created.
     :type created_at: models.DateTimeField(auto_now_add=True)
 
     :param updated_at: Date and time when badge was updated, changes every time badge is edited.
