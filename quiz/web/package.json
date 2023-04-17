@@ -5,7 +5,7 @@
     "type": "module",
     "scripts": {
         "dev": "vite",
-        "build": "tsc && vite build",
+        "build": "ls && tsc && vite build",
         "preview": "vite preview",
         "lint": "prettier --write --ignore-path=.eslintignore .",
         "eslint": "eslint ./src",
@@ -15,7 +15,7 @@
         "watch": "vitest watch"
     },
     "dependencies": {
-        "@azeno/bank": "^0.0.0",
+        "@azeno/bank": "file:../../bank",
         "@emotion/react": "^11.10.6",
         "@emotion/styled": "^11.10.6",
         "@fontsource/roboto": "^4.5.8",

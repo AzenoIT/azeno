@@ -6,12 +6,9 @@
   "main": "index.js",
   "type": "module",
   "license": "",
-  "scripts": {
-    "dev": "vite"
-  },
   "workspaces": [
     "bank",
-    "web"
+    "quiz/web"
   ],
   "bugs": {
     "url": "https://github.com/AzenoIT/azeno/issues"
@@ -33,8 +30,5 @@
     "eslint-plugin-simple-import-sort": "^10.0.0",
     "prettier": "^2.8.4",
     "typescript": "^4.9.3"
-  },
-  "dependencies": {
-    "@azeno/bank": "^0.0.0"
   }
 }

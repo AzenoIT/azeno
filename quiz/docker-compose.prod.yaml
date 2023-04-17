@@ -17,8 +17,8 @@ services:
       - quiz_web_network
       - quiz_backend_network
     depends_on:
-      - quiz_web
-      - quiz_backend
+      - web
+      - backend
     ports:
       - "80:80"
     volumes:
@@ -34,7 +34,7 @@ services:
     command: gunicorn config.wsgi:application --bind 0.0.0.0:8000
     restart: on-failure
     depends_on:
-      - quiz_postgres
+      - postgres
     networks:
       - quiz_backend_network
       - quiz_postgres_network

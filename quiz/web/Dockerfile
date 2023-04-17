@@ -6,16 +6,17 @@ WORKDIR /project
 COPY ./bank ./bank
 COPY ./package.json ./package-lock.json ./
 COPY quiz/web/package.json quiz/web/package-lock.json ./quiz/web/
-RUN npm install ./bank
+RUN npm install ./bank -w quiz/web
 RUN npm ci -W
 
 FROM development as builder
 
-COPY ./.eslintignore ./.eslintrc.json ./.prettierrc.json ./tsconfig.json quiz/web/ ./
-RUN npm run --prefix quiz/web/ build
+COPY ./.eslintignore ./.eslintrc.json ./.prettierrc.json ./tsconfig.json ./
+COPY quiz/web/ ./quiz/web
+RUN npm run -w quiz/web build
 
 
 FROM nginx:1.23.3 as production
 EXPOSE 3000
-COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
+COPY quiz/web/nginx/default.conf /etc/nginx/conf.d/default.conf
 COPY --from=builder /project/quiz/web/dist /usr/share/nginx/html

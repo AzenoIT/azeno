@@ -12,6 +12,8 @@ services:
       - "3000:3000"
     volumes:
       - ../:/project/
+      - /project/quiz/mobile/
+      - node_modules:/project/node_modules
     env_file:
       - envs/web.env
     environment:
@@ -67,6 +69,7 @@ services:
 
 volumes:
   backend_quiz_db_volume:
+  node_modules:
 
 networks:
   quiz_postgres_network:
