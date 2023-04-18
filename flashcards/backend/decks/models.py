@@ -1,4 +1,6 @@
 from django.contrib.auth import get_user_model
+from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.models import ContentType
 from django.core.validators import MinValueValidator
 from django.db import models
 from decimal import Decimal
@@ -143,16 +145,20 @@ class Flashcard(models.Model):
     :type difficulty: int
     """
 
-    deck = models.ForeignKey("Deck", on_delete=models.DO_NOTHING)
-    category = models.ForeignKey("Category", on_delete=models.DO_NOTHING)
+    deck = models.ForeignKey("Deck", on_delete=models.CASCADE)
+    category = models.ForeignKey("Category", on_delete=models.CASCADE)
     rating_flashcard = models.PositiveIntegerField(default=0)
     is_active = models.BooleanField(default=True)
-    question = models.TextField()
-    answer = models.TextField()
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, limit_choices_to={'model__in': (
+        'text', 'image', 'code'
+    )})
+    object_id = models.PositiveIntegerField()
+    question = GenericForeignKey('content_type', 'object_id')
+    answer = GenericForeignKey('content_type', 'object_id')
     date_added = models.DateField(auto_now_add=True)
     date_modification = models.DateField(auto_now=True)
-    author = models.ForeignKey("User", on_delete=models.DO_NOTHING)
-    difficulty = models.ForeignKey("DifficultyLevel", on_delete=models.DO_NOTHING)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    difficulty = models.ForeignKey("DifficultyLevel", on_delete=models.CASCADE)
 
     def __str__(self):
         return self.question
@@ -161,6 +167,22 @@ class Flashcard(models.Model):
         verbose_name = "flashcard"
         verbose_name_plural = "flashcards"
 
+
+class Text(models.Model):
+    content = models.TextField()
+
+
+class Image(models.Model):
+    content = models.FileField(
+        upload_to="decks/",
+        blank=True,
+        null=True,
+        validators=[validators.validate_file_type, validators.validate_file_size],
+    )
+
+
+class Code(models.Model):
+    pass
 
 class DifficultyLevel(models.Model):
     pass
