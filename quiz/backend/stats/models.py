@@ -99,4 +99,9 @@ class Badge(TimestampModel):
         return self.name
 
     def get_absolute_url(self):
+        """Method for building absolute url for Badge object.
+
+        :return: The absolute URL of the badge's detail view.
+        :rtype: str
+        """
         return reverse("stats:badge_detail", args=[str(self.pk)])
