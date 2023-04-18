@@ -14,9 +14,7 @@ class PlayerAdminConfig(admin.ModelAdmin):
 
     """
 
-    inlines = (
-        BadgeInline,
-    )
+    inlines = (BadgeInline,)
     list_display = ("nick", "rank", "is_bot", "created_at", "is_active")
     search_fields = ("nick",)
     list_editable = (

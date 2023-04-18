@@ -1,3 +1,9 @@
 from django.shortcuts import render
+from rest_framework import generics
 
-# Create your views here.
+from . import serializers, models
+
+
+class BadgeRetrieveView(generics.RetrieveAPIView):
+    queryset = models.Badge.objects.all()
+    serializer_class = serializers.BadgeSerializer
