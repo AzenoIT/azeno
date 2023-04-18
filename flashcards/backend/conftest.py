@@ -131,36 +131,39 @@ def difficulty_level(db):
     """
     return DifficultyLevel.objects.create(name="Hard", value=1)
 
-@pytest.fixture(scope='session')
+
+@pytest.fixture(scope="session")
 def flashcard_decks():
     """Factory for generating decks
-        Usage is automated with custom command and combined with test user data generation,
-        described in :doc:`users.management.commands`.
+
+    after usage this fixture creates 50 decks and dumps them into fixtures folder to decks.json file`.
     """
 
     decks = DeckFactory.create_batch(50)
     decks_data = []
     for deck in decks:
-        decks_data.append({
-            'model': 'flashcards.Deck',
-            'pk': deck.pk,
-            'fields': {
-                'image': str(deck.image),
-                'name': deck.name,
-                'category': deck.category.pk,
-                'is_public': deck.is_public,
-                'price': str(deck.price),
-                'author': deck.author.pk,
-                'popularity': deck.popularity,
-                'is_active': deck.is_active,
-                'description': deck.description,
+        decks_data.append(
+            {
+                "model": "decks.Deck",
+                "pk": deck.pk,
+                "fields": {
+                    "image": str(deck.image),
+                    "name": deck.name,
+                    "category": deck.category.pk,
+                    "is_public": deck.is_public,
+                    "price": str(deck.price),
+                    "author": deck.author.pk,
+                    "popularity": deck.popularity,
+                    "is_active": deck.is_active,
+                    "description": deck.description,
+                },
             }
-        })
+        )
 
-    fixture_dir = Path(__file__).parent / 'fixtures'
+    fixture_dir = Path(__file__).parent / "fixtures"
     fixture_dir.mkdir(exist_ok=True)
 
-    with open(fixture_dir / 'decks.json', 'w') as f:
+    with open(fixture_dir / "decks.json", "w") as f:
         json.dump(decks_data, f)
 
     return decks

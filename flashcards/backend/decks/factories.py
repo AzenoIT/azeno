@@ -1,4 +1,3 @@
-import factory
 from factory.django import DjangoModelFactory, ImageField
 from factory import Faker, Sequence, SubFactory
 
@@ -6,12 +5,12 @@ from backend.decks.models import Category, Flashcard, Deck, DifficultyLevel, Tag
 from backend.users.factories import UserFactory
 
 
-
 class CategoryFactory(DjangoModelFactory):
     """Factory for generating category of categories
 
     Usage is automated and it creates the instances of Category`.
     """
+
     name = Sequence(lambda n: f"Category {n:0>4}")
     description = Faker("sentence", nb_words=5)
 
@@ -25,6 +24,7 @@ class DeckFactory(DjangoModelFactory):
 
     Usage is automated and it creates the instances of Decks`.
     """
+
     image = ImageField(color="blue")
     name = Faker("language_name")
     category = SubFactory(CategoryFactory)
@@ -44,6 +44,7 @@ class FlashcardFactory(DjangoModelFactory):
 
     Usage is automated and it creates the instances of Flashcards`.
     """
+
     class Meta:
         model = Flashcard
 
@@ -53,6 +54,7 @@ class TagFactory(DjangoModelFactory):
 
     Usage is automated and it creates the instances of Tags`.
     """
+
     name = Faker("word")
     deck = SubFactory(DeckFactory)
     flashcard = SubFactory(FlashcardFactory)
@@ -66,8 +68,9 @@ class DifficultyLevelFactory(DjangoModelFactory):
 
     Usage is automated and it creates the instances of DifficultyLevel`.
     """
+
     name = Sequence(lambda n: f"Difficulty {n:0>2}")
-    value = Faker("pyint", min_value=1, max_value=10)
+    value = Faker("pyint", min_value=1, max_value=5)
 
     class Meta:
         model = DifficultyLevel

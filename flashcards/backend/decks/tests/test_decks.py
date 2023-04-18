@@ -5,18 +5,14 @@ from backend.decks.factories import CategoryFactory, DeckFactory, FlashcardFacto
 
 class TestFactories(TestCase):
     def test_category_factory(self):
-        """Test CategoryFactory.
-
-        """
+        """Test CategoryFactory."""
         category = CategoryFactory()
         self.assertIsNotNone(category)
         self.assertIsNotNone(category.name)
         self.assertIsNotNone(category.description)
 
     def test_deck_factory(self):
-        """ Test DeckFactory.
-
-        """
+        """Test DeckFactory."""
         deck = DeckFactory()
         self.assertIsNotNone(deck)
         self.assertIsNotNone(deck.image)
@@ -30,16 +26,12 @@ class TestFactories(TestCase):
         self.assertIsNotNone(deck.description)
 
     def test_flashcard_factory(self):
-        """Test FlashcardFactory.
-
-        """
+        """Test FlashcardFactory."""
         flashcard = FlashcardFactory()
         self.assertIsNotNone(flashcard)
 
     def test_tag_factory(self):
-        """Test TagFactory.
-
-        """
+        """Test TagFactory."""
         tag = TagFactory()
         self.assertIsNotNone(tag)
         self.assertIsNotNone(tag.name)
@@ -47,9 +39,7 @@ class TestFactories(TestCase):
         self.assertIsNotNone(tag.flashcard)
 
     def test_difficulty_level_factory(self):
-        """Test DifficultyLevelFactory.
-
-        """
+        """Test DifficultyLevelFactory."""
         difficulty_level = DifficultyLevelFactory()
         self.assertIsNotNone(difficulty_level)
         self.assertIsNotNone(difficulty_level.name)
