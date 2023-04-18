@@ -103,6 +103,7 @@ def remove_test_data():
     shutil.rmtree(os.path.join(settings.BASE_DIR, "test_dir"), ignore_errors=True)
 
 
+@pytest.fixture
 def tag_db(db, deck, flashcard):
     name = "tag_2"
     deck = deck
@@ -116,6 +117,7 @@ def flashcard(db):
     return Flashcard.objects.create()
 
 
+@pytest.fixture
 def difficulty_level(db):
     """Fixture that will create databased saved difficulty object.
     :return: Object of class DifficultyLevel representing a row in table.
