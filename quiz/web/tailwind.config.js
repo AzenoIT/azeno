@@ -2,7 +2,7 @@
 
 import config from "@azeno/bank/tailwind.config.cjs";
 
-module.exports = {
+export default {
     content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}", "../../node_modules/@azeno/bank/**/*.{js,ts,jsx,tsx}"],
     theme: {
         extend: {
