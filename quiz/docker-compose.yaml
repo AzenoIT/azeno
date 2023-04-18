@@ -11,14 +11,20 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ../:/project/
+      - ../bank/:/project/bank/
+      - ../quiz/:/project/quiz/
+      - ../.eslintignore:/project/.eslintignore
+      - ../.eslintrc.json:/project/.eslintrc.json
+      - ../.prettierrc.json:/project/.prettierrc.json
+      - ../package.json:/project/package.json
+      - ../package-lock.json:/project/package-lock.json
+      - ../tsconfig.json:/project/tsconfig.json
       - /project/quiz/mobile/
-      - node_modules:/project/node_modules
     env_file:
       - envs/web.env
     environment:
       - VITE_PORT=3000
-    command: npm run --prefix quiz/web/ dev
+    command: npm run -w quiz/web dev
     stdin_open: true
     tty: true
 

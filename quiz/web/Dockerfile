@@ -6,7 +6,7 @@ WORKDIR /project
 COPY ./bank ./bank
 COPY ./package.json ./package-lock.json ./
 COPY quiz/web/package.json quiz/web/package-lock.json ./quiz/web/
-RUN npm install ./bank -w quiz/web
+RUN npm install -w quiz/web ./bank
 RUN npm ci -W
 
 FROM development as builder
