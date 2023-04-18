@@ -1,8 +1,10 @@
 import io
+import json
 import os
 import shutil
 import tempfile
 from datetime import datetime
+from pathlib import Path
 
 import pytest
 from PIL import Image
@@ -12,9 +14,11 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 
 from django.core.management import call_command
 from django.test import override_settings
-
+from factory import faker
+from faker import factory
 
 from decks.models import Category, Deck, Flashcard, Tag, DifficultyLevel
+from decks.factories import DeckFactory
 from config import settings
 
 
@@ -126,3 +130,40 @@ def difficulty_level(db):
     :rtype: DifficultyLevel
     """
     return DifficultyLevel.objects.create(name="Hard", value=1)
+
+
+@pytest.fixture(scope="session")
+def flashcard_decks():
+    """Factory for generating decks
+
+    after usage this fixture creates 50 decks and dumps them into fixtures folder to decks.json file`.
+    """
+
+    decks = DeckFactory.create_batch(50)
+    decks_data = []
+    for deck in decks:
+        decks_data.append(
+            {
+                "model": "decks.Deck",
+                "pk": deck.pk,
+                "fields": {
+                    "image": str(deck.image),
+                    "name": deck.name,
+                    "category": deck.category.pk,
+                    "is_public": deck.is_public,
+                    "price": str(deck.price),
+                    "author": deck.author.pk,
+                    "popularity": deck.popularity,
+                    "is_active": deck.is_active,
+                    "description": deck.description,
+                },
+            }
+        )
+
+    fixture_dir = Path(__file__).parent / "fixtures"
+    fixture_dir.mkdir(exist_ok=True)
+
+    with open(fixture_dir / "decks.json", "w") as f:
+        json.dump(decks_data, f)
+
+    return decks
