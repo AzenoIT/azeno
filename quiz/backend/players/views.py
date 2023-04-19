@@ -1,5 +1,8 @@
-from typing import List, cast, Any
-from rest_framework.generics import CreateAPIView, RetrieveAPIView
+from typing import List
+from rest_framework.generics import (
+    CreateAPIView,
+    RetrieveUpdateAPIView,
+)
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -51,7 +54,7 @@ class PlayerCreateAPIView(CreateAPIView):
 
 
 # TODO add authentication to the view below when auth type is decided on
-class PlayerRetrieveAPIView(RetrieveAPIView):
+class PlayerRetrieveUpdateAPIView(RetrieveUpdateAPIView):
     """Retrieve profile data for a specific player.
     No authentication required.
 

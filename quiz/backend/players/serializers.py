@@ -29,7 +29,7 @@ class PlayerDetailSerializer(ModelSerializer):
     :rtype: rest_framework.serializers.Serializer
     """
 
-    username = CharField(source="nick")
+    username = CharField(source="nick", validators=[validate_profanity])
 
     class Meta:
         model = models.Player
@@ -39,4 +39,5 @@ class PlayerDetailSerializer(ModelSerializer):
             "rank",
             "created_at",
         )
-        read_only_fields = ("uuid", "rank", "created_at")
+        read_only_fields = ("uuid", "created_at")
+        required_fields = ("rank",)

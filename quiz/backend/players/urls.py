@@ -11,7 +11,7 @@ urlpatterns = [
     path("players/", views.PlayerCreateAPIView.as_view(), name="create-player"),
     path(
         "players/<uuid:uuid>/",
-        views.PlayerRetrieveAPIView.as_view(),
+        views.PlayerRetrieveUpdateAPIView.as_view(),
         name="player_profile",
     ),
 ]
