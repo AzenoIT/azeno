@@ -36,6 +36,5 @@
   ],
   "references": [
     { "path": "bank" },
-    { "path": "quiz/web" }
   ]
 }

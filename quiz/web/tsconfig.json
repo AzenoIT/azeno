@@ -7,13 +7,16 @@
         "outDir": "dist",
         "baseUrl": "./src",
         "paths": {
-            "@mui/styled-engine": ["./node_modules/@mui/styled-engine-sc"]
+            "@mui/styled-engine": [
+                "./node_modules/@mui/styled-engine-sc"
+            ]
         }
     },
-    "include": ["src", "src/**/*.json"],
+    "include": [
+        "src",
+        "src/**/*.json"
+    ],
     "references": [
-        {
-            "path": "./tsconfig.node.json"
-        }
+        { "path": "./tsconfig.node.json" },
     ]
 }
