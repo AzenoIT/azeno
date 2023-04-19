@@ -17,9 +17,9 @@ class BadgeSerializer(serializers.ModelSerializer):
     * badge_url: The absolute URL of the badge's detail view.
 
     :ivar image_url: The URL field for image associated with badge instance.
-    :type image_url: serializers.URLField
+    :vartype image_url: serializers.URLField
     :ivar badge_url: The URL field for the absolute url of the badge's detail view.
-    :type badge_url: serializers.URLField
+    :vartype badge_url: serializers.URLField
 
     """
 

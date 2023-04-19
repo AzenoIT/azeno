@@ -68,8 +68,7 @@ class Badge(TimestampModel):
     :param points: How many points is given badge worth.
     :type points: models.PositiveSmallIntegerField(default=0)
 
-    :param created_at: Date and
-    time when badge was created.
+    :param created_at: Date and time when badge was created.
     :type created_at: models.DateTimeField(auto_now_add=True)
 
     :param updated_at: Date and time when badge was updated, changes every time badge is edited.

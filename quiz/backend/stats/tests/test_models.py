@@ -36,3 +36,9 @@ def test_badge_model_raises_validation_error_with_wrong_file_types(
         badge.full_clean()
 
     assert "File type not supported. Use: svg+xml" in exc_info.value.messages[0]
+
+
+def test_badge_get_absolute_url(badge):
+    url = f"/api/v1/badges/{badge.pk}/"
+
+    assert badge.get_absolute_url() == url

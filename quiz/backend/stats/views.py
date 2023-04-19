@@ -5,14 +5,15 @@ from . import serializers, models
 
 
 class BadgeRetrieveView(generics.RetrieveAPIView):
-    """Retrieve a single badge instance by its primary key.
+    """Retrieve a single Badge instance by its primary key.
 
-    * For now authentication is not required.
+    .. attention::
+        * For now authentication is not required.
 
     :ivar queryset: The queryset used to retrieve the :class:`stats.models.Badge` instance.
-    :type queryset: QuerySet
+    :vartype queryset: QuerySet
     :ivar serializer_class: The serializer class used to serialize Badge data.
-    :type serializer_class: Type[serializers.BadgeSerializer]
+    :vartype serializer_class: Type[serializers.BadgeSerializer]
 
     """
 
@@ -21,14 +22,15 @@ class BadgeRetrieveView(generics.RetrieveAPIView):
 
 
 class BadgeListView(generics.ListAPIView):
-    """List all badge instances.
+    """List all Badge instances.
 
-    * For now authentication is not required.
+    .. attention::
+        * For now authentication is not required.
 
     :ivar queryset: The queryset used to retrieve all :class:`stats.models.Badge` instances
-    :type queryset: Queryset
+    :vartype queryset: Queryset
     :ivar serializer_class: The serializer class used for serializing Badge data.
-    :type serializer_class: Type[serializers.BadgeSerializer]
+    :vartype serializer_class: Type[serializers.BadgeSerializer]
 
     """
 
