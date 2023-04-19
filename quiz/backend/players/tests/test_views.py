@@ -18,8 +18,8 @@ def test_player_view_return_201_status_code_and_correct_data(player_api):
     response = player_api()
 
     assert response.status_code == 201
-    assert response.data["nick"] == "test_nick"
-    assert all(prop in response.data for prop in ["uuid", "rank", "created_at"])
+    assert response.data["username"] == "test_nick"
+    assert all(prop in response.data for prop in ["uuid", "username"])
 
 
 def test_player_view_create_player_save_in_db(player_api):
@@ -34,7 +34,7 @@ def test_retrieve_player_view_returns_data(player_api, api_rf):
     response = PlayerRetrieveAPIView.as_view()(request, uuid=player.data["uuid"])
 
     assert response.status_code == 200
-    assert response.data["nick"] == player.data["nick"]
+    assert response.data["username"] == player.data["username"]
     assert response.data["uuid"] == str(player.data["uuid"])
 
 

@@ -46,7 +46,7 @@ def player_api(api_rf, db):
     def create_player():
         request = api_rf.post(
             "api/v1/players/",
-            json.dumps({"nick": "test_nick"}),
+            json.dumps({"username": "test_nick"}),
             content_type="application/json",
         )
         view = PlayerCreateAPIView.as_view()
