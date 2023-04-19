@@ -11,7 +11,7 @@ class DeckViewSet(viewsets.ModelViewSet):
     serializer_class = DeckSerializer
 
     def list(self, request, *args, **kwargs):
-        decks = self.serializer_class(self.get_queryset(), many=True)
+        decks = self.serializer_class(self.get_queryset().order_by("-rating"), many=True)
         return Response(data=decks.data, status=status.HTTP_200_OK)
 
     def retrieve(self, request, *args, pk=None, **kwargs):
