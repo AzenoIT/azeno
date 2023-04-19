@@ -1,3 +1,5 @@
+import uuid
+
 import pytest
 
 from .. import models
@@ -31,28 +33,17 @@ def test_player_view_create_player_save_in_db(player_api):
     assert PlayerCreateAPIView.queryset.get(uuid=response.data["uuid"])
 
 
-@pytest.mark.skip(reason="WIP")
-def test_retrieve_player_view_returns_data(player, api_rf):
-    url = f"/api/v1/players/{player.uuid}/"
-    view = PlayerRetrieveAPIView.as_view()
-    request = api_rf.get(url, format="json")
-    response = view(request, uuid=player.uuid)
-    response.render()
-    p = models.Player.objects.get(uuid=player.uuid)
-    print("*" * 20)
-    print(response.data)
-    print(player.uuid)
-    print(url)
-    print(p)
-    print("*" * 20)
+def test_retrieve_player_view_returns_data(profile_data, api_rf):
+    url = f"/api/v1/players/{profile_data.player.uuid}/"
+    request = api_rf.get(url, content_type="application/json")
+    response = PlayerRetrieveAPIView.as_view()(request, uuid=profile_data.player.uuid)
+
     assert response.status_code == 200
+    assert response.data["nick"] == profile_data.player.nick
+    assert response.data["uuid"] == str(profile_data.player.uuid)
 
 
-    # assert response.data["nick"] == player.data["nick"]
-    # assert response.data["uuid"] == str(player.data["uuid"])
-
-
-def test_retrieve_player_view_with_wrong_uuid_returns_404(db, api_rf):
+def test_retrieve_player_view_with_wrong_uuid_returns_404(profile_data, api_rf):
     random_uuid = str(uuid.uuid4())
     request = api_rf.get(f"/api/v1/players/{random_uuid}/")
     response = PlayerRetrieveAPIView.as_view()(
