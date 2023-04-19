@@ -57,11 +57,7 @@ def player_api(api_rf, db):
 
 @pytest.fixture
 def profile_data(test_image, player):
-    return Profile.objects.create(
-        player=player,
-        avatar=test_image,
-        score=100
-    )
+    return Profile.objects.create(player=player, avatar=test_image, score=100)
 
 
 @pytest.fixture

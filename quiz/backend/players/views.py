@@ -51,10 +51,10 @@ class PlayerRetrieveAPIView(RetrieveAPIView):
 
     serializer_class = serializers.ProfileSerializer
     queryset = models.Player.objects.all()
-    lookup_field = 'uuid'
+    lookup_field = "uuid"
 
     def get_object(self):
-        uuid = self.kwargs.get('uuid')
+        uuid = self.kwargs.get("uuid")
         try:
             return models.Profile.objects.get(player_id=uuid)
         except (models.Player.DoesNotExist, models.Profile.DoesNotExist):

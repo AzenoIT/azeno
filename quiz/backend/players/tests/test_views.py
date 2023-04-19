@@ -46,8 +46,6 @@ def test_retrieve_player_view_returns_data(profile_data, api_rf):
 def test_retrieve_player_view_with_wrong_uuid_returns_404(profile_data, api_rf):
     random_uuid = str(uuid.uuid4())
     request = api_rf.get(f"/api/v1/players/{random_uuid}/")
-    response = PlayerRetrieveAPIView.as_view()(
-        request, uuid=f'{random_uuid}'
-    )
+    response = PlayerRetrieveAPIView.as_view()(request, uuid=f"{random_uuid}")
 
     assert response.status_code == 404
