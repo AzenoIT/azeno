@@ -24,7 +24,11 @@ def generated_data_with_custom_command(settings, db):
     """
     return call_command(
         "create_test_data",
-        "5",
+        "--decks=3",
+        "--users=5",
+        "--categories=3",
+        "--tags=2",
+        "--difficulties=1",
     )
 
 
