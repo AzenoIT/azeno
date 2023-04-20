@@ -152,4 +152,3 @@ class DifficultyLevel(models.Model):
             super().save(*args, **kwargs)
             return self
         return name
-

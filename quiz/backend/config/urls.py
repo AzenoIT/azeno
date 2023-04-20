@@ -24,6 +24,7 @@ from django.urls import path, include
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/v1/", include("players.urls")),
+    path("api/v1/", include("stats.urls")),
 ]
 
 admin.site.site_header = "Azeno Quiz"

@@ -3,4 +3,3 @@ dist/
 public/
 .prettierrc.json
 .eslintrc.json
-**/bank/

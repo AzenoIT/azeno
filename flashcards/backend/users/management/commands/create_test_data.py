@@ -1,19 +1,19 @@
+from django.conf import settings
 from django.core.management import BaseCommand
 from django.core.management.base import CommandParser
-
 from django.db import transaction
 
-from django.conf import settings
+from decks.factories import CategoryFactory, DeckFactory, DifficultyLevelFactory, TagFactory
 from users.factories import UserFactory
 
 
 class Command(BaseCommand):
-    """Custom command for generating user objects.
-    It takes one positional argument, and it is the count of objects wanted to be generated.
+    """Custom command for generating deck, user, tag, category and difficulty level objects.
+    It takes five named (optional) arguments which are the counts of objects that need to be generated.
 
     Usage:
 
-    ``python manage.py create_test_data 5``
+    ``python manage.py create_test_data --decks=5 --users=3 --tags=2 --categories=4 --difficulties=2``
 
     """
 
@@ -29,7 +29,11 @@ class Command(BaseCommand):
         :param dict kwargs: kwargs
         :return: None
         """
-        objects_count = kwargs["objects_count"]
+        deck_objects_count = kwargs["decks"]
+        user_objects_count = kwargs["users"]
+        tag_objects_count = kwargs["tags"]
+        category_objects_count = kwargs["categories"]
+        difficulties_objects_count = kwargs["difficulties"]
         if not settings.DEBUG:
             self.stdout.write(
                 self.style.WARNING(
@@ -39,18 +43,56 @@ class Command(BaseCommand):
             )
         else:
             self.stdout.write(self.style.SUCCESS("Creating test data"))
-            for item in range(objects_count):
+            for item in range(deck_objects_count):
+                DeckFactory()
+            for item in range(user_objects_count):
                 UserFactory()
+            for item in range(tag_objects_count):
+                TagFactory()
+            for item in range(category_objects_count):
+                CategoryFactory()
+            for item in range(difficulties_objects_count):
+                DifficultyLevelFactory()
 
     def add_arguments(self, parser: CommandParser) -> None:
         """Overrides base method for taking in arguments.
-        This method is parsing the count of objects the user want to generate.
+        This method is parsing the count of objects the user wants to generate. If the count for the particular object
+        is not specified the default value 0 is taken and the object is not created.
 
         :param CommandParser parser: parser
         :return: None
         """
         parser.add_argument(
-            "objects_count",
+            "--decks",
+            default=0,
             type=int,
-            help="Indicates the number of objects to be created",
+            help="Indicates the number of deck objects to be created",
+        )
+
+        parser.add_argument(
+            "--users",
+            default=0,
+            type=int,
+            help="Indicates the number of user objects to be created",
+        )
+
+        parser.add_argument(
+            "--tags",
+            default=0,
+            type=int,
+            help="Indicates the number of tag objects to be created",
+        )
+
+        parser.add_argument(
+            "--categories",
+            default=0,
+            type=int,
+            help="Indicates the number of category objects to be created",
+        )
+
+        parser.add_argument(
+            "--difficulties",
+            default=0,
+            type=int,
+            help="Indicates the number of difficulty level objects to be created",
         )

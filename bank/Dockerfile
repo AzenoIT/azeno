@@ -3,11 +3,13 @@ FROM node:18.14.2-slim as development
 WORKDIR /app
 
 COPY ./package.json ./package-lock.json ./
-RUN npm ci
+COPY ./bank/package.json ./bank/package-lock.json ./bank/
+RUN npm ci -W
 
 FROM development as builder
 
-COPY . .
+COPY ./.eslintignore ./.eslintrc.json ./.prettierrc.json ./tsconfig.json ./
+COPY ./bank/ ./bank/
 RUN npm run build-storybook
 
 
