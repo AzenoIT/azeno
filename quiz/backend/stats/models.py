@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 from helpers.validators.validators import validate_badge_file_type
 
@@ -42,6 +43,9 @@ class PlayerBadge(models.Model):
     class Meta:
         verbose_name = "badge obtained by player"
         verbose_name_plural = "badges obtained by players"
+
+    def __str__(self):
+        return f"{self.badge.name} obtained by {self.player.nick}"
 
 
 class Badge(TimestampModel):
@@ -92,3 +96,11 @@ class Badge(TimestampModel):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        """Method for building absolute url for Badge object.
+
+        :return: The absolute URL of the badge's detail view.
+        :rtype: str
+        """
+        return reverse("stats:badge_detail", args=[str(self.pk)])

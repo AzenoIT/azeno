@@ -1,3 +1,4 @@
+
 Stats App
 =============
 
@@ -31,6 +32,14 @@ Models
 -------------------
 
 .. automodule:: stats.models
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Serializers
+-------------------
+
+.. automodule:: stats.serializers
    :members:
    :undoc-members:
    :show-inheritance:
