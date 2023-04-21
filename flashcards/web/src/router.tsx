@@ -6,7 +6,7 @@ import GenericTestsAll from "pages/GenericTestsAll";
 export const router = createBrowserRouter([
     {
         path: "/",
-        element: <h1>Home</h1>,
+        element: <Dashboard />,
     },
     {
         path: "/login",
@@ -29,11 +29,11 @@ export const router = createBrowserRouter([
         element: <h1>Marketplace</h1>,
     },
     {
-        path: "/tests",
-        element: <GenericTestsAll />,
+        path: "/train",
+        element: <h1>Train Deck</h1>,
     },
     {
-        path: "/dashboard",
-        element: <Dashboard />,
+        path: "/tests",
+        element: <GenericTestsAll />,
     },
 ]);
