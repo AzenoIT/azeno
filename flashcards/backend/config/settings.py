@@ -173,8 +173,8 @@ REST_FRAMEWORK = {
     "DEFAULT_PARSER_CLASSES": [
         "rest_framework.parsers.JSONParser",
     ],
-    'DEFAULT_PAGINATION_CLASS': 'decks.pagination.DecksPagination',
-    'PAGE_SIZE': 20
+    "DEFAULT_PAGINATION_CLASS": "decks.pagination.DecksPagination",
+    "PAGE_SIZE": 20,
 }
 
 # Simple JWT
