@@ -1,0 +1,34 @@
+{
+    "name": "azeno",
+    "version": "1.0.0",
+    "description": "Azeno main repository",
+    "private": true,
+    "main": "index.js",
+    "type": "module",
+    "license": "",
+    "workspaces": [
+        "bank",
+        "quiz/web"
+    ],
+    "bugs": {
+        "url": "https://github.com/AzenoIT/azeno/issues"
+    },
+    "homepage": "https://github.com/AzenoIT/azeno#readme",
+    "devDependencies": {
+        "@types/node": "^18.14.6",
+        "@typescript-eslint/eslint-plugin": "^5.54.1",
+        "@typescript-eslint/parser": "^5.54.1",
+        "eslint": "^8.35.0",
+        "eslint-config-airbnb": "^19.0.4",
+        "eslint-config-prettier": "^8.7.0",
+        "eslint-import-resolver-typescript": "^3.5.3",
+        "eslint-plugin-import": "^2.27.5",
+        "eslint-plugin-jsx-a11y": "^6.7.1",
+        "eslint-plugin-prettier": "^4.2.1",
+        "eslint-plugin-react": "^7.32.2",
+        "eslint-plugin-react-hooks": "^4.6.0",
+        "eslint-plugin-simple-import-sort": "^10.0.0",
+        "prettier": "^2.8.4",
+        "typescript": "^4.9.3"
+    }
+}

@@ -1,20 +1,18 @@
 import io
 import os
 import shutil
-import tempfile
 from datetime import datetime
 
 import pytest
 from PIL import Image
 from django.contrib.auth import get_user_model
-from django.core.files.base import ContentFile
 from django.core.files.uploadedfile import SimpleUploadedFile
 
 from django.core.management import call_command
 from django.test import override_settings
 
 
-from decks.models import Category, Deck, Flashcard, Tag
+from decks.models import Category, Deck, Flashcard, Tag, DifficultyLevel
 from config import settings
 
 
@@ -26,7 +24,11 @@ def generated_data_with_custom_command(settings, db):
     """
     return call_command(
         "create_test_data",
-        "5",
+        "--decks=3",
+        "--users=5",
+        "--categories=3",
+        "--tags=2",
+        "--difficulties=1",
     )
 
 
@@ -117,3 +119,23 @@ def tag_db(db, deck, flashcard):
 @pytest.fixture
 def flashcard(db):
     return Flashcard.objects.create()
+
+
+@pytest.fixture
+def difficulty_level(db):
+    """Fixture that will create databased saved difficulty object.
+    :return: Object of class DifficultyLevel representing a row in table.
+    :rtype: DifficultyLevel
+    """
+    return DifficultyLevel.objects.create(name="Hard", value=1)
+
+
+@pytest.fixture
+def api_request_factory():
+    """Fixture for creating request instance.
+    :return: APIRequestFactory instance.
+    :rtype: APIRequestFactory
+    """
+    from rest_framework.test import APIRequestFactory
+
+    return APIRequestFactory()

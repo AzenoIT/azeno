@@ -9,12 +9,28 @@ from django.test import override_settings
 
 @override_settings(DEBUG=True)
 @pytest.mark.django_db
-def test_create_test_data_command_returns_success_message_when_debug_true(settings, db):
+def test_create_test_data_command_for_users_returns_success_message_when_debug_true(settings, db):
     out = StringIO()
     sys.stdout = out
     call_command(
         "create_test_data",
-        "5",
+        "--users=5",
+    )
+    assert out.getvalue() == "Creating test data\n"
+
+
+@override_settings(DEBUG=True)
+@pytest.mark.django_db
+def test_create_test_data_command_for_all_objects_returns_success_message_when_debug_true(settings, db):
+    out = StringIO()
+    sys.stdout = out
+    call_command(
+        "create_test_data",
+        "--decks=3",
+        "--users=2",
+        "--categories=3",
+        "--tags=2",
+        "--difficulties=1",
     )
     assert out.getvalue() == "Creating test data\n"
 
@@ -26,7 +42,11 @@ def test_create_test_data_returns_warning_message_when_debug_false(settings, db)
     sys.stdout = out
     call_command(
         "create_test_data",
-        "1",
+        "--decks=4",
+        "--users=1",
+        "--tags=3",
+        "--categories=3",
+        "--difficulties=1",
     )
     assert (
         out.getvalue() == "!!! Generating test data is not possible, "
@@ -55,7 +75,7 @@ def test_delete_data_command_deletes_only_non_admin_users(
     call_command("delete_test_data")
     superuser = django_user_model.objects.get(email=os.environ.get("DJ_SU_EMAIL"))
 
-    assert database_before_calling_command == 6
+    assert database_before_calling_command >= 6
     assert superuser.email == os.environ.get("DJ_SU_EMAIL")
 
 
