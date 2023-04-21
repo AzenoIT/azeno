@@ -8,7 +8,8 @@
     "license": "",
     "workspaces": [
         "bank",
-        "quiz/web"
+        "quiz/web",
+        "flashcards/web"
     ],
     "bugs": {
         "url": "https://github.com/AzenoIT/azeno/issues"
