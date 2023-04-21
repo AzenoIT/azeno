@@ -1,5 +1,8 @@
 from typing import List
-from rest_framework.generics import CreateAPIView, RetrieveAPIView
+from rest_framework.generics import (
+    CreateAPIView,
+    RetrieveUpdateAPIView,
+)
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -37,9 +40,21 @@ class PlayerCreateAPIView(CreateAPIView):
     queryset = models.Player.objects.all()
     serializer_class = serializers.PlayerSerializer
 
+    def create(self, request, *args, **kwargs) -> Response:
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=False)
+
+        if not serializer.errors:
+            self.perform_create(serializer)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+        return Response(
+            {"message": "Invalid username."}, status=status.HTTP_406_NOT_ACCEPTABLE
+        )
+
 
 # TODO add authentication to the view below when auth type is decided on
-class PlayerRetrieveAPIView(RetrieveAPIView):
+class PlayerRetrieveUpdateAPIView(RetrieveUpdateAPIView):
     """Retrieve profile data for a specific player.
     No authentication required.
 
@@ -48,5 +63,5 @@ class PlayerRetrieveAPIView(RetrieveAPIView):
     """
 
     queryset = models.Player.objects.all()
-    serializer_class = serializers.PlayerSerializer
+    serializer_class = serializers.PlayerDetailSerializer
     lookup_field = "uuid"
