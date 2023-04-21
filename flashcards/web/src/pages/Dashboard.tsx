@@ -147,7 +147,9 @@ function Dashboard(): JSX.Element {
                             .map((deck) => (
                                 <div key={deck.title} className="bg-white p-2 rounded-md border-2 border-stone-400">
                                     <div className="bg-stone-100 w-full h-32 rounded-md">
-                                        <img className="w-full h-full object-cover" src={deck.image} />
+                                        <a href="/train">
+                                            <img className="w-full h-full object-cover" src={deck.image} />
+                                        </a>
                                     </div>
                                     <div className="space-y-2 py-4">
                                         <a href="/train">
