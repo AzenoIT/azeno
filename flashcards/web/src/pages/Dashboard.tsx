@@ -1,11 +1,11 @@
-import React, { FC, useState } from "react";
+import React, { useState, JSX } from "react";
 import Button from "@mui/material/Button";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 
-function Dashboard(): FC {
+function Dashboard(): JSX.Element {
     const [filterDecks, setFilterDecks] = useState("all");
 
     const handleChange = (e) => {
@@ -38,7 +38,7 @@ function Dashboard(): FC {
             flashcards: 21,
             mastered: 19,
             lastViewed: "7 days ago",
-            status: ["all", "in progress"],
+            status: ["all", "started"],
             image: "https://loremflickr.com/640/480/nature",
         },
         {
@@ -74,7 +74,7 @@ function Dashboard(): FC {
             flashcards: 21,
             mastered: 19,
             lastViewed: "8 days ago",
-            status: ["all", "in progress"],
+            status: ["all", "started"],
             image: "https://loremflickr.com/640/480/paris",
         },
         {
@@ -92,7 +92,7 @@ function Dashboard(): FC {
             flashcards: 21,
             mastered: 19,
             lastViewed: "3 days ago",
-            status: ["all", "in progress"],
+            status: ["all", "started"],
             image: "https://loremflickr.com/640/480/girl",
         },
     ];
@@ -147,10 +147,12 @@ function Dashboard(): FC {
                             .map((deck) => (
                                 <div key={deck.title} className="bg-white p-2 rounded-md border-2 border-stone-400">
                                     <div className="bg-stone-100 w-full h-32 rounded-md">
-                                        <img className="w-full h-full" src={deck.image} />
+                                        <img className="w-full h-full object-cover" src={deck.image} />
                                     </div>
                                     <div className="space-y-2 py-4">
-                                        <p className="text-xl pb-2">{deck.title}</p>
+                                        <a href="/train">
+                                            <p className="text-xl pb-2">{deck.title}</p>
+                                        </a>
                                         <div className="text-xs flex justify-between gap-4">
                                             <p>{deck.flashcards} flashcards</p>
                                             <p>
