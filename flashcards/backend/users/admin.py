@@ -11,6 +11,7 @@ class UserAdminConfig(UserAdmin):
     it can be changed in list_display class field.
     """
 
+    add_fieldsets = ((None, {"classes": ("wide",), "fields": ("email", "username", "password1", "password2")}),)
     model = User
     search_fields = ("email", "username")
     list_filter = ("email", "username", "is_active", "is_staff")
