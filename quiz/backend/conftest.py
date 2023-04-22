@@ -207,3 +207,27 @@ def badge(db, uploaded_svg, temp_media_root):
         description="Description with maximum length of 300 characters.",
         image=uploaded_svg,
     )
+
+
+@pytest.fixture
+def player(db):
+    """Fixture that returns Player instance.
+
+    :param db: Database fixture
+    :return: Player instance
+    :rtype: Player
+    """
+    return Player.objects.create(nick="testNick")
+
+
+@pytest.fixture
+def profile(db, player, test_image):
+    """
+
+    :param db: Database fixture
+    :param player: Player fixture
+    :param test_image: Test image fixture
+    :return: Profile instance
+    :rtype: Profile
+    """
+    return Profile.objects.create(player=player, avatar=test_image)

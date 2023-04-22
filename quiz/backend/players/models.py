@@ -56,7 +56,7 @@ class Player(models.Model):
 
 
 def upload_avatar_to(instance, filename):
-    """This function iis used for generating a dynamic path for players avatars, so they
+    """This function is used for generating a dynamic path for players avatars, so they
     are stored in dedicated directories identified by uuid.
 
     :param instance: Object of given class.

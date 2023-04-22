@@ -108,3 +108,12 @@ def test_profile_creation_raises_validation_error_with_invalid_image_type(
         profile.full_clean()
 
     assert "File type not supported. Use one of:" in str(exc_info.value.message_dict)
+
+
+def test_profile_saves_avatar_in_dedicated_media_directory(
+    player, profile, test_image, db
+):
+    get_profile = Profile.objects.get(pk=profile.pk)
+    assert str(get_profile.avatar).endswith(
+        f"players/{player.uuid}/avatars/{test_image.name}"
+    )
