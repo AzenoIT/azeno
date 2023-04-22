@@ -12,4 +12,4 @@ def test_deck_list_pagination(api_request_factory, db):
     request = api_request_factory.get(url)
     response = view(request)
 
-    assert response.data["results"] == DecksPagination.max_limit
+    assert len(response.data["results"]) == DecksPagination.max_limit
