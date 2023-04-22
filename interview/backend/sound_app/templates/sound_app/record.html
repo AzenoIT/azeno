@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sound Recorder</title>
+</head>
+    <body>
+        <h1>Sound Recorder</h1>
+        <form method="POST" action="{% url 'record' %}">
+            {% csrf_token %}
+            <label for="duration">Duration (seconds):</label>
+            <input type="number" id="duration" name="duration" value="5" required><br>
+            <label for="fs">Sampling Frequency:</label>
+            <input type="number" id="fs" name="fs" value="44100" required><br>
+            <label for="filename">Filename:</label>
+            <input type="text" id="filename" name="filename" value="output.wav" required><br>
+            <label for="threshold">Threshold (dB):</label>
+            <input type="number" id="threshold" name="threshold" value="-30" required><br>
+            <input type="submit" value="Record">
+        </form>
+    </body>
+</html>

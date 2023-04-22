@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     "rest_framework_simplejwt.token_blacklist",
     # Local
     "users.apps.UsersConfig",
+    "sound_app.apps.SoundAppConfig",
 ]
 
 MIDDLEWARE = [

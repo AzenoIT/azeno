@@ -17,6 +17,10 @@ pytest-cov = "4.0.0"
 djangorestframework = "3.14.0"
 djangorestframework-simplejwt = "5.2.2"
 psycopg = "3.1.8"
+pydub = "0.25.1"
+sounddevice = "0.4.6"
+wavio = "0.0.7"
+numpy = "1.24.2"
 
 [tool.poetry.group.dev.dependencies]
 sphinx = "6.1.3"
