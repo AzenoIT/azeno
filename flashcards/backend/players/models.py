@@ -33,7 +33,7 @@ class Player(models.Model):
     :param nick: player name
     :type nick: str
     :param user: related user object
-    :type user: User
+    :type user: CustomUser
     :param account_type: player's account type
     :type account_type: AccountType
     :param start_time: player's account start time
