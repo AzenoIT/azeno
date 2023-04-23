@@ -173,7 +173,7 @@ def comment(db, user, flashcard, deck):
         user=user,
         flashcard=flashcard,
         deck=deck,
-        description="This is a test comment."
+        comment="This is a test comment."
     )
 
 
