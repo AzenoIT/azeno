@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Category, Tag, Deck, Flashcard
+from .models import Category, Tag, Deck, Flashcard, DifficultyLevel, Text, Image, Code
 
 
 class CategoryAdminConfig(admin.ModelAdmin):
@@ -40,7 +40,7 @@ class DeckAdminConfig(admin.ModelAdmin):
 class FlashcardAdminConfig(admin.ModelAdmin):
     """**FlashcardAdminConfig** is a configuration class for :class: `decks.models.Flashcard` model
     in the admin panel."""
-    list_display = ("question", "rating_flashcard", "author", "is_active", "date_added")
+    list_display = ("question", "answer", "rating_flashcard", "author", "is_active", "date_added")
     search_fields = ("question",)
     list_editable = ("is_active",)
     list_display_links = ("question",)
@@ -48,6 +48,15 @@ class FlashcardAdminConfig(admin.ModelAdmin):
     list_filter = ("rating_flashcard", "is_active", "author", "category")
     list_per_page = 50
 
+
+class DifficultyLevelAdminConfig(admin.ModelAdmin):
+    pass
+
+
+admin.site.register(Text)
+admin.site.register(Image)
+admin.site.register(Code)
+admin.site.register(DifficultyLevel, DifficultyLevelAdminConfig)
 admin.site.register(Flashcard, FlashcardAdminConfig)
 admin.site.register(Tag, TagAdminConfig)
 admin.site.register(Category, CategoryAdminConfig)

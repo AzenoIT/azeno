@@ -70,10 +70,111 @@ class Migration(migrations.Migration):
             },
         ),
         migrations.CreateModel(
-            name="Flashcard",
+            name="DifficultyLevel",
             fields=[
                 ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
             ],
+        ),
+        migrations.CreateModel(
+            name="Text",
+            fields=[
+                ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                ("title", models.CharField(max_length=250)),
+                ("created", models.DateTimeField(auto_now_add=True)),
+                ("updated", models.DateTimeField(auto_now=True)),
+                ("content", models.CharField(max_length=255)),
+                (
+                    "owner",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="%(class)s_related",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
+            ],
+            options={
+                "abstract": False,
+            },
+        ),
+        migrations.CreateModel(
+            name="Image",
+            fields=[
+                ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                ("title", models.CharField(max_length=250)),
+                ("created", models.DateTimeField(auto_now_add=True)),
+                ("updated", models.DateTimeField(auto_now=True)),
+                (
+                    "content",
+                    models.FileField(
+                        blank=True,
+                        null=True,
+                        upload_to="decks/",
+                        validators=[decks.validators.validate_file_type, decks.validators.validate_file_size],
+                    ),
+                ),
+                (
+                    "owner",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="%(class)s_related",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
+            ],
+            options={
+                "abstract": False,
+            },
+        ),
+        migrations.CreateModel(
+            name="Flashcard",
+            fields=[
+                ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                ("rating_flashcard", models.PositiveIntegerField(default=0)),
+                ("is_active", models.BooleanField(default=True)),
+                ("object_id", models.PositiveIntegerField()),
+                ("date_added", models.DateField(auto_now_add=True)),
+                ("date_modification", models.DateField(auto_now=True)),
+                ("author", models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ("category", models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to="decks.category")),
+                (
+                    "content_type",
+                    models.ForeignKey(
+                        limit_choices_to={"model__in": ("text", "image", "code")},
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="contenttypes.contenttype",
+                    ),
+                ),
+                ("deck", models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to="decks.deck")),
+                (
+                    "difficulty",
+                    models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to="decks.difficultylevel"),
+                ),
+            ],
+            options={
+                "verbose_name": "flashcard",
+                "verbose_name_plural": "flashcards",
+            },
+        ),
+        migrations.CreateModel(
+            name="Code",
+            fields=[
+                ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                ("title", models.CharField(max_length=250)),
+                ("created", models.DateTimeField(auto_now_add=True)),
+                ("updated", models.DateTimeField(auto_now=True)),
+                ("content", models.TextField()),
+                (
+                    "owner",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="%(class)s_related",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
+            ],
+            options={
+                "abstract": False,
+            },
         ),
         migrations.CreateModel(
             name="Tag",

@@ -157,7 +157,7 @@ class Flashcard(models.Model):
     answer = GenericForeignKey('content_type', 'object_id')
     date_added = models.DateField(auto_now_add=True)
     date_modification = models.DateField(auto_now=True)
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     difficulty = models.ForeignKey("DifficultyLevel", on_delete=models.CASCADE)
 
     def __str__(self):
@@ -167,12 +167,23 @@ class Flashcard(models.Model):
         verbose_name = "flashcard"
         verbose_name_plural = "flashcards"
 
+class ItemBase(models.Model):
+    owner = models.ForeignKey(get_user_model(), related_name='%(class)s_related', on_delete=models.CASCADE)
+    title = models.CharField(max_length=250)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
-class Text(models.Model):
-    content = models.TextField()
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        abstract = True
+
+class Text(ItemBase):
+    content = models.CharField(max_length=255)
 
 
-class Image(models.Model):
+class Image(ItemBase):
     content = models.FileField(
         upload_to="decks/",
         blank=True,
@@ -181,8 +192,9 @@ class Image(models.Model):
     )
 
 
-class Code(models.Model):
-    pass
+class Code(ItemBase):
+    content = models.TextField()
+
 
 class DifficultyLevel(models.Model):
     pass
