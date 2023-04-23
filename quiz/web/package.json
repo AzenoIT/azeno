@@ -15,6 +15,7 @@
         "watch": "vitest watch"
     },
     "dependencies": {
+        "@azeno/bank": "file:../../bank",
         "@emotion/react": "^11.10.6",
         "@emotion/styled": "^11.10.6",
         "@fontsource/roboto": "^4.5.8",

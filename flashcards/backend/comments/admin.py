@@ -11,13 +11,11 @@ class CommentAdminConfig(admin.ModelAdmin):
         "user",
         "flashcard",
         "deck",
-        "description",
+        "comment",
         "created_at",
     )
     search_fields = (
-        "user",
-        "flashcard",
-        "deck",
+        "comment",
     )
     list_display_links = ("user",)
     save_on_top = True

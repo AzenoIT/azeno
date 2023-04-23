@@ -5,10 +5,8 @@ Subpackages
 -----------
 
 .. toctree::
-
    :maxdepth: 2
 
-   decks.migrations
    decks.tests
 
 
@@ -24,6 +22,14 @@ Apps
 -----------------
 
 .. automodule:: decks.apps
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Factories
+----------------------
+
+.. automodule:: decks.factories
    :members:
    :undoc-members:
    :show-inheritance:

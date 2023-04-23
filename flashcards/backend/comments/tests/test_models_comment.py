@@ -1,7 +1,7 @@
 from datetime import datetime
 
 
-def test_correct_gui_representation(comment, remove_test_data):
+def test_comment_gui_representation(comment, remove_test_data):
     assert str(comment) == f"{comment.created_at} - {comment.user} " \
                            f"- {comment.deck} - {comment.flashcard}"
 

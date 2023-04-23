@@ -1,7 +1,8 @@
 services:
     web:
         build:
-            context: ./
+            context: ../
+            dockerfile: ./bank/Dockerfile
             target: development
         restart: on-failure
         working_dir: /app
@@ -10,11 +11,16 @@ services:
         ports:
             - "6006:6006"
         volumes:
-            - ./:/app
-            - node_modules:/app/node_modules
+            - ./:/app/bank/
+            - ../.eslintignore:/app/.eslintignore
+            - ../.eslintrc.json:/app/.eslintrc.json
+            - ../.prettierrc.json:/app/.prettierrc.json
+            - ../package.json:/app/package.json
+            - ../package-lock.json:/app/package-lock.json
+            - ../tsconfig.json:/app/tsconfig.json
         env_file:
             - envs/web.env
-        command: npm run storybook
+        command: npm run -w bank storybook
         stdin_open: true
         tty: true
 

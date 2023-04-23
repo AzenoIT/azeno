@@ -115,4 +115,3 @@ class Migration(migrations.Migration):
             name="unique difficulty level",
         ),
     ]
-

@@ -1,17 +1,22 @@
 FROM node:18.14.2-slim as development
 
-WORKDIR /app
+WORKDIR /project
 
+
+COPY ./bank ./bank
 COPY ./package.json ./package-lock.json ./
-RUN npm ci
+COPY quiz/web/package.json quiz/web/package-lock.json ./quiz/web/
+RUN npm install -w quiz/web ./bank
+RUN npm ci -W
 
 FROM development as builder
 
-COPY . .
-RUN npm run build
+COPY ./.eslintignore ./.eslintrc.json ./.prettierrc.json ./tsconfig.json ./
+COPY quiz/web/ ./quiz/web
+RUN npm run -w quiz/web build
 
 
 FROM nginx:1.23.3 as production
 EXPOSE 3000
-COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
-COPY --from=builder /app/dist /usr/share/nginx/html
+COPY quiz/web/nginx/default.conf /etc/nginx/conf.d/default.conf
+COPY --from=builder /project/quiz/web/dist /usr/share/nginx/html
