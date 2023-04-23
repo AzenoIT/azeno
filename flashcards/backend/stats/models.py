@@ -33,6 +33,9 @@ class FlashcardStudy(StudyLog):
     def __str__(self):
         return f"{self.study_date} - {self.flashcard} - {self.user} - {self.correct_answers} correct answers"
 
+    class Meta:
+        verbose_name_plural = "flashcard studies"
+
 
 class DeckStudy(StudyLog):
     """Model for acquisition of data regarding deck study
@@ -51,3 +54,7 @@ class DeckStudy(StudyLog):
 
     def __str__(self):
         return f"{self.study_date} - {self.deck} - {self.user} - {self.realization}%"
+
+    class Meta:
+        verbose_name_plural = "deck studies"
+
