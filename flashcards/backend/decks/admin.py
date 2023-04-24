@@ -40,9 +40,10 @@ class DeckAdminConfig(admin.ModelAdmin):
 class FlashcardAdminConfig(admin.ModelAdmin):
     """**FlashcardAdminConfig** is a configuration class for :class: `decks.models.Flashcard` model
     in the admin panel."""
+
     list_display = ("question", "answer", "rating_flashcard", "author", "is_active", "date_added")
     search_fields = ("question",)
-    list_editable = ("is_active",)
+    list_editable = ("is_active", "rating_flashcard")
     list_display_links = ("question",)
     save_on_top = True
     list_filter = ("rating_flashcard", "is_active", "author", "category")

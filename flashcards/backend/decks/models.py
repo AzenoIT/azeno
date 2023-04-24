@@ -145,39 +145,37 @@ class Flashcard(models.Model):
     :type difficulty: int
     """
 
+    name = models.CharField(max_length=100)
     deck = models.ForeignKey("Deck", on_delete=models.CASCADE)
     category = models.ForeignKey("Category", on_delete=models.CASCADE)
     rating_flashcard = models.PositiveIntegerField(default=0)
     is_active = models.BooleanField(default=True)
-    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, limit_choices_to={'model__in': (
-        'text', 'image', 'code'
-    )})
+    content_type = models.ForeignKey(
+        ContentType, on_delete=models.CASCADE, limit_choices_to={"model__in": ("text", "image", "code")}
+
+    )
     object_id = models.PositiveIntegerField()
-    question = GenericForeignKey('content_type', 'object_id')
-    answer = GenericForeignKey('content_type', 'object_id')
+    question = GenericForeignKey("content_type", "object_id")
+    answer = GenericForeignKey("content_type", "object_id")
     date_added = models.DateField(auto_now_add=True)
     date_modification = models.DateField(auto_now=True)
     author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     difficulty = models.ForeignKey("DifficultyLevel", on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.question
+        return self.name
 
     class Meta:
         verbose_name = "flashcard"
         verbose_name_plural = "flashcards"
 
+
 class ItemBase(models.Model):
-    owner = models.ForeignKey(get_user_model(), related_name='%(class)s_related', on_delete=models.CASCADE)
     title = models.CharField(max_length=250)
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.title
 
-    class Meta:
-        abstract = True
 
 class Text(ItemBase):
     content = models.CharField(max_length=255)

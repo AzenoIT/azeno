@@ -76,33 +76,44 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
-            name="Text",
+            name="ItemBase",
             fields=[
                 ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
                 ("title", models.CharField(max_length=250)),
-                ("created", models.DateTimeField(auto_now_add=True)),
-                ("updated", models.DateTimeField(auto_now=True)),
-                ("content", models.CharField(max_length=255)),
+            ],
+        ),
+        migrations.CreateModel(
+            name="Code",
+            fields=[
                 (
-                    "owner",
-                    models.ForeignKey(
+                    "itembase_ptr",
+                    models.OneToOneField(
+                        auto_created=True,
                         on_delete=django.db.models.deletion.CASCADE,
-                        related_name="%(class)s_related",
-                        to=settings.AUTH_USER_MODEL,
+                        parent_link=True,
+                        primary_key=True,
+                        serialize=False,
+                        to="decks.itembase",
                     ),
                 ),
+                ("content", models.TextField()),
             ],
-            options={
-                "abstract": False,
-            },
+            bases=("decks.itembase",),
         ),
         migrations.CreateModel(
             name="Image",
             fields=[
-                ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
-                ("title", models.CharField(max_length=250)),
-                ("created", models.DateTimeField(auto_now_add=True)),
-                ("updated", models.DateTimeField(auto_now=True)),
+                (
+                    "itembase_ptr",
+                    models.OneToOneField(
+                        auto_created=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        parent_link=True,
+                        primary_key=True,
+                        serialize=False,
+                        to="decks.itembase",
+                    ),
+                ),
                 (
                     "content",
                     models.FileField(
@@ -112,23 +123,32 @@ class Migration(migrations.Migration):
                         validators=[decks.validators.validate_file_type, decks.validators.validate_file_size],
                     ),
                 ),
+            ],
+            bases=("decks.itembase",),
+        ),
+        migrations.CreateModel(
+            name="Text",
+            fields=[
                 (
-                    "owner",
-                    models.ForeignKey(
+                    "itembase_ptr",
+                    models.OneToOneField(
+                        auto_created=True,
                         on_delete=django.db.models.deletion.CASCADE,
-                        related_name="%(class)s_related",
-                        to=settings.AUTH_USER_MODEL,
+                        parent_link=True,
+                        primary_key=True,
+                        serialize=False,
+                        to="decks.itembase",
                     ),
                 ),
+                ("content", models.CharField(max_length=255)),
             ],
-            options={
-                "abstract": False,
-            },
+            bases=("decks.itembase",),
         ),
         migrations.CreateModel(
             name="Flashcard",
             fields=[
                 ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                ("name", models.CharField(max_length=100)),
                 ("rating_flashcard", models.PositiveIntegerField(default=0)),
                 ("is_active", models.BooleanField(default=True)),
                 ("object_id", models.PositiveIntegerField()),
@@ -153,27 +173,6 @@ class Migration(migrations.Migration):
             options={
                 "verbose_name": "flashcard",
                 "verbose_name_plural": "flashcards",
-            },
-        ),
-        migrations.CreateModel(
-            name="Code",
-            fields=[
-                ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
-                ("title", models.CharField(max_length=250)),
-                ("created", models.DateTimeField(auto_now_add=True)),
-                ("updated", models.DateTimeField(auto_now=True)),
-                ("content", models.TextField()),
-                (
-                    "owner",
-                    models.ForeignKey(
-                        on_delete=django.db.models.deletion.CASCADE,
-                        related_name="%(class)s_related",
-                        to=settings.AUTH_USER_MODEL,
-                    ),
-                ),
-            ],
-            options={
-                "abstract": False,
             },
         ),
         migrations.CreateModel(
