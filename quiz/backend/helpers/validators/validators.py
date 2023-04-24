@@ -3,6 +3,7 @@ import re
 from typing import List
 
 import magic
+from PIL import Image
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.core.files.base import ContentFile
@@ -75,5 +76,46 @@ def validate_badge_file_type(upload: UploadedFile) -> None:
 
     if file_type not in image_types:
         raise ValidationError(
-            f'File type not supported. Use: {", ".join(settings.BADGE_IMAGE_TYPES)}'
+            f'File type not supported. Use: {", ".join(settings.BADGE_IMAGE_TYPES)}.'
         )
+
+
+def validate_avatar_file_type_and_dimensions(upload: UploadedFile) -> None:
+    """Validate type and dimensions of avatar to uploaded by player.
+
+    :param upload: UploadedFile instance containing the file uploaded by the user
+    :type upload: UploadedFile
+    :return: None
+    :raise: ValidationError
+    """
+    if upload.name is None:
+        raise ValidationError("No file name provided.")
+
+    tmp_path = "tmp/%s" % upload.name[2:]
+
+    if upload.file is None:
+        raise ValidationError("No file content provided.")
+
+    default_storage.save(tmp_path, ContentFile(upload.file.read()))
+    full_tmp_path = os.path.join(settings.MEDIA_ROOT, tmp_path)
+    file_type = magic.from_file(full_tmp_path, mime=True)
+    default_storage.delete(tmp_path)
+    image_types = [f"image/{img}" for img in settings.AVATAR_IMAGE_TYPE]
+
+    if file_type not in image_types:
+        raise ValidationError(
+            f'File type not supported. Use one of: {", ".join(settings.AVATAR_IMAGE_TYPE)}.'
+        )
+
+    else:
+        img = Image.open(upload)
+        img_width, img_height = img.size
+
+        if (
+            img_width > settings.AVATAR_MAX_DIMENSION
+            or img_height > settings.AVATAR_MAX_DIMENSION
+        ):
+            raise ValidationError(
+                f"Image exceeds maximum dimensions. Maximum width: {settings.AVATAR_MAX_DIMENSION}px,"
+                f" maximum height: {settings.AVATAR_MAX_DIMENSION}."
+            )

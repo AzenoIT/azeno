@@ -2,14 +2,12 @@ import io
 import json
 import os
 import shutil
-import tempfile
 from datetime import datetime
 from pathlib import Path
 
 import pytest
 from PIL import Image
 from django.contrib.auth import get_user_model
-from django.core.files.base import ContentFile
 from django.core.files.uploadedfile import SimpleUploadedFile
 
 from django.core.management import call_command
@@ -30,7 +28,11 @@ def generated_data_with_custom_command(settings, db):
     """
     return call_command(
         "create_test_data",
-        "5",
+        "--decks=3",
+        "--users=5",
+        "--categories=3",
+        "--tags=2",
+        "--difficulties=1",
     )
 
 
@@ -167,3 +169,14 @@ def flashcard_decks():
         json.dump(decks_data, f)
 
     return decks
+
+
+@pytest.fixture
+def api_request_factory():
+    """Fixture for creating request instance.
+    :return: APIRequestFactory instance.
+    :rtype: APIRequestFactory
+    """
+    from rest_framework.test import APIRequestFactory
+
+    return APIRequestFactory()

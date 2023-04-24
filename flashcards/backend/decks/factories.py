@@ -1,29 +1,34 @@
-from factory.django import DjangoModelFactory, ImageField
 from factory import Faker, Sequence, SubFactory
+from factory.django import DjangoModelFactory, ImageField
 
-from backend.decks.models import Category, Flashcard, Deck, DifficultyLevel, Tag
-from backend.users.factories import UserFactory
+from decks.models import Category, Deck, Flashcard, Tag, DifficultyLevel
+from users.factories import UserFactory
 
 
 class CategoryFactory(DjangoModelFactory):
-    """Factory for generating category of categories
+    """Factory for generating flashcard/deck categories
 
-    Usage is automated and it creates the instances of Category`.
+    Usage is automated with custom command and combined with test user data generation,
+    described in :doc:`users.management.commands`.
     """
-
-    name = Sequence(lambda n: f"Category {n:0>4}")
-    description = Faker("sentence", nb_words=5)
 
     class Meta:
         model = Category
         django_get_or_create = ("name",)
 
+    name = Sequence(lambda n: f"Category {n:0>4}")
+    description = Faker("sentence", nb_words=5)
+
 
 class DeckFactory(DjangoModelFactory):
     """Factory for generating decks
 
-    Usage is automated and it creates the instances of Decks`.
+    Usage is automated with custom command and combined with test user data generation,
+    described in :doc:`users.management.commands`.
     """
+
+    class Meta:
+        model = Deck
 
     image = ImageField(color="blue")
     name = Faker("language_name")
@@ -34,9 +39,6 @@ class DeckFactory(DjangoModelFactory):
     popularity = 0
     is_active = True
     description = Faker("sentence", nb_words=8)
-
-    class Meta:
-        model = Deck
 
 
 class FlashcardFactory(DjangoModelFactory):
@@ -50,27 +52,29 @@ class FlashcardFactory(DjangoModelFactory):
 
 
 class TagFactory(DjangoModelFactory):
-    """Factory for generating TagFactory
+    """Factory for generating tags
 
-    Usage is automated and it creates the instances of Tags`.
+    Usage is automated with custom command and combined with test user data generation,
+    described in :doc:`users.management.commands`.
     """
+
+    class Meta:
+        model = Tag
 
     name = Faker("word")
     deck = SubFactory(DeckFactory)
     flashcard = SubFactory(FlashcardFactory)
 
-    class Meta:
-        model = Tag
-
 
 class DifficultyLevelFactory(DjangoModelFactory):
     """Factory for generating difficulty level
 
-    Usage is automated and it creates the instances of DifficultyLevel`.
+    Usage is automated with custom command and combined with test user data generation,
+    described in :doc:`users.management.commands`.
     """
-
-    name = Sequence(lambda n: f"Difficulty {n:0>2}")
-    value = Faker("pyint", min_value=1, max_value=5)
 
     class Meta:
         model = DifficultyLevel
+
+    name = Sequence(lambda n: f"Difficulty {n:0>2}")
+    value = Faker("pyint", min_value=1, max_value=10)
