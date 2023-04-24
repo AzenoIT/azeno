@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from backend.decks.factories import CategoryFactory, DeckFactory, FlashcardFactory, TagFactory, DifficultyLevelFactory
+from decks.factories import CategoryFactory, DeckFactory, FlashcardFactory, TagFactory, DifficultyLevelFactory
 
 
 class TestFactories(TestCase):
