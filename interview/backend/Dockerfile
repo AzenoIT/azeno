@@ -13,6 +13,10 @@ COPY ./install-poetry.py ./
 RUN python3 install-poetry.py --version 1.4.0 \
     && $POETRY_HOME/bin/poetry --version
 
+RUN apt-get update && apt-get install -y ffmpeg \
+    portaudio19-dev \
+    && rm -rf /var/lib/apt/lists/*
+
 WORKDIR /app
 
 COPY ./pyproject.toml ./poetry.lock ./

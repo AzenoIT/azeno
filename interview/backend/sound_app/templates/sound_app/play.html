@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Sound Recorder</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.1/howler.core.min.js"></script>
+</head>
+<body>
+    <h1>Sound Recorder</h1>
+    <h2>Playing file "{{ filename }}"</h2>
+    <button onclick="playSound()">Play</button>
+    <button onclick="stopSound()">Stop</button>
+
+    <script>
+        let sound = new Howl({
+            src: ['/play/{{ filename }}'],
+            html5: true
+        });
+
+        function playSound() {
+            sound.play();
+        }
+
+        function stopSound() {
+            sound.stop();
+        }
+    </script>
+</body>
+</html>
