@@ -38,7 +38,7 @@ class DeckAdminConfig(admin.ModelAdmin):
 
 
 class FlashcardAdminConfig(admin.ModelAdmin):
-    """**FlashcardAdminConfig** is a configuration class for :class: `decks.models.Flashcard` model
+    """**FlashcardAdminConfig** is a configuration class for :class:`decks.models.Flashcard` model
     in the admin panel."""
 
     list_display = ("question", "answer", "rating_flashcard", "author", "is_active", "date_added")

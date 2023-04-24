@@ -7,6 +7,7 @@ from datetime import datetime, date
 import pytest
 from PIL import Image
 from django.contrib.auth import get_user_model
+from django.contrib.contenttypes.models import ContentType
 from django.core.files.base import ContentFile
 from django.core.files.uploadedfile import SimpleUploadedFile
 
@@ -14,7 +15,7 @@ from django.core.management import call_command
 from django.test import override_settings
 
 
-from decks.models import Category, Deck, Flashcard, Tag, DifficultyLevel
+from decks.models import Category, Deck, Flashcard, Tag, DifficultyLevel, Text, Code
 from config import settings
 
 
@@ -121,8 +122,10 @@ def flashcard(db, deck, category, user, difficulty):
         deck=deck,
         category=category,
         rating_flashcard=1,
-        question="test question",
-        answer="test answer",
+        content_type_question=ContentType.objects.get_for_model(text),
+        object_id_question=1,
+        content_type_answer=ContentType.objects.get_for_model(text),
+        object_id_answer=1,
         date_added=date.today,
         date_modification=date.today,
         author=user,
@@ -130,6 +133,16 @@ def flashcard(db, deck, category, user, difficulty):
     )
 
     return flashcard
+
+
+@pytest.fixture
+def text(db):
+    return Text.objects.create(title="test", content="test")
+
+
+@pytest.fixture
+def code(db):
+    return Code.objects.create(title="test", content="test")
 
 
 @pytest.fixture
