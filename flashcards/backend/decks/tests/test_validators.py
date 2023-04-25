@@ -1,8 +1,16 @@
 import pytest
+
 from django.core.exceptions import ValidationError
-from config import settings
 from decks.models import Deck
 from decks.validators import validate_file_type
+
+from django.core.files.base import ContentFile
+from django.conf import settings
+from unittest.mock import MagicMock, patch
+from PIL import Image
+from contextlib import contextmanager
+
+from decks.validators import validate_image_file_type, validate_image_file_size
 
 
 def test_negative_price_raises_value_error(user, db):
@@ -53,3 +61,35 @@ def test_image_with_invalid_size(image, user, category):
     with pytest.raises(ValidationError) as excinfo:
         deck.full_clean()
     assert f"File size is too big. Max size is {settings.MAX_UPLOAD_SIZE} bytes." in str(excinfo.value)
+
+
+def create_image_mock(width, height, file_type):
+    image_mock = MagicMock(spec=Image)
+    image_mock.size = (width, height)
+    image_mock.format = file_type.upper()
+    return image_mock
+
+
+@contextmanager
+def image_open_context_manager(image_mock):
+    yield image_mock
+
+
+@pytest.mark.parametrize("file_type,width,height", [("jpeg", 800, 600)])
+def test_validate_file_type_valid_resolution(file_type, width, height):
+    upload = MagicMock()
+    upload.file = ContentFile(b"dummy_content")
+    upload.name = f"test.{file_type}"
+    image_mock = create_image_mock(width, height, file_type)
+
+    with patch("magic.from_file", return_value=f"image/{file_type}"):
+        with patch("PIL.Image.open", return_value=image_open_context_manager(image_mock)):
+            validate_image_file_type(upload)
+
+
+@pytest.mark.parametrize("size", [settings.MAX_UPLOAD_SIZE - 1024, settings.MAX_UPLOAD_SIZE // 2, 1024])
+def test_validate_file_size_valid(size):
+    file = MagicMock()
+    file.size = size
+
+    validate_image_file_size(file)

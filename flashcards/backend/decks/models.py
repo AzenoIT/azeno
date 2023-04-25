@@ -152,3 +152,19 @@ class DifficultyLevel(models.Model):
             super().save(*args, **kwargs)
             return self
         return name
+
+
+class Image(TimeStampModel):
+    """Model to represent the default deck images
+
+    :param image: image
+    :type image: file, optional
+
+    """
+
+    image = models.FileField(
+        upload_to="decks", validators=[validators.validate_image_file_type, validators.validate_image_file_size]
+    )
+
+    def __str__(self):
+        return self.image.name

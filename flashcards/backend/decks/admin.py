@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Category, Tag, Deck, DifficultyLevel
+from .models import Category, Tag, Deck, DifficultyLevel, Image
 
 
 class CategoryAdminConfig(admin.ModelAdmin):
@@ -48,7 +48,19 @@ class DifficultyLevelAdminConfig(admin.ModelAdmin):
     list_per_page = 50
 
 
+class ImageAdminConfig(admin.ModelAdmin):
+    """Class **ImageAdminConfig**
+    is a configuration class for :class:`decks.models.Image` model."""
+
+    list_display = ("image", "created_at", "updated_at")
+    search_fields = ("image",)
+    save_on_top = True
+    list_filter = ("image",)
+    list_per_page = 50
+
+
 admin.site.register(Category, CategoryAdminConfig)
 admin.site.register(Tag, TagAdminConfig)
 admin.site.register(Deck, DeckAdminConfig)
 admin.site.register(DifficultyLevel, DifficultyLevelAdminConfig)
+admin.site.register(Image, ImageAdminConfig)

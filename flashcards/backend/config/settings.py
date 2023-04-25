@@ -146,9 +146,11 @@ AUTH_USER_MODEL = "users.CustomUser"
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
-IMAGES_TYPES = ["jpg", "png", "jpeg"]
+IMAGES_TYPES = ["jpg", "png", "jpeg", "webp"]
 
 MAX_UPLOAD_SIZE = 512000  # 500kb
+MAX_IMAGE_WIDTH = 800
+MAX_IMAGE_HEIGHT = 600
 
 # LoggingF
 
@@ -160,7 +162,6 @@ logging.config.dictConfig(settings_logging.get_logger_config(BASE_DIR))
 
 hostname, _, nginx_ips = socket.gethostbyname_ex("proxy")
 INTERNAL_IPS = nginx_ips
-
 
 # Django REST Framework
 
