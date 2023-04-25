@@ -85,7 +85,6 @@ class CustomUser(AbstractUser):
     username = models.CharField(
         max_length=100,
         blank=True,
-        null=True,
         unique=False,
         validators=[UnicodeUsernameValidator()],
         help_text="Optional",
