@@ -49,6 +49,37 @@ class Category(models.Model):
         verbose_name_plural = "categories"
 
 
+class DifficultyLevel(models.Model):
+    """Model for representing how hard flashcard/deck is to learn.
+
+    :param name: level name
+    :type name: str
+    :param value: value
+    :type value: int
+
+    """
+
+    name = models.CharField(max_length=20, unique=True)
+    value = models.PositiveSmallIntegerField(unique=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "difficulty level"
+        verbose_name_plural = "difficulty level`s"
+
+    def save(self, *args, **kwargs):
+        name = DifficultyLevel.objects.filter(name__iexact=self.name).first()
+        if not name:
+            super().save(*args, **kwargs)
+            return self
+        if name and self.id:
+            super().save(*args, **kwargs)
+            return self
+        return name
+
+
 class Deck(TimeStampModel):
     """Model for representing deck data
 
@@ -56,6 +87,10 @@ class Deck(TimeStampModel):
     :type image: file, optional
     :param name: deck name
     :type name: str
+    :param category: foreign key for Category model
+    :type category: int
+    :param difficulty_level: foreign key for DifficultyLevel model
+    :type difficulty_level: int
     :param is_public: indicates if deck is public
     :type is_public: bool, optional
     :param price: deck price
@@ -80,6 +115,7 @@ class Deck(TimeStampModel):
     )
     name = models.CharField(max_length=100)
     category = models.ForeignKey("Category", on_delete=models.DO_NOTHING)
+    difficulty_level = models.ForeignKey("DifficultyLevel", on_delete=models.DO_NOTHING)
     is_public = models.BooleanField(default=True)
     price = models.DecimalField(max_digits=4, decimal_places=2, validators=[MinValueValidator(Decimal("0.00"))])
     author = models.ForeignKey(User, on_delete=models.DO_NOTHING)
@@ -121,34 +157,3 @@ class Tag(models.Model):
 
 class Flashcard(models.Model):
     pass
-
-
-class DifficultyLevel(models.Model):
-    """Model for representing how hard flashcard/deck is to learn.
-
-    :param name: level name
-    :type name: str
-    :param value: value
-    :type value: int
-
-    """
-
-    name = models.CharField(max_length=20, unique=True)
-    value = models.PositiveSmallIntegerField(unique=True)
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        verbose_name = "difficulty level"
-        verbose_name_plural = "difficulty level`s"
-
-    def save(self, *args, **kwargs):
-        name = DifficultyLevel.objects.filter(name__iexact=self.name).first()
-        if not name:
-            super().save(*args, **kwargs)
-            return self
-        if name and self.id:
-            super().save(*args, **kwargs)
-            return self
-        return name

@@ -11,7 +11,6 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 from django.core.management import call_command
 from django.test import override_settings
 
-
 from decks.models import Category, Deck, Flashcard, Tag, DifficultyLevel
 from config import settings
 
@@ -40,8 +39,18 @@ def category(db):
     """
     name = "test category"
     description = "test category description"
-
     return Category.objects.create(name=name, description=description)
+
+
+@pytest.fixture
+def difficulty_level(db):
+    """Fixture that will create databased saved difficulty object.
+    :return: Object of class DifficultyLevel representing a row in table.
+    :rtype: DifficultyLevel
+    """
+    name = "Hard"
+    value = 1
+    return DifficultyLevel.objects.create(name=name, value=value)
 
 
 @pytest.fixture
@@ -57,7 +66,7 @@ def user(db):
 
 @pytest.fixture
 @override_settings(MEDIA_ROOT=os.path.join(settings.BASE_DIR, "test_dir", "media"))
-def deck(db, user, category, image):
+def deck(db, user, category, difficulty_level, image):
     """Fixture for creating deck with image.
     :return: Object of class Deck representing a row in table.
     :rtype: Deck
@@ -66,6 +75,7 @@ def deck(db, user, category, image):
         image=image,
         name="test",
         category=category,
+        difficulty_level=difficulty_level,
         author_id=user.id,
         description="test",
         price=42.00,
@@ -119,15 +129,6 @@ def tag_db(db, deck, flashcard):
 @pytest.fixture
 def flashcard(db):
     return Flashcard.objects.create()
-
-
-@pytest.fixture
-def difficulty_level(db):
-    """Fixture that will create databased saved difficulty object.
-    :return: Object of class DifficultyLevel representing a row in table.
-    :rtype: DifficultyLevel
-    """
-    return DifficultyLevel.objects.create(name="Hard", value=1)
 
 
 @pytest.fixture

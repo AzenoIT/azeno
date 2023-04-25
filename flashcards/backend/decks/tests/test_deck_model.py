@@ -25,6 +25,7 @@ def test_deck_fields(deck, remove_test_data):
         "image",
         "name",
         "category_id",
+        "difficulty_level_id",
         "is_public",
         "price",
         "author_id",
