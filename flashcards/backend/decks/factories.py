@@ -42,7 +42,10 @@ class DeckFactory(DjangoModelFactory):
 
 
 class FlashcardFactory(DjangoModelFactory):
-    """Factory for generating flashcards"""
+    """Factory for generating flashcards
+
+    Usage is automated and it creates the instances of Flashcards`.
+    """
 
     class Meta:
         model = Flashcard
