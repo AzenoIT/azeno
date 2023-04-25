@@ -11,11 +11,6 @@ class AccountTypeAdminConfig(admin.ModelAdmin):
     search_fields = ("name",)
     list_display_links = ("name",)
     save_on_top = True
-    list_filter = (
-        "name",
-        "duration",
-        "cost",
-    )
     list_per_page = 10
 
 
@@ -24,7 +19,7 @@ class PlayerAdminConfig(admin.ModelAdmin):
     based on :class:`players.models.Player` model."""
 
     list_display = ("nick", "user", "account_type", "created_at", "is_active")
-    search_fields = ("nick",)
+    search_fields = ("nick", "user__email")
     list_editable = (
         "account_type",
         "is_active",
@@ -33,7 +28,6 @@ class PlayerAdminConfig(admin.ModelAdmin):
     save_on_top = True
     list_filter = (
         "account_type",
-        "created_at",
     )
     list_per_page = 50
 

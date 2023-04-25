@@ -16,14 +16,11 @@ class CommentAdminConfig(admin.ModelAdmin):
     )
     search_fields = (
         "comment",
+        "user__email",
+        "deck__name",
     )
     list_display_links = ("user",)
     save_on_top = True
-    list_filter = (
-        "user",
-        "flashcard",
-        "deck",
-    )
     list_per_page = 50
 
 
