@@ -1,19 +1,22 @@
 import io
 import os
 import shutil
-from datetime import datetime
+import tempfile
+from datetime import datetime, timedelta
+from _decimal import Decimal
 
 import pytest
 from PIL import Image
 from django.contrib.auth import get_user_model
 from django.core.files.uploadedfile import SimpleUploadedFile
-
 from django.core.management import call_command
 from django.test import override_settings
 
-
+from comments.models import Comment
+from players.models import AccountType
 from decks.models import Category, Deck, Flashcard, Tag, DifficultyLevel
 from config import settings
+from stats.models import FlashcardStudy, DeckStudy
 
 
 @pytest.fixture
@@ -119,6 +122,59 @@ def tag_db(db, deck, flashcard):
 @pytest.fixture
 def flashcard(db):
     return Flashcard.objects.create()
+
+
+@pytest.fixture
+def account_type(db):
+    """Fixture for creating account type with saving to database.
+    :return: Object of class AccountType representing a row in table.
+    :rtype: AccountType
+    """
+    return AccountType.objects.create(name="Basic", duration=timedelta(days=60), cost=Decimal(10))
+
+
+@pytest.fixture
+def flashcard_study(db, user, flashcard):
+    """Fixture for creating a flashcard study instance with saving to database.
+    :return: Object of class FlashcardStudy representing a row in table.
+    :rtype: FlashcardStudy
+    """
+    return FlashcardStudy.objects.create(
+        user=user,
+        study_date=datetime.now(),
+        correct_answers=2,
+        flashcard=flashcard
+    )
+
+
+@pytest.fixture
+def deck_study(db, user, deck):
+    """Fixture for creating a deck study instance with saving to database.
+    :return: Object of class DeckStudy representing a row in table.
+    :rtype: DeckStudy
+    """
+    return DeckStudy.objects.create(
+        user=user,
+        study_date=datetime.now(),
+        correct_answers=3,
+        deck=deck,
+        study_duration=timedelta(hours=1),
+        realization=Decimal(42)
+    )
+
+
+@pytest.fixture
+def comment(db, user, flashcard, deck):
+    """Fixture for creating a comment with saving to database.
+    :return: Object of class Comment representing a row in table.
+    :rtype: Comment
+    """
+    return Comment.objects.create(
+        user=user,
+        flashcard=flashcard,
+        deck=deck,
+        comment="This is a test comment."
+    )
 
 
 @pytest.fixture
