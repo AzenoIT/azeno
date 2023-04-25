@@ -9,7 +9,7 @@ class FlashcardStudyAdminConfig(admin.ModelAdmin):
 
     list_display = ("flashcard", "user", "study_date", "correct_answers")
     # TODO: add flashcard__name to search_fields once Flashcard model is finished
-    search_fields = ("user",)
+    search_fields = ("user__email",)
     list_display_links = ("flashcard",)
     save_on_top = True
     list_per_page = 50
