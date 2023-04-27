@@ -1,3 +1,10 @@
-from django.shortcuts import render
+class StudyLogVIew():
+    pass
 
-# Create your views here.
+
+class FlashcardStudyView():
+    pass
+
+
+class DeckStudyViewr():
+    pass
