@@ -150,12 +150,7 @@ def flashcard_study(db, user, flashcard):
     :return: Object of class FlashcardStudy representing a row in table.
     :rtype: FlashcardStudy
     """
-    return FlashcardStudy.objects.create(
-        user=user,
-        study_date=datetime.now(),
-        correct_answers=2,
-        flashcard=flashcard
-    )
+    return FlashcardStudy.objects.create(user=user, study_date=datetime.now(), correct_answers=2, flashcard=flashcard)
 
 
 @pytest.fixture
@@ -170,7 +165,7 @@ def deck_study(db, user, deck):
         correct_answers=3,
         deck=deck,
         study_duration=timedelta(hours=1),
-        realization=Decimal(42)
+        realization=Decimal(42),
     )
 
 
@@ -180,21 +175,7 @@ def comment(db, user, flashcard, deck):
     :return: Object of class Comment representing a row in table.
     :rtype: Comment
     """
-    return Comment.objects.create(
-        user=user,
-        flashcard=flashcard,
-        deck=deck,
-        comment="This is a test comment."
-    )
-
-
-@pytest.fixture
-def difficulty_level(db):
-    """Fixture that will create databased saved difficulty object.
-    :return: Object of class DifficultyLevel representing a row in table.
-    :rtype: DifficultyLevel
-    """
-    return DifficultyLevel.objects.create(name="Hard", value=1)
+    return Comment.objects.create(user=user, flashcard=flashcard, deck=deck, comment="This is a test comment.")
 
 
 @pytest.fixture

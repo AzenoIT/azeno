@@ -57,4 +57,3 @@ class DeckStudy(StudyLog):
 
     class Meta:
         verbose_name_plural = "deck studies"
-

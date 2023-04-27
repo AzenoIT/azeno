@@ -3,8 +3,10 @@ from datetime import datetime
 
 def test_correct_gui_representation(flashcard_study, remove_test_data):
     flashcard_study_ = flashcard_study
-    assert str(flashcard_study_) == f"{flashcard_study_.study_date} - {flashcard_study_.flashcard} " \
-                                    f"- {flashcard_study_.user} - {flashcard_study_.correct_answers} correct answers"
+    assert (
+        str(flashcard_study_) == f"{flashcard_study_.study_date} - {flashcard_study_.flashcard} "
+        f"- {flashcard_study_.user} - {flashcard_study_.correct_answers} correct answers"
+    )
 
 
 def test_flashcard_study_creation(flashcard_study, flashcard, remove_test_data):
