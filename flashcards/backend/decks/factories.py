@@ -1,4 +1,4 @@
-from factory import Faker, Sequence, SubFactory, LazyAttribute
+from factory import Faker, Sequence, SubFactory, LazyAttribute, post_generation
 from factory.django import DjangoModelFactory, ImageField
 
 from decks.models import Category, Deck, Flashcard, Tag, DifficultyLevel
@@ -75,5 +75,17 @@ class TagFactory(DjangoModelFactory):
         model = Tag
 
     name = Faker("bothify", text="Tag_???-###")
-    deck = SubFactory(DeckFactory)
-    flashcard = SubFactory(FlashcardFactory)
+
+    @post_generation
+    def decks(self, create, extracted, **kwargs):
+        if not create or not extracted:
+            return
+
+        self.decks.add(*extracted)
+
+    @post_generation
+    def flashcards(self, create, extracted, **kwargs):
+        if not create or not extracted:
+            return
+
+        self.flashcards.add(*extracted)
