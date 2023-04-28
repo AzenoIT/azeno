@@ -7,6 +7,7 @@ import FormikTest from "modules/genericTests/FormikTest/FormikTest";
 import TailwindTest from "modules/genericTests/TailwindTest/TailwindTest";
 import FakerTest from "modules/genericTests/FakerTest/FakerTest";
 import MaterialUITest from "modules/genericTests/MaterialUITest/MaterialUITest";
+import AddDecksForm from "modules/AddDeck/components/AddDecksForm";
 
 function App() {
     const queryClient = new QueryClient();
@@ -21,6 +22,7 @@ function App() {
                     <TailwindTest />
                     <FormikTest />
                     <MaterialUITest />
+                    <AddDecksForm />
                 </ErrorBoundary>
             </AuthTokenProvider>
         </QueryClientProvider>
