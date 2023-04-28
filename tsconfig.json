@@ -32,7 +32,8 @@
   },
   "include": [
     "bank",
-    "quiz/web"
+    "quiz/web",
+    "flashcards/web"
   ],
   "references": [
     { "path": "bank" },

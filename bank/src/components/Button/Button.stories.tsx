@@ -5,7 +5,7 @@ import { expect } from "@storybook/jest";
 
 import "index.css";
 
-import Button from "components/Button";
+import Button from "@azeno/bank/components/Button";
 
 const meta: Meta<typeof Button> = {
     title: "Button",
