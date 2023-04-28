@@ -162,7 +162,6 @@ logging.config.dictConfig(settings_logging.get_logger_config(BASE_DIR))
 hostname, _, nginx_ips = socket.gethostbyname_ex("proxy")
 INTERNAL_IPS = nginx_ips
 
-
 # Django REST Framework
 
 REST_FRAMEWORK = {
@@ -178,6 +177,8 @@ REST_FRAMEWORK = {
     "DEFAULT_PARSER_CLASSES": [
         "rest_framework.parsers.JSONParser",
     ],
+    "DEFAULT_PAGINATION_CLASS": "decks.pagination.DecksPagination",
+    "PAGE_SIZE": 20,
 }
 
 # Simple JWT
