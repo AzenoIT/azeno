@@ -6,8 +6,10 @@ from _decimal import Decimal
 
 def test_correct_gui_representation(deck_study, remove_test_data):
     deck_study_ = deck_study
-    assert str(deck_study_) == f"{deck_study_.study_date} - {deck_study_.deck} " \
-                               f"- {deck_study_.user} - {deck_study_.realization}%"
+    assert (
+        str(deck_study_) == f"{deck_study_.study_date} - {deck_study_.deck} "
+        f"- {deck_study_.user} - {deck_study_.realization}%"
+    )
 
 
 def test_deck_study_creation(deck_study, deck, remove_test_data):
@@ -29,5 +31,5 @@ def test_deck_study_fields(deck_study, remove_test_data):
         "correct_answers",
         "deck_id",
         "study_duration",
-        "realization"
+        "realization",
     ]

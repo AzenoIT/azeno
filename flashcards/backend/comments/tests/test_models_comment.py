@@ -1,6 +1,5 @@
 def test_comment_gui_representation(comment, remove_test_data):
-    assert str(comment) == f"{comment.created_at} - {comment.user} " \
-                           f"- {comment.deck} - {comment.flashcard}"
+    assert str(comment) == f"{comment.created_at} - {comment.user} " f"- {comment.deck} - {comment.flashcard}"
 
 
 def test_comment_creation(comment, flashcard, deck, remove_test_data):
