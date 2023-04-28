@@ -132,13 +132,6 @@ from django.core.management.utils import get_random_secret_key
 get_random_secret_key()
 ```
 
-> **CORS_ALLOWED_ORIGINS=**
-
-Add origins that are allowed to make cross-site HTTP requests.
-*Make sure that origins are SPACE-SEPARATED, not comma-separated*
-For development, you can set this variable to:
-`CORS_ALLOWED_ORIGINS="http://localhost:frontend_port http://localhost:backend_port"`
-
 ### web.env
 
 > **VITE_PORT=**
