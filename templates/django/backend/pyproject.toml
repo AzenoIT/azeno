@@ -6,8 +6,7 @@ authors = ["Azeno Team"]
 
 [tool.poetry.dependencies]
 python = "^3.11"
-django = "4.1.7"
-psycopg2 = "2.9.5"
+django = "4.2"
 dj-database-url = "1.2.0"
 gunicorn = "20.1.0"
 django-debug-toolbar = "3.8.1"
@@ -17,6 +16,7 @@ coverage = "7.2.1"
 pytest-cov = "4.0.0"
 djangorestframework = "3.14.0"
 djangorestframework-simplejwt = "5.2.2"
+psycopg = "3.1.8"
 
 [tool.poetry.group.dev.dependencies]
 sphinx = "6.1.3"

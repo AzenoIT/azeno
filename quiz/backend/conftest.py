@@ -6,10 +6,11 @@ import pytest
 from PIL import Image
 from django.core.files.uploadedfile import SimpleUploadedFile
 
-from players.models import Player
+from players.models import Player, Profile
 from django.core.management import call_command
 
 from players.views import PlayerCreateAPIView
+from stats.models import Badge
 
 
 @pytest.fixture
@@ -53,6 +54,11 @@ def player_api(api_rf, db):
         return view(request)
 
     return create_player
+
+
+@pytest.fixture
+def profile_data(test_image, player):
+    return Profile.objects.create(player=player, avatar=test_image, score=100)
 
 
 @pytest.fixture
@@ -165,3 +171,39 @@ def temp_media_root(settings, tmpdir):
     """
     settings.MEDIA_ROOT = tmpdir.strpath
     return settings.MEDIA_ROOT
+
+
+@pytest.fixture
+def avatar_valid_type(request):
+    """Fixture that returns avatar with dimensions given in parameter.
+
+    :param request: fixture for providing information about executing test function.
+    :type request: FixtureRequest
+    :return: uploaded image with parametrized dimensions
+    """
+    size = request.param
+    img = Image.new("RGB", (size, size), color=(255, 0, 0))
+    image_data = io.BytesIO()
+    img.save(image_data, format="JPEG")
+
+    uploaded_image = SimpleUploadedFile(
+        "test_image.jpeg",
+        image_data.getvalue(),
+        content_type="image/jpeg",
+    )
+    yield uploaded_image
+
+
+@pytest.fixture
+def badge(db, uploaded_svg, temp_media_root):
+    """Badge instance fixture.
+
+    :param db: Database fixtue
+    :param uploaded_svg: Uploaded. svg file.
+    :return: Badge instance
+    """
+    yield Badge.objects.create(
+        name="Test badge",
+        description="Description with maximum length of 300 characters.",
+        image=uploaded_svg,
+    )

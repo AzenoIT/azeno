@@ -28,7 +28,17 @@ class TagAdminConfig(admin.ModelAdmin):
 class DeckAdminConfig(admin.ModelAdmin):
     """**DeckAdminConfig** is a configuration class for :class:`decks.models.Deck` model in the admin panel."""
 
-    list_display = ("name", "is_public", "price", "author", "rating", "is_active", "created_at")
+    list_display = (
+        "name",
+        "is_public",
+        "price",
+        "author",
+        "rating",
+        "is_active",
+        "created_at",
+        "category",
+        "difficulty_level",
+    )
     search_fields = ("name",)
     list_editable = ("price", "is_public", "is_active")
     list_display_links = ("name",)
@@ -51,14 +61,22 @@ class FlashcardAdminConfig(admin.ModelAdmin):
 
 
 class DifficultyLevelAdminConfig(admin.ModelAdmin):
-    pass
+    """Class **DifficultyAdminConfig**
+    displays difficulty levels list in admin panel based on :class:`decks.models.DifficultyLevel` model."""
+
+    ordering = ("name",)
+    list_display = ("name", "value")
+    search_fields = ("name",)
+    list_display_links = ("name",)
+    list_per_page = 50
 
 
 admin.site.register(Text)
 admin.site.register(Image)
 admin.site.register(Code)
-admin.site.register(DifficultyLevel, DifficultyLevelAdminConfig)
 admin.site.register(Flashcard, FlashcardAdminConfig)
 admin.site.register(Tag, TagAdminConfig)
 admin.site.register(Category, CategoryAdminConfig)
+admin.site.register(Tag, TagAdminConfig)
 admin.site.register(Deck, DeckAdminConfig)
+admin.site.register(DifficultyLevel, DifficultyLevelAdminConfig)

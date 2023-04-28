@@ -1,0 +1,41 @@
+[
+  {
+    "model": "stats.badge",
+    "pk": 1,
+    "fields": {
+      "created_at": "2023-04-18T07:10:31.612Z",
+      "updated_at": "2023-04-18T07:10:31.612Z",
+      "name": "First game",
+      "description": "Badge obtained when player won first game.",
+      "owned_by_user_percentage": 0.0,
+      "points": 10,
+      "image": "badges/1679492014two-sharks-logo_zRzlted.svg"
+    }
+  },
+  {
+    "model": "stats.badge",
+    "pk": 2,
+    "fields": {
+      "created_at": "2023-04-18T07:11:53.531Z",
+      "updated_at": "2023-04-18T07:11:53.531Z",
+      "name": "Velvet Student",
+      "description": "Obtained when player played two games",
+      "owned_by_user_percentage": 0.0,
+      "points": 20,
+      "image": "badges/1679492014two-sharks-logo_FLBPqjy.svg"
+    }
+  },
+  {
+    "model": "stats.badge",
+    "pk": 3,
+    "fields": {
+      "created_at": "2023-04-18T07:12:52.370Z",
+      "updated_at": "2023-04-18T07:12:52.370Z",
+      "name": "Owned Games",
+      "description": "Obtained after player created first game.",
+      "owned_by_user_percentage": 0.0,
+      "points": 10,
+      "image": "badges/1679492014two-sharks-logo_WBEzzQb.svg"
+    }
+  }
+]

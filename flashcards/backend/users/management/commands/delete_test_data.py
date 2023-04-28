@@ -1,12 +1,13 @@
+from django.conf import settings
 from django.core.management import BaseCommand
 from django.db import transaction
 
-from django.conf import settings
+from decks.models import Category, Deck, DifficultyLevel, Tag
 from users.models import CustomUser
 
 
 class Command(BaseCommand):
-    """Custom command for deleting generated user objects.
+    """Custom command for deleting generated test data objects.
 
     Usage:
 
@@ -19,7 +20,7 @@ class Command(BaseCommand):
     @transaction.atomic
     def handle(self, *args, **kwargs):
         """Command handler.
-        Deletes all objects except users with superuser flag set to True. If DEBUG is set to false
+        Deletes all test data objects except users with superuser flag set to True. If DEBUG is set to false
         method will not delete any objects, and display a warning that the project is probably
         in production environment.
 
@@ -36,6 +37,18 @@ class Command(BaseCommand):
             )
         else:
             self.stdout.write(self.style.SUCCESS("Deleting test data"))
-            models = [CustomUser]
-            for item in models:
+            tag_models = [Tag]
+            for item in tag_models:
+                item.objects.all().delete()
+            deck_models = [Deck]
+            for item in deck_models:
+                item.objects.all().delete()
+            category_models = [Category]
+            for item in category_models:
+                item.objects.all().delete()
+            difficulty_models = [DifficultyLevel]
+            for item in difficulty_models:
+                item.objects.all().delete()
+            user_models = [CustomUser]
+            for item in user_models:
                 item.objects.filter(is_superuser=False).delete()

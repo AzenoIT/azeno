@@ -2,7 +2,8 @@ import io
 import os
 import shutil
 import tempfile
-from datetime import datetime, date
+from datetime import datetime, date, timedelta
+from _decimal import Decimal
 
 import pytest
 from PIL import Image
@@ -10,13 +11,13 @@ from django.contrib.auth import get_user_model
 from django.contrib.contenttypes.models import ContentType
 from django.core.files.base import ContentFile
 from django.core.files.uploadedfile import SimpleUploadedFile
-
 from django.core.management import call_command
 from django.test import override_settings
-
-
-from decks.models import Category, Deck, Flashcard, Tag, DifficultyLevel, Text, Code
 from config import settings
+from comments.models import Comment
+from decks.models import Category, Deck, Flashcard, Tag, DifficultyLevel, Text, Code
+from players.models import AccountType
+from stats.models import FlashcardStudy, DeckStudy
 
 
 @pytest.fixture
@@ -27,7 +28,11 @@ def generated_data_with_custom_command(settings, db):
     """
     return call_command(
         "create_test_data",
-        "5",
+        "--decks=3",
+        "--users=5",
+        "--categories=3",
+        "--tags=2",
+        "--difficulties=1",
     )
 
 
@@ -39,8 +44,18 @@ def category(db):
     """
     name = "test category"
     description = "test category description"
-
     return Category.objects.create(name=name, description=description)
+
+
+@pytest.fixture
+def difficulty_level(db):
+    """Fixture that will create databased saved difficulty object.
+    :return: Object of class DifficultyLevel representing a row in table.
+    :rtype: DifficultyLevel
+    """
+    name = "Hard"
+    value = 1
+    return DifficultyLevel.objects.create(name=name, value=value)
 
 
 @pytest.fixture
@@ -56,7 +71,7 @@ def user(db):
 
 @pytest.fixture
 @override_settings(MEDIA_ROOT=os.path.join(settings.BASE_DIR, "test_dir", "media"))
-def deck(db, user, category, image):
+def deck(db, user, category, difficulty_level, image):
     """Fixture for creating deck with image.
     :return: Object of class Deck representing a row in table.
     :rtype: Deck
@@ -65,6 +80,7 @@ def deck(db, user, category, image):
         image=image,
         name="test",
         category=category,
+        difficulty_level=difficulty_level,
         author_id=user.id,
         description="test",
         price=42.00,
@@ -148,3 +164,57 @@ def code(db):
 @pytest.fixture
 def difficulty(db):
     return DifficultyLevel.objects.create()
+
+
+@pytest.fixture
+def account_type(db):
+    """Fixture for creating account type with saving to database.
+    :return: Object of class AccountType representing a row in table.
+    :rtype: AccountType
+    """
+    return AccountType.objects.create(name="Basic", duration=timedelta(days=60), cost=Decimal(10))
+
+
+@pytest.fixture
+def flashcard_study(db, user, flashcard):
+    """Fixture for creating a flashcard study instance with saving to database.
+    :return: Object of class FlashcardStudy representing a row in table.
+    :rtype: FlashcardStudy
+    """
+    return FlashcardStudy.objects.create(user=user, study_date=datetime.now(), correct_answers=2, flashcard=flashcard)
+
+
+@pytest.fixture
+def deck_study(db, user, deck):
+    """Fixture for creating a deck study instance with saving to database.
+    :return: Object of class DeckStudy representing a row in table.
+    :rtype: DeckStudy
+    """
+    return DeckStudy.objects.create(
+        user=user,
+        study_date=datetime.now(),
+        correct_answers=3,
+        deck=deck,
+        study_duration=timedelta(hours=1),
+        realization=Decimal(42),
+    )
+
+
+@pytest.fixture
+def comment(db, user, flashcard, deck):
+    """Fixture for creating a comment with saving to database.
+    :return: Object of class Comment representing a row in table.
+    :rtype: Comment
+    """
+    return Comment.objects.create(user=user, flashcard=flashcard, deck=deck, comment="This is a test comment.")
+
+
+@pytest.fixture
+def api_request_factory():
+    """Fixture for creating request instance.
+    :return: APIRequestFactory instance.
+    :rtype: APIRequestFactory
+    """
+    from rest_framework.test import APIRequestFactory
+
+    return APIRequestFactory()

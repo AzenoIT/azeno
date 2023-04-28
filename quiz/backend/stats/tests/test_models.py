@@ -21,11 +21,12 @@ def test_badge_model_validates_right_type_of_image(temp_media_root, uploaded_svg
     image_name = Badge.objects.first().image.name
 
     assert Badge.objects.first().name == "Funny Badge"
-    assert image_name.split('/')[-1] == uploaded_svg.name
+    assert image_name.split("/")[-1] == uploaded_svg.name
 
 
-def test_badge_model_raises_validation_error_with_wrong_file_types(temp_media_root, test_image, db):
-
+def test_badge_model_raises_validation_error_with_wrong_file_types(
+    temp_media_root, test_image, db
+):
     with pytest.raises(ValidationError) as exc_info:
         badge = Badge.objects.create(
             name="Funny Badge",
@@ -34,4 +35,10 @@ def test_badge_model_raises_validation_error_with_wrong_file_types(temp_media_ro
         )
         badge.full_clean()
 
-    assert "File type not supported. Use: svg+xml" in exc_info.value.messages
+    assert "File type not supported. Use: svg+xml" in exc_info.value.messages[0]
+
+
+def test_badge_get_absolute_url(badge):
+    url = f"/api/v1/badges/{badge.pk}/"
+
+    assert badge.get_absolute_url() == url

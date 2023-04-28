@@ -1,5 +1,6 @@
 from typing import List
-from rest_framework.generics import CreateAPIView
+from django.http import Http404
+from rest_framework.generics import CreateAPIView, RetrieveAPIView
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -36,3 +37,24 @@ class PlayerCreateAPIView(CreateAPIView):
 
     queryset = models.Player.objects.all()
     serializer_class = serializers.PlayerSerializer
+
+
+# TODO add authentication to the view below when auth type is decided on
+class PlayerRetrieveAPIView(RetrieveAPIView):
+    """Retrieve profile data for a specific player.
+    .. attention::
+        * For now authentication is not required.
+    :returns: PlayerRetrieveAPIView
+    :rtype: rest.framework.generics.RetrieveAPIView
+    """
+
+    serializer_class = serializers.ProfileSerializer
+    queryset = models.Player.objects.all()
+    lookup_field = "uuid"
+
+    def get_object(self):
+        uuid = self.kwargs.get("uuid")
+        try:
+            return models.Profile.objects.get(player_id=uuid)
+        except (models.Player.DoesNotExist, models.Profile.DoesNotExist):
+            raise Http404

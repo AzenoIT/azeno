@@ -229,10 +229,22 @@ For this reason suggested approach would be to install cypress locally and run i
    > 
 
 ## Test data generator
-1. To add some test data to database run:
-    > int_value = how many objects do you want to create
-    > 
-    >`docker compose exec <backend_service_name> python manage.py create_test_data int_value `
+1. To add some test data to the database run the command 
+    `docker compose exec <backend_service_name> python manage.py create_test_data` with the 
+    following optional arguments:
+    > `--decks=<int_value>` - number of deck objects you want to create
+    >
+    > `--users=<int_value>` - number of user objects you want to create 
+    >    
+    > `--tags=<int_value>` - number of tag objects you want to create    
+    >
+    > `--categories=<int_value>` - number of category objects you want to create    
+    >
+    > `--difficulties=<int_value>` - number of difficulty level objects you want to create    
+     
+    e.g `docker compose exec <backend_service_name> python manage.py create_test_data --decks=3 --users=4 --tags=2 
+    --categories=3 --difficulties=1`
+    
 
 2. To remove test data from database run:
     > `docker compose exec <backend_service_name> python manage.py delete_test_data`

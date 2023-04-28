@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 from helpers.validators.validators import validate_badge_file_type
 
@@ -19,6 +20,32 @@ class TimestampModel(models.Model):
 
     class Meta:
         abstract = True
+
+
+class PlayerBadge(models.Model):
+    """Model for linking badges :class:`stats.models.Badge` with player :class:`players.models.Player`
+
+    :param badge: ID of badge
+    :type badge: models.ForeignKey
+
+    :param player: ID of player
+    :type player: models.ForeignKey
+
+    :param obtained_on: Date when player obtained given badge.
+    :type obtained_on: models.DateTimeField
+
+    """
+
+    badge = models.ForeignKey("Badge", on_delete=models.DO_NOTHING)
+    player = models.ForeignKey("players.Player", on_delete=models.DO_NOTHING)
+    obtained_on = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = "badge obtained by player"
+        verbose_name_plural = "badges obtained by players"
+
+    def __str__(self):
+        return f"{self.badge.name} obtained by {self.player.nick}"
 
 
 class Badge(TimestampModel):
@@ -63,6 +90,17 @@ class Badge(TimestampModel):
             validate_badge_file_type,
         ],
     )
+    players = models.ManyToManyField(
+        "players.Player", related_name="badges", through="PlayerBadge"
+    )
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        """Method for building absolute url for Badge object.
+
+        :return: The absolute URL of the badge's detail view.
+        :rtype: str
+        """
+        return reverse("stats:badge_detail", args=[str(self.pk)])

@@ -646,6 +646,30 @@
     }
   },
   {
+    "model": "decks.difficulty_level",
+    "pk": 1,
+    "fields": {
+      "name": "Easy",
+      "value": 1
+    }
+  },
+  {
+    "model": "decks.difficulty_level",
+    "pk": 2,
+    "fields": {
+      "name": "Normal",
+      "value": 2
+    }
+  },
+  {
+    "model": "decks.difficulty_level",
+    "pk": 3,
+    "fields": {
+      "name": "Very Hard",
+      "description": 3
+    }
+  },
+  {
     "model": "decks.deck",
     "pk": 1,
     "fields": {
@@ -654,6 +678,7 @@
       "image": "decks/css_nd8viob.png",
       "name": "css & html",
       "category": 3,
+      "difficulty_level": 1,
       "is_public": true,
       "price": "14.00",
       "author": "e48564c8-6f7a-45a2-86ad-84e1eb665e51",
@@ -672,6 +697,7 @@
       "image": "decks/python_SFLgnib.png",
       "name": "python deck",
       "category": 2,
+      "difficulty_level": 2,
       "is_public": true,
       "price": "0.00",
       "author": "e48564c8-6f7a-45a2-86ad-84e1eb665e51",
@@ -690,6 +716,7 @@
       "image": "decks/js_YTFYvn0.png",
       "name": "js deck",
       "category": 1,
+      "difficulty_level": 3,
       "is_public": true,
       "price": "42.00",
       "author": "e48564c8-6f7a-45a2-86ad-84e1eb665e51",
