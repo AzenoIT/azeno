@@ -28,7 +28,17 @@ class TagAdminConfig(admin.ModelAdmin):
 class DeckAdminConfig(admin.ModelAdmin):
     """**DeckAdminConfig** is a configuration class for :class:`decks.models.Deck` model in the admin panel."""
 
-    list_display = ("name", "is_public", "price", "author", "rating", "is_active", "created_at")
+    list_display = (
+        "name",
+        "is_public",
+        "price",
+        "author",
+        "rating",
+        "is_active",
+        "created_at",
+        "category",
+        "difficulty_level",
+    )
     search_fields = ("name",)
     list_editable = ("price", "is_public", "is_active")
     list_display_links = ("name",)

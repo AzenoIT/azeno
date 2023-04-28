@@ -6,7 +6,7 @@ import pytest
 from PIL import Image
 from django.core.files.uploadedfile import SimpleUploadedFile
 
-from players.models import Player
+from players.models import Player, Profile
 from django.core.management import call_command
 
 from players.views import PlayerCreateAPIView
@@ -54,6 +54,11 @@ def player_api(api_rf, db):
         return view(request)
 
     return create_player
+
+
+@pytest.fixture
+def profile_data(test_image, player):
+    return Profile.objects.create(player=player, avatar=test_image, score=100)
 
 
 @pytest.fixture

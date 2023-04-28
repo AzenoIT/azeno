@@ -52,10 +52,10 @@ Validators
    :show-inheritance:
 
 
-Views
+Viewsets
 ------------------
 
-.. automodule:: decks.views
+.. automodule:: decks.viewsets
    :members:
    :undoc-members:
    :show-inheritance:
