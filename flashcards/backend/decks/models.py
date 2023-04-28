@@ -244,7 +244,3 @@ class Code(ItemBase):
     """Model representing Flashcard.question, Flashcard.answer in code block form"""
 
     content = models.TextField()
-
-
-class DifficultyLevel(models.Model):
-    pass
