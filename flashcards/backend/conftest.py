@@ -2,19 +2,20 @@ import io
 import os
 import shutil
 import tempfile
-from datetime import datetime, timedelta
+from datetime import datetime, date, timedelta
 from _decimal import Decimal
 
 import pytest
 from PIL import Image
 from django.contrib.auth import get_user_model
+from django.contrib.contenttypes.models import ContentType
+from django.core.files.base import ContentFile
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.core.management import call_command
 from django.test import override_settings
-
 from config import settings
 from comments.models import Comment
-from decks.models import Category, Deck, Flashcard, Tag, DifficultyLevel
+from decks.models import Category, Deck, Flashcard, Tag, DifficultyLevel, Text, Code
 from players.models import AccountType
 from stats.models import FlashcardStudy, DeckStudy
 
@@ -131,8 +132,30 @@ def tag_db(db, deck, flashcard):
 
 
 @pytest.fixture
-def flashcard(db):
-    return Flashcard.objects.create()
+def flashcard(db, deck, category, user, difficulty_level, text):
+    """Fixture for creating Flashcard"""
+    flashcard = Flashcard.objects.create(
+        name='Test Flashcard',
+        deck=deck,
+        category=category,
+        rating_flashcard=1,
+        question=text,
+        answer=text,
+        author=user,
+        difficulty=difficulty_level,
+    )
+
+    return flashcard
+
+
+@pytest.fixture
+def text(db):
+    return Text.objects.create(title="test", content="test")
+
+
+@pytest.fixture
+def code(db):
+    return Code.objects.create(title="test", content="test")
 
 
 @pytest.fixture
