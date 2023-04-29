@@ -1,15 +1,75 @@
-import { Avatar } from "@mui/material";
+import Avatar from "@azeno/bank/components/Avatar";
+import EditIcon from "@mui/icons-material/Edit";
+import { Dialog } from "@mui/material";
 
-interface AvatarSelectProps {}
+import AvatarEditor from "react-avatar-editor";
+import tailwindConfig from "@azeno/bank/tailwindConfig";
+import { ChangeEvent, useRef, useState } from "react";
 
-export default function AvatarSelect({}: AvatarSelectProps) {
+function useAvatarImage() {
+    const [image, setImage] = useState<string>("");
+    const [tempImage, setTempImage] = useState<string>("");
+
+    function addTempImage(event: ChangeEvent<HTMLInputElement>) {
+        if (!event.target.files) return;
+        setTempImage(URL.createObjectURL(event.target.files[0]));
+    }
+
+    function uploadImage(image: HTMLCanvasElement) {
+        console.log(image);
+        setImage(image.toDataURL());
+        setTempImage("");
+    }
+
+    return { image, tempImage, addTempImage, uploadImage, cancel: () => setTempImage("") };
+}
+
+interface AvatarSelectProps {
+    alt?: string;
+}
+
+export default function AvatarSelect({ alt = "Profile picture" }: AvatarSelectProps) {
+    const { image, tempImage, addTempImage, uploadImage, cancel } = useAvatarImage();
+    const editor = useRef<AvatarEditor>(null);
+
     return (
-        <div className="">
-            <div />
-            <Avatar />
-            <div>
-                <
+        <>
+            <Dialog open={tempImage !== ""} onClose={cancel}>
+                <div className="p-4 flex flex-col items-center">
+                    <AvatarEditor
+                        ref={editor}
+                        image={tempImage}
+                        width={250}
+                        height={250}
+                        border={50}
+                        color={[255, 255, 255, 0.6]} // RGBA
+                        scale={1}
+                    />
+                    <button
+                        type="button"
+                        onClick={() => uploadImage(editor.current!.getImage())}
+                        className="max-w-[200px] bg-primary-600 text-white"
+                    >
+                        Upload
+                    </button>
+                </div>
+            </Dialog>
+            <div className="flex items-center gap-x-2.5">
+                <div className="w-6" />
+                <Avatar src={image} alt={alt} type="lg" />
+                <label htmlFor="avatarImagePicker" className="w-6 cursor-pointer">
+                    <input
+                        id="avatarImagePicker"
+                        type="file"
+                        alt={alt}
+                        src={image}
+                        accept="image/*"
+                        onChange={addTempImage}
+                        className="hidden"
+                    />
+                    <EditIcon style={{ fill: tailwindConfig.theme.colors.primary["700"] }} />
+                </label>
             </div>
-        </div>
+        </>
     );
 }
