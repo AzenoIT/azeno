@@ -15,5 +15,8 @@
         {
             "path": "./tsconfig.node.json"
         }
+    ],
+    "files": [
+        "./tailwind.config.js"
     ]
 }
