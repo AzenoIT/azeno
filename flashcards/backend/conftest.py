@@ -132,20 +132,17 @@ def tag_db(db, deck, flashcard):
 
 
 @pytest.fixture
-def flashcard(db, deck, category, user, difficulty):
+def flashcard(db, deck, category, user, difficulty_level, text):
     """Fixture for creating Flashcard"""
     flashcard = Flashcard.objects.create(
+        name='Test Flashcard',
         deck=deck,
         category=category,
         rating_flashcard=1,
-        content_type_question=ContentType.objects.get_for_model(text),
-        object_id_question=1,
-        content_type_answer=ContentType.objects.get_for_model(text),
-        object_id_answer=1,
-        date_added=date.today,
-        date_modification=date.today,
+        question=text,
+        answer=text,
         author=user,
-        difficulty=difficulty,
+        difficulty=difficulty_level,
     )
 
     return flashcard
@@ -159,11 +156,6 @@ def text(db):
 @pytest.fixture
 def code(db):
     return Code.objects.create(title="test", content="test")
-
-
-@pytest.fixture
-def difficulty(db):
-    return DifficultyLevel.objects.create()
 
 
 @pytest.fixture
