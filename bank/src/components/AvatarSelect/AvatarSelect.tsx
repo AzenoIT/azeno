@@ -3,7 +3,6 @@ import EditIcon from "@mui/icons-material/Edit";
 import { Dialog } from "@mui/material";
 
 import AvatarEditor from "react-avatar-editor";
-import tailwindConfig from "@azeno/bank/tailwindConfig";
 import { ChangeEvent, useRef, useState } from "react";
 
 function useAvatarImage() {
@@ -15,9 +14,8 @@ function useAvatarImage() {
         setTempImage(URL.createObjectURL(event.target.files[0]));
     }
 
-    function uploadImage(image: HTMLCanvasElement) {
-        console.log(image);
-        setImage(image.toDataURL());
+    function uploadImage(canvas: HTMLCanvasElement) {
+        setImage(canvas.toDataURL());
         setTempImage("");
     }
 
@@ -31,6 +29,11 @@ interface AvatarSelectProps {
 export default function AvatarSelect({ alt = "Profile picture" }: AvatarSelectProps) {
     const { image, tempImage, addTempImage, uploadImage, cancel } = useAvatarImage();
     const editor = useRef<AvatarEditor>(null);
+
+    const handleResizeCompleted = () => {
+        if (!editor.current) return;
+        uploadImage(editor.current.getImage());
+    };
 
     return (
         <>
@@ -47,7 +50,7 @@ export default function AvatarSelect({ alt = "Profile picture" }: AvatarSelectPr
                     />
                     <button
                         type="button"
-                        onClick={() => uploadImage(editor.current!.getImage())}
+                        onClick={handleResizeCompleted}
                         className="max-w-[200px] bg-primary-600 text-white"
                     >
                         Upload
@@ -67,7 +70,7 @@ export default function AvatarSelect({ alt = "Profile picture" }: AvatarSelectPr
                         onChange={addTempImage}
                         className="hidden"
                     />
-                    <EditIcon style={{ fill: tailwindConfig.theme.colors.primary["700"] }} />
+                    <EditIcon style={{ fill: "#3BAEE1" }} />
                 </label>
             </div>
         </>

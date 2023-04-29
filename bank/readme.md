@@ -14,7 +14,7 @@
 # Useful commands
 
 | command                                          | description                          |
-|--------------------------------------------------|--------------------------------------|
+| ------------------------------------------------ | ------------------------------------ |
 | `docker compose run --rm -it web /bin/bash`      | Open terminal within web container   |
 | `docker compose run --rm -it web npm run lint`   | Run prettier to fix errors           |
 | `docker compose run --rm -it web npm run eslint` | Run eslint in the project            |
