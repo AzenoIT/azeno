@@ -26,9 +26,7 @@ class PlayerAdminConfig(admin.ModelAdmin):
     )
     list_display_links = ("nick",)
     save_on_top = True
-    list_filter = (
-        "account_type",
-    )
+    list_filter = ("account_type",)
     list_per_page = 50
 
 
