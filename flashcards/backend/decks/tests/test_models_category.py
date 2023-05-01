@@ -4,8 +4,8 @@ from django.db import IntegrityError, DataError
 from ..models import Category
 
 
-def test_category_gui_representation():
-    category = Category(name="test category", description="test category description")
+def test_category_gui_representation(image):
+    category = Category(name="test category", description="test category description", image=image)
 
     assert str(category) == category.name
 
@@ -20,6 +20,7 @@ def test_category_name_max_length(category):
 def test_category_in_db(category):
     assert category.name == "test category"
     assert category.description == "test category description"
+    assert category.image is not None
 
 
 def test_category_name_uniqueness(category):

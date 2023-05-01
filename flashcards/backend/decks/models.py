@@ -31,6 +31,8 @@ class TimeStampModel(models.Model):
 class Category(models.Model):
     """Model for representing Category for deck
 
+    :param image: Category image
+    :type image: file
     :param name: Category name
     :type name: str
     :param description: Description for category
@@ -38,8 +40,11 @@ class Category(models.Model):
 
     """
 
-    name: models.CharField = models.CharField(max_length=24, unique=True)
-    description: models.TextField = models.TextField()
+    image = models.FileField(
+        upload_to="decks/", validators=[validators.validate_file_type, validators.validate_file_size]
+    )
+    name = models.CharField(max_length=24, unique=True)
+    description = models.TextField()
 
     def __str__(self):
         return self.name
@@ -84,7 +89,7 @@ class Deck(TimeStampModel):
     """Model for representing deck data
 
     :param image: deck image
-    :type image: file, optional
+    :type image: file, None
     :param name: deck name
     :type name: str
     :param category: foreign key for Category model
@@ -109,8 +114,7 @@ class Deck(TimeStampModel):
 
     image = models.FileField(
         upload_to="decks/",
-        blank=True,
-        null=True,
+        default=None,
         validators=[validators.validate_file_type, validators.validate_file_size],
     )
     name = models.CharField(max_length=100)
