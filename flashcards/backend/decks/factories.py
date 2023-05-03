@@ -17,7 +17,7 @@ class CategoryFactory(DjangoModelFactory):
         django_get_or_create = ("name",)
 
     name = Sequence(lambda n: f"Category {n:0>4}")
-    description = Faker("sentence", nb_words=5)
+    description: Faker = Faker("sentence", nb_words=5)
 
 
 class DifficultyLevelFactory(DjangoModelFactory):
@@ -31,8 +31,8 @@ class DifficultyLevelFactory(DjangoModelFactory):
         model = DifficultyLevel
         django_get_or_create = ("value",)
 
-    value = Faker("pyint", min_value=1, max_value=10)
-    name = LazyAttribute(lambda a: "Difficulty " + str(a.value))
+    value: Faker = Faker("pyint", min_value=1, max_value=10)
+    name: LazyAttribute = LazyAttribute(lambda a: "Difficulty " + str(a.value))
 
 
 class DeckFactory(DjangoModelFactory):
@@ -46,15 +46,15 @@ class DeckFactory(DjangoModelFactory):
         model = Deck
 
     image = ImageField(color="blue")
-    name = Faker("language_name")
-    category = SubFactory(CategoryFactory)
-    difficulty_level = SubFactory(DifficultyLevelFactory)
+    name: Faker = Faker("language_name")
+    category: SubFactory = SubFactory(CategoryFactory)
+    difficulty_level: SubFactory = SubFactory(DifficultyLevelFactory)
     is_public = True
-    price = Faker("pydecimal", right_digits=2, min_value=1, max_value=99)
-    author = SubFactory(UserFactory)
+    price: Faker = Faker("pydecimal", right_digits=2, min_value=1, max_value=99)
+    author: SubFactory = SubFactory(UserFactory)
     popularity = 0
     is_active = True
-    description = Faker("sentence", nb_words=8)
+    description: Faker = Faker("sentence", nb_words=8)
 
 
 class FlashcardFactory(DjangoModelFactory):
@@ -74,6 +74,6 @@ class TagFactory(DjangoModelFactory):
     class Meta:
         model = Tag
 
-    name = Faker("bothify", text="Tag_???-###")
-    deck = SubFactory(DeckFactory)
-    flashcard = SubFactory(FlashcardFactory)
+    name: Faker = Faker("bothify", text="Tag_???-###")
+    deck: SubFactory = SubFactory(DeckFactory)
+    flashcard: SubFactory = SubFactory(FlashcardFactory)
