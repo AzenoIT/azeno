@@ -15,6 +15,13 @@ class CategoryAdminConfig(admin.ModelAdmin):
     list_per_page = 50
 
 
+class TagInLine(admin.TabularInline):
+    """Class **TagInLine** is a configuration class for :class:`decks.models.Tag` model in the admin panel to allow
+    changing tags directly from deck page"""
+
+    model = Tag.decks.through
+
+
 class TagAdminConfig(admin.ModelAdmin):
     """Class **TagAdminConfig** displays tags list in admin panel based on :class:`decks.models.Tag` model."""
 
@@ -23,6 +30,7 @@ class TagAdminConfig(admin.ModelAdmin):
     list_display_links = ("name",)
     list_filter = ("name",)
     list_per_page = 50
+    inlines = [TagInLine]
 
 
 class DeckAdminConfig(admin.ModelAdmin):
@@ -45,6 +53,7 @@ class DeckAdminConfig(admin.ModelAdmin):
     save_on_top = True
     list_filter = ("is_public", "is_active", "author", "category")
     list_per_page = 50
+    inlines = [TagInLine]
 
 
 class DifficultyLevelAdminConfig(admin.ModelAdmin):

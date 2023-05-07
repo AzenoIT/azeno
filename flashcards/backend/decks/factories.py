@@ -1,6 +1,6 @@
 from typing import Any
 
-from factory import Faker, Sequence, SubFactory, LazyAttribute
+from factory import Faker, Sequence, SubFactory, LazyAttribute, post_generation
 from factory.django import DjangoModelFactory, ImageField
 
 from .models import Category, Deck, Flashcard, Tag, DifficultyLevel
@@ -19,7 +19,7 @@ class CategoryFactory(DjangoModelFactory):
         django_get_or_create = ("name",)
 
     name = Sequence(lambda n: f"Category {n:0>4}")
-    description: Faker[str, Any] = Faker("sentence", nb_words=5)
+    description: Faker = Faker("sentence", nb_words=5)
 
 
 class DifficultyLevelFactory(DjangoModelFactory):
@@ -33,8 +33,8 @@ class DifficultyLevelFactory(DjangoModelFactory):
         model = DifficultyLevel
         django_get_or_create = ("value",)
 
-    value: Faker[str, Any] = Faker("pyint", min_value=1, max_value=10)
-    name: LazyAttribute[Any, Any] = LazyAttribute(lambda a: "Difficulty " + str(a.value))
+    value: Faker = Faker("pyint", min_value=1, max_value=10)
+    name: LazyAttribute = LazyAttribute(lambda a: "Difficulty " + str(a.value))
 
 
 class DeckFactory(DjangoModelFactory):
@@ -48,15 +48,15 @@ class DeckFactory(DjangoModelFactory):
         model = Deck
 
     image = ImageField(color="blue")
-    name: Faker[str, Any] = Faker("language_name")
-    category: SubFactory[Any, Any] = SubFactory(CategoryFactory)
-    difficulty_level: SubFactory[Any, Any] = SubFactory(DifficultyLevelFactory)
+    name: Faker = Faker("language_name")
+    category: SubFactory = SubFactory(CategoryFactory)
+    difficulty_level: SubFactory = SubFactory(DifficultyLevelFactory)
     is_public = True
-    price: Faker[str, Any] = Faker("pydecimal", right_digits=2, min_value=1, max_value=99)
-    author: SubFactory[Any, Any] = SubFactory(UserFactory)
+    price: Faker = Faker("pydecimal", right_digits=2, min_value=1, max_value=99)
+    author: SubFactory = SubFactory(UserFactory)
     popularity = 0
     is_active = True
-    description: Faker[str, Any] = Faker("sentence", nb_words=8)
+    description: Faker = Faker("sentence", nb_words=8)
 
 
 class FlashcardFactory(DjangoModelFactory):
@@ -76,6 +76,18 @@ class TagFactory(DjangoModelFactory):
     class Meta:
         model = Tag
 
-    name: Faker[str, Any] = Faker("bothify", text="Tag_???-###")
-    deck: SubFactory[Any, Any] = SubFactory(DeckFactory)
-    flashcard: SubFactory[Any, Any] = SubFactory(FlashcardFactory)
+    name: Faker = Faker("bothify", text="Tag_???-###")
+
+    @post_generation
+    def decks(self, create, extracted, **kwargs):
+        if not create or not extracted:
+            return
+
+        self.decks.add(*extracted)
+
+    @post_generation
+    def flashcards(self, create, extracted, **kwargs):
+        if not create or not extracted:
+            return
+
+        self.flashcards.add(*extracted)

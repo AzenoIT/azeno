@@ -122,17 +122,21 @@ def remove_test_data():
 
 
 @pytest.fixture
-def tag_db(db, deck, flashcard):
-    name = "tag_2"
-    deck = deck
-    flashcard = flashcard
-
-    return Tag.objects.create(name=name, deck=deck, flashcard=flashcard)
+def flashcard(db):
+    return Flashcard.objects.create()
 
 
 @pytest.fixture
-def flashcard(db):
-    return Flashcard.objects.create()
+def tag_db(db, deck, flashcard):
+    """Fixture for creating a tag  with saving to database.
+    :return: Object of class Tag representing a row in table.
+    :rtype: Tag
+    """
+
+    tag = Tag.objects.create(name="tag_2")
+    tag.flashcards.add(flashcard)
+    tag.decks.add(deck)
+    return tag
 
 
 @pytest.fixture

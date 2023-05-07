@@ -140,15 +140,16 @@ class Tag(models.Model):
     """Model for representing tags for decks
     :param name: Tag name
     :type name: str
-    :param deck: Foreign Key for Deck model
-    :type deck: int
-    :param flashcard: Foreign Key for Flashcard model
-    :type flashcard: int
+    :param decks:
+    :param decks: Foreign Key for Deck model
+    :type decks: int
+    :param flashcards: Foreign Key for Flashcard model
+    :type flashcards: int
     """
 
     name = models.CharField(max_length=24)
-    deck = models.ForeignKey("Deck", on_delete=models.DO_NOTHING)
-    flashcard = models.ForeignKey("Flashcard", on_delete=models.DO_NOTHING)
+    decks = models.ManyToManyField("Deck", related_name="tags", blank=True)
+    flashcards = models.ManyToManyField("Flashcard", related_name="tags", blank=True)
 
     def __str__(self):
         return self.name
