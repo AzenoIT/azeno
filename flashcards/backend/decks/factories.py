@@ -1,5 +1,3 @@
-from typing import Any
-
 from factory import Faker, Sequence, SubFactory, LazyAttribute, post_generation
 from factory.django import DjangoModelFactory, ImageField
 
