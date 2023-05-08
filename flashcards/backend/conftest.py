@@ -133,7 +133,7 @@ def tag_db(db, deck, flashcard):
     :rtype: Tag
     """
 
-    tag = Tag.objects.create(name='tag_2')
+    tag = Tag.objects.create(name="tag_2")
     tag.flashcards.add(flashcard)
     tag.decks.add(deck)
     return tag
