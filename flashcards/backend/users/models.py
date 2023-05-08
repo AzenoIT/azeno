@@ -82,7 +82,13 @@ class CustomUser(AbstractUser):
 
     id: models.UUIDField = models.UUIDField(default=uuid.uuid4, primary_key=True, editable=False, db_index=True)
     email = models.EmailField(_("email address"), unique=True)
-    username = models.CharField(max_length=100, validators=[UnicodeUsernameValidator()])
+    username = models.CharField(
+        max_length=100,
+        blank=True,
+        unique=False,
+        validators=[UnicodeUsernameValidator()],
+        help_text="Optional",
+    )
 
     USERNAME_FIELD: str = "email"
     REQUIRED_FIELDS: list[str] = [
