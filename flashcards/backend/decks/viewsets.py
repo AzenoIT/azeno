@@ -10,17 +10,20 @@ class DeckViewSet(viewsets.ModelViewSet):
     queryset = Deck.objects.all()
     serializer_class = DeckSerializer
     filterset_fields = {
-            "name": ["exact",],
-            "category": ["exact",],
-            "difficulty_level": ["gt", "lt", "gte", "lte"],
-            "price": ["gt", "lt", "gte", "lte"],
-            "popularity": ["gt", "lt", "gte", "lte"],
-            "rating": ["gt", "lt", "gte", "lte"],
-        }
+        "name": [
+            "exact",
+        ],
+        # "category": [
+        #     # "id",
+        # ],
+        # "difficulty_level": ["value"],
+        "price": ["gt", "lt", "gte", "lte"],
+        "popularity": ["gt", "lt", "gte", "lte"],
+        "rating": ["gt", "lt", "gte", "lte"],
+    }
 
     def list(self, request, *args, **kwargs):
         self.queryset = self.filter_queryset(self.get_queryset().order_by("-rating")).filter()
-        # self.queryset = self.filter_queryset(self.get_queryset()).filter()
         return super().list(request, *args, **kwargs)
 
     def retrieve(self, request, *args, pk=None, **kwargs):
