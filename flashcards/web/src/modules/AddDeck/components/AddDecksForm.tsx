@@ -45,8 +45,7 @@ function AddDecksForm() {
     };
 
     const handleCheckboxForSaleChange = (event: ChangeEvent<HTMLInputElement>) => {
-        const isChecked = event.target.checked;
-        setState({ ...state, checkboxForSale: isChecked, price: isChecked ? "" : false });
+        setState({ ...state, checkboxForSale: event.target.checked, price: event.target.checked });
     };
 
     const handleSubmit = (values: FormValues, actions: FormikHelpers<FormValues>) => {
@@ -57,92 +56,87 @@ function AddDecksForm() {
     };
 
     return (
-        <div>
-            <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
-                {({ isSubmitting }) => (
-                    <div className="vh-100 flex flex-col justify-center items-center">
-                        <Form className="w-1/2">
-                            <div className="mb-3 flex justify-center">
-                                <Typography>Add decks form</Typography>
-                            </div>
-                            <div className="mb-3">
-                                <TextField type="text" name="tagName" label="Tag name" fullWidth />
-                                <ErrorMessage name="tagName" />
-                            </div>
+        <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
+            {({ isSubmitting }) => (
+                <div className="vh-100 flex flex-col justify-center items-center">
+                    <Form className="w-1/2">
+                        <div className="mb-3 flex justify-center">
+                            <Typography>Add decks form</Typography>
+                        </div>
+                        <div className="mb-3">
+                            <TextField type="text" name="tagName" label="Tag name" fullWidth />
+                            <ErrorMessage name="tagName" />
+                        </div>
 
-                            <div className="mb-3">
-                                <TextField type="text" name="deckName" label="Deck name" fullWidth />
-                                <ErrorMessage name="deckName" />
-                            </div>
+                        <div className="mb-3">
+                            <TextField type="text" name="deckName" label="Deck name" fullWidth />
+                            <ErrorMessage name="deckName" />
+                        </div>
 
-                            <div className="mb-3">
-                                <InputLabel id="select-tag-label">Select Tag</InputLabel>
-                                <Select fullWidth labelId="select-tag-label" id="selectTag" name="selectTag">
-                                    <MenuItem value="Test">Test</MenuItem>
-                                    <MenuItem value="Test2">Test2</MenuItem>
-                                    <MenuItem value="Test3">Test3</MenuItem>
-                                </Select>
-                                <ErrorMessage name="selectTag" />
-                            </div>
-                            <div className="mb-3">
-                                <InputLabel id="select-a-category-label">Select a category</InputLabel>
-                                <Select
-                                    fullWidth
-                                    labelId="select-a-category-label"
-                                    id="selectCategory"
-                                    name="selectCategory"
-                                >
-                                    <MenuItem value="Test">Test</MenuItem>
-                                    <MenuItem value="Test2">Test2</MenuItem>
-                                    <MenuItem value="Test3">Test3</MenuItem>
-                                </Select>
-                                <ErrorMessage name="selectCategory" />
-                            </div>
+                        <div className="mb-3">
+                            <InputLabel id="select-tag-label">Select Tag</InputLabel>
+                            <Select fullWidth labelId="select-tag-label" id="selectTag" name="selectTag">
+                                <MenuItem value="Test">Test</MenuItem>
+                                <MenuItem value="Test2">Test2</MenuItem>
+                                <MenuItem value="Test3">Test3</MenuItem>
+                            </Select>
+                            <ErrorMessage name="selectTag" />
+                        </div>
+                        <div className="mb-3">
+                            <InputLabel id="select-a-category-label">Select a category</InputLabel>
+                            <Select
+                                fullWidth
+                                labelId="select-a-category-label"
+                                id="selectCategory"
+                                name="selectCategory"
+                            >
+                                <MenuItem value="Test">Test</MenuItem>
+                                <MenuItem value="Test2">Test2</MenuItem>
+                                <MenuItem value="Test3">Test3</MenuItem>
+                            </Select>
+                            <ErrorMessage name="selectCategory" />
+                        </div>
 
-                            <div>
-                                <FormControlLabel
-                                    control={
-                                        <Checkbox
-                                            checked={state.checkboxPublic}
-                                            onChange={handleCheckboxPublicChange}
-                                        />
-                                    }
-                                    label="Public"
-                                />
-                            </div>
+                        <div>
+                            <FormControlLabel
+                                control={
+                                    <Checkbox checked={state.checkboxPublic} onChange={handleCheckboxPublicChange} />
+                                }
+                                label="Public"
+                            />
+                        </div>
 
-                            <div>
-                                {state.checkboxPublic && (
-                                    <div className="mb-3">
-                                        <FormControlLabel
-                                            control={
-                                                <Checkbox
-                                                    checked={state.checkboxForSale}
-                                                    onChange={handleCheckboxForSaleChange}
-                                                />
-                                            }
-                                            label="For sale"
-                                        />
-                                    </div>
-                                )}
-                                {state.price && (
-                                    <div className="mb-3">
-                                        <TextField type="text" name="price" label="Enter your price" fullWidth />
-                                        <ErrorMessage name="price" />
-                                    </div>
-                                )}
-                            </div>
+                        <div>
+                            {state.checkboxPublic && (
+                                <div className="mb-3">
+                                    <FormControlLabel
+                                        control={
+                                            <Checkbox
+                                                checked={state.checkboxForSale}
+                                                onChange={handleCheckboxForSaleChange}
+                                            />
+                                        }
+                                        label="For sale"
+                                    />
+                                </div>
+                            )}
+                            {state.price && (
+                                <div className="mb-3">
+                                    <TextField type="text" name="price" label="Enter your price" fullWidth />
+                                    <ErrorMessage name="price" />
+                                </div>
+                            )}
+                        </div>
 
-                            <div className="flex justify-center mb-3">
-                                <Button variant="contained" type="submit" disabled={isSubmitting}>
-                                    Submit
-                                </Button>
-                            </div>
-                        </Form>
-                    </div>
-                )}
-            </Formik>
-        </div>
+                        <div className="flex justify-center mb-3">
+                            <Button variant="contained" type="submit" disabled={isSubmitting}>
+                                Submit
+                            </Button>
+                        </div>
+                    </Form>
+                </div>
+            )}
+        </Formik>
     );
 }
 
