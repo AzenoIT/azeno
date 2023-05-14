@@ -1,7 +1,17 @@
-import React, { useState } from "react";
-import { Formik, Form, ErrorMessage } from "formik";
+import { ChangeEvent, useState } from "react";
+import { Formik, Form, ErrorMessage, FormikHelpers } from "formik";
 import * as Yup from "yup";
 import { TextField, Typography, Button, Select, InputLabel, MenuItem, Checkbox, FormControlLabel } from "@mui/material";
+
+interface FormValues {
+    tagName: string;
+    deckName: string;
+    selectTag: string;
+    selectCategory: string;
+    checkboxPublic: boolean;
+    checkboxForSale: boolean;
+    price: number | string | boolean;
+}
 
 const validationSchema = Yup.object({
     tagName: Yup.string().min(2, "Too Short!").max(20, "Too Long!").required("Required!"),
@@ -12,11 +22,12 @@ const validationSchema = Yup.object({
     checkboxForSale: Yup.boolean(),
     price: Yup.number().when("checkboxForSale", {
         is: true,
-        then: Yup.number().required("Required!"),
+        then: Yup.number().required("Price is required!"),
+        otherwise: Yup.number().nullable(),
     }),
 });
 
-const initialValues = {
+const initialValues: FormValues = {
     tagName: "",
     deckName: "",
     selectTag: "",
@@ -27,17 +38,18 @@ const initialValues = {
 };
 
 function AddDecksForm() {
-    const [state, setState] = useState(initialValues);
+    const [state, setState] = useState<FormValues>(initialValues);
 
-    const handleCheckboxPublicChange = (event) => {
+    const handleCheckboxPublicChange = (event: ChangeEvent<HTMLInputElement>) => {
         setState({ ...state, checkboxPublic: event.target.checked });
     };
 
-    const handleCheckboxForSaleChange = (event) => {
-        setState({ ...state, checkboxForSale: event.target.checked, price: event.target.checked });
+    const handleCheckboxForSaleChange = (event: ChangeEvent<HTMLInputElement>) => {
+        const isChecked = event.target.checked;
+        setState({ ...state, checkboxForSale: isChecked, price: isChecked ? "" : false });
     };
 
-    const handleSubmit = (values, actions) => {
+    const handleSubmit = (values: FormValues, actions: FormikHelpers<FormValues>) => {
         setTimeout(() => {
             alert(JSON.stringify(values, null, 2));
             actions.setSubmitting(false);
