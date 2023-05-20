@@ -2,7 +2,7 @@ from django.conf import settings
 from django.core.management import BaseCommand
 from django.db import transaction
 
-from decks.models import Category, Deck, DifficultyLevel, Tag
+from decks.models import Category, Deck, DifficultyLevel, Tag, Flashcard
 from users.models import CustomUser
 
 
@@ -42,6 +42,9 @@ class Command(BaseCommand):
                 item.objects.all().delete()
             deck_models = [Deck]
             for item in deck_models:
+                item.objects.all().delete()
+            flashcard_model = [Flashcard]
+            for item in flashcard_model:
                 item.objects.all().delete()
             category_models = [Category]
             for item in category_models:

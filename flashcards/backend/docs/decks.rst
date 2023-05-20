@@ -1,4 +1,4 @@
-Decks App
+Decks app
 =============
 
 Subpackages
@@ -8,7 +8,6 @@ Subpackages
    :maxdepth: 2
 
    decks.tests
-
 
 Admin
 ------------------
@@ -42,6 +41,21 @@ Models
    :undoc-members:
    :show-inheritance:
 
+Serializers
+------------------------
+
+.. automodule:: decks.serializers
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Urls
+-----------------
+
+.. automodule:: decks.urls
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
 Validators
 -----------------------
@@ -51,9 +65,21 @@ Validators
    :undoc-members:
    :show-inheritance:
 
+<<<<<<< HEAD
 
 Viewsets
+=======
+Views
+>>>>>>> 16ffc40 (Add deck viewset with serializers)
 ------------------
+
+.. automodule:: decks.viewsets
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Viewsets
+---------------------
 
 .. automodule:: decks.viewsets
    :members:

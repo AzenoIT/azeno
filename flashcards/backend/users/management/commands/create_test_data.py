@@ -3,7 +3,7 @@ from django.core.management import BaseCommand
 from django.core.management.base import CommandParser
 from django.db import transaction
 
-from decks.factories import CategoryFactory, DeckFactory, DifficultyLevelFactory, TagFactory
+from decks.factories import CategoryFactory, DeckFactory, DifficultyLevelFactory, TagFactory, FlashcardFactory
 from users.factories import UserFactory
 
 
@@ -48,7 +48,7 @@ class Command(BaseCommand):
             for item in range(user_objects_count):
                 UserFactory()
             for item in range(tag_objects_count):
-                TagFactory()
+                TagFactory.create(decks=(DeckFactory(),), flashcards=(FlashcardFactory(),))
             for item in range(category_objects_count):
                 CategoryFactory()
             for item in range(difficulties_objects_count):

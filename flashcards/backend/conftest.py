@@ -1,7 +1,6 @@
 import io
 import os
 import shutil
-import tempfile
 from datetime import datetime, timedelta
 from _decimal import Decimal
 
@@ -36,14 +35,38 @@ def generated_data_with_custom_command(settings, db):
 
 
 @pytest.fixture
-def category(db):
+def image(name="test.png", suffix="PNG", size=(50, 50), color="red"):
+    """Fixture for creating image file.
+    :param name: name of image file
+    :type name: str
+    :param suffix: suffix of image file
+    :type suffix: str
+    :param size: size of image file
+    :type size: tuple
+    :param color: color of image file
+    :type color: str
+    :return: Object of class SimpleUploadedFile representing a file.
+    :rtype: SimpleUploadedFile
+    """
+
+    image = Image.new("RGB", size=size, color=color)
+    file = io.BytesIO()
+    image.save(file, format=suffix)
+    file.seek(0)
+
+    return SimpleUploadedFile(name, file.read(), content_type="image/png")
+
+
+@pytest.fixture
+def category(db, image):
     """Fixture for create category with saving to database.
     :return: Object of class Category representing a row in table.
     :rtype: Category
     """
     name = "test category"
     description = "test category description"
-    return Category.objects.create(name=name, description=description)
+
+    return Category.objects.create(name=name, description=description, image=image)
 
 
 @pytest.fixture
@@ -89,29 +112,6 @@ def deck(db, user, category, difficulty_level, image):
 
 
 @pytest.fixture
-def image(name="test.png", suffix="PNG", size=(50, 50), color="red"):
-    """Fixture for creating image file.
-    :param name: name of image file
-    :type name: str
-    :param suffix: suffix of image file
-    :type suffix: str
-    :param size: size of image file
-    :type size: tuple
-    :param color: color of image file
-    :type color: str
-    :return: Object of class SimpleUploadedFile representing a file.
-    :rtype: SimpleUploadedFile
-    """
-
-    image = Image.new("RGB", size=size, color=color)
-    file = io.BytesIO()
-    image.save(file, format=suffix)
-    file.seek(0)
-
-    return SimpleUploadedFile(name, file.read(), content_type="image/png")
-
-
-@pytest.fixture
 def remove_test_data():
     """Fixture for removing test data.
     :return: None
@@ -122,17 +122,21 @@ def remove_test_data():
 
 
 @pytest.fixture
-def tag_db(db, deck, flashcard):
-    name = "tag_2"
-    deck = deck
-    flashcard = flashcard
-
-    return Tag.objects.create(name=name, deck=deck, flashcard=flashcard)
+def flashcard(db):
+    return Flashcard.objects.create()
 
 
 @pytest.fixture
-def flashcard(db):
-    return Flashcard.objects.create()
+def tag_db(db, deck, flashcard):
+    """Fixture for creating a tag  with saving to database.
+    :return: Object of class Tag representing a row in table.
+    :rtype: Tag
+    """
+
+    tag = Tag.objects.create(name="tag_2")
+    tag.flashcards.add(flashcard)
+    tag.decks.add(deck)
+    return tag
 
 
 @pytest.fixture
@@ -187,3 +191,22 @@ def api_request_factory():
     from rest_framework.test import APIRequestFactory
 
     return APIRequestFactory()
+
+
+@pytest.fixture
+def uploaded_image():
+    """Fixture for creating and saving image file in JPEG format.
+    :return: Object of class SimpleUploadedFile representing a file.
+    :rtype: SimpleUploadedFile
+    """
+    img = Image.new("RGB", (50, 50), color=(255, 0, 0))
+    image_data = io.BytesIO()
+    img.save(image_data, format="jpeg")
+
+    uploaded_image = SimpleUploadedFile(
+        "test_image.jpeg",
+        image_data.getvalue(),
+        content_type="image/jpeg",
+    )
+
+    return uploaded_image

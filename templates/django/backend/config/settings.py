@@ -182,7 +182,7 @@ SIMPLE_JWT = {
     "ALGORITHM": "HS256",
     "SIGNING_KEY": os.environ.get("JWT_SECRET_KEY", SECRET_KEY),
     "VERIFYING_KEY": "",
-    "AUDIENCE": "azeno_quiz",
+    "AUDIENCE": "{{project_name}}",
     "ISSUER": None,
     "JSON_ENCODER": None,
     "JWK_URL": None,

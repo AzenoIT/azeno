@@ -20,7 +20,8 @@ Line 4 `description = "virtual environment for {{project_name}} application"` sh
 # e.g.
 
 description = "virtual environment for quiz application" or
-description = "virtual environment for flashcards application"
+description = "virtual environment for flashcards\
+ application"
 ```
 
 > ### backend/docs/conf.py
@@ -31,4 +32,12 @@ Line 25 `project = "{{project_name}}"` should be changed to:
 # e.q.
 
 project = "quiz" or project = "flashcards"
+```
+
+> ### backend/config/settings.py
+
+Line 185 `AUDIENCE: "{{project_name}}"` should be changed to:
+
+```python
+AUDIENCE: "quiz" or AUDIENCE: "flashcards"
 ```

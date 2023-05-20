@@ -1,10 +1,10 @@
-from rest_framework import routers
+from rest_framework.routers import DefaultRouter
 
-from .viewsets import DeckViewSet
+from . import viewsets
 
 app_name = "decks"
 
-router = routers.DefaultRouter()
-router.register(r"decks", DeckViewSet, basename="deck"),
+router = DefaultRouter()
+router.register(r"decks", viewsets.DeckViewSet, basename="deck")
 
 urlpatterns = [*router.urls]
