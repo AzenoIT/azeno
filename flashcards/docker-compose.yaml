@@ -10,6 +10,7 @@ services:
       - flashcards_web_network
     ports:
       - "3000:3000"
+      - "3001:3001"
     volumes:
       - ../bank/:/project/bank/
       - ../flashcards/:/project/flashcards/

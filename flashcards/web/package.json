@@ -4,6 +4,7 @@
     "version": "0.0.0",
     "type": "module",
     "scripts": {
+        "server": "json-server --watch ./helpers/api/db.json --routes ./helpers/api/routes.json --port 3001 --host 0.0.0.0",
         "dev": "vite",
         "build": "tsc && vite build",
         "preview": "vite preview",
@@ -63,6 +64,7 @@
         "eslint-plugin-react-hooks": "^4.6.0",
         "eslint-plugin-simple-import-sort": "^10.0.0",
         "happy-dom": "^8.9.0",
+        "json-server": "^0.17.3",
         "postcss": "^8.4.21",
         "prettier": "^2.8.4",
         "tailwindcss": "^3.2.7",

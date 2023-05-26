@@ -248,3 +248,19 @@ For this reason suggested approach would be to install cypress locally and run i
 
 2. To remove test data from database run:
     > `docker compose exec <backend_service_name> python manage.py delete_test_data`
+
+
+## Using Json Server
+1. To start json-server run:
+    > `docker compose exec web npm run server`
+
+2. The data is exposed on port 3001.
+3. Proxy was added on http://0.0.0.0:3001
+4. The following endpoints have been set up:
+    > `"/decks/" - get all decks`
+
+    > `"/decks/:id" - get deck with specific id`
+
+    > `"/decks/:status/show" - get decks with specific status `
+
+    > `"/decks/:id/flashcards" - get flashcards from specific deck`

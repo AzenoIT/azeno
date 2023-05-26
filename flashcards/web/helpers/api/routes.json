@@ -1,0 +1,7 @@
+{
+    "/api/v1/decks/": "/decks",
+    "/api/v1/decks/:id": "/decks?id=:id",
+    "/api/v1/decks/:status/show": "/decks?status_like=:status",
+    "/api/v1/decks/:id/flashcards": "/flashcards?decks_like=:id",
+    "/api/v1/decks/:id/flashcards/:id": "/flashcards?id=:id"
+}
