@@ -5,6 +5,7 @@
         "rootDir": "src",
         "outDir": "dist",
         "baseUrl": "./src",
+        "noEmit": true,
         "paths": {
             "@mui/styled-engine": ["./node_modules/@mui/styled-engine-sc"],
             "@azeno/bank/*": ["./*"]

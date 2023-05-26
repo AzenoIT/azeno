@@ -1,6 +1,6 @@
 /** @type {import("tailwindcss").Config} */
 
-import config from "@azeno/bank/tailwind.config.cjs";
+import config from "@azeno/bank/tailwind.config.js";
 
 export default {
     content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}", "../../node_modules/@azeno/bank/**/*.{js,ts,jsx,tsx}"],
