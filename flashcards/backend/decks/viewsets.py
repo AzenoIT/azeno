@@ -1,4 +1,7 @@
+from django_filters.rest_framework import DjangoFilterBackend
+
 from rest_framework import status
+
 from rest_framework.generics import get_object_or_404
 from rest_framework.parsers import MultiPartParser, JSONParser
 from rest_framework.response import Response
@@ -7,11 +10,20 @@ from rest_framework.viewsets import ModelViewSet
 from . import models, serializers
 from .models import Category
 
-
 class DeckViewSet(ModelViewSet):
     queryset = models.Deck.objects.all()
     serializer_class = serializers.DeckSerializer
     parser_classes = [MultiPartParser, JSONParser]
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = {
+        "category__name": ["exact"],
+        "difficulty_level__name": ["exact"],
+        "difficulty_level__value": ["gt", "lt"],
+        "name": ["exact"],
+        "price": ["gt", "lt", "gte", "lte"],
+        "popularity": ["gt", "lt", "gte", "lte"],
+        "rating": ["gt", "lt", "gte", "lte"],
+    }
 
     def retrieve(self, request, *args, pk=None, **kwargs):
         deck = get_object_or_404(queryset=self.get_queryset(), pk=pk)
