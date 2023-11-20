@@ -55,6 +55,20 @@ class Player(models.Model):
         super().save(*args, **kwargs)
 
 
+def upload_avatar_to(instance, filename):
+    """This function is used for generating a dynamic path for players avatars, so they
+    are stored in dedicated directories identified by uuid.
+
+    :param instance: Object of given class.
+    :type instance: Profile
+    :param filename: File uploaded by player.
+    :type: SimpleUploadedFile
+    :return: String containing a path to dedicated directory.
+    :rtype: str
+    """
+    return f"players/{instance.player.uuid}/avatars/{filename}"
+
+
 class Profile(models.Model):
     """Model for representing player settings and basic information. Related to :class:`players.models.Player`
 
@@ -80,7 +94,7 @@ class Profile(models.Model):
         "Player", on_delete=models.DO_NOTHING, related_name="profile"
     )
     avatar = models.FileField(
-        upload_to="players_avatars/",
+        upload_to=upload_avatar_to,
         validators=[validate_avatar_file_type_and_dimensions],
     )
     score = models.PositiveIntegerField(default=0, help_text="Points earned by player.")

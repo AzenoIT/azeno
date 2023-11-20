@@ -1,47 +1,91 @@
 [
   {
     "model": "players.player",
-    "pk": "42c021bf-5e5b-40f9-a452-213e7abf0cbf",
+    "pk": "045dcc73-a329-4b5e-bb9a-d09fa8ce68e0",
     "fields": {
-      "nick": "niki",
-      "rank": 0,
+      "nick": "Mieciu",
+      "rank": 20,
       "is_bot": false,
       "is_active": true,
-      "created_at": "2023-04-24T11:58:29.174Z"
+      "created_at": "2023-03-22T21:13:33.547Z"
     }
   },
   {
     "model": "players.player",
-    "pk": "bcf06c27-4102-4386-8f3b-ed25846c7a5a",
+    "pk": "414052bd-d2b1-4ec1-a1aa-ccbc203f73cb",
     "fields": {
-      "nick": "kiki",
-      "rank": 0,
+      "nick": "Julia",
+      "rank": 4,
       "is_bot": false,
       "is_active": true,
-      "created_at": "2023-04-24T11:58:16.680Z"
+      "created_at": "2023-03-22T21:14:06.197Z"
     }
   },
   {
     "model": "players.player",
-    "pk": "d24bc55c-cfc4-4b7d-8344-d2b68e5f28c1",
+    "pk": "5c8dd373-444e-4756-b165-807e242628cc",
     "fields": {
-      "nick": "miki",
+      "nick": "Stefan",
+      "rank": 2,
+      "is_bot": false,
+      "is_active": false,
+      "created_at": "2023-03-22T21:13:22.378Z"
+    }
+  },
+  {
+    "model": "players.player",
+    "pk": "7ee349ab-7607-47d9-8610-3cbfc7274d46",
+    "fields": {
+      "nick": "Antoni",
+      "rank": 5,
+      "is_bot": false,
+      "is_active": true,
+      "created_at": "2023-03-22T21:13:13.139Z"
+    }
+  },
+  {
+    "model": "players.player",
+    "pk": "92eb7229-6bd2-4ca0-86cb-2bb56d902125",
+    "fields": {
+      "nick": "Player1",
       "rank": 0,
       "is_bot": false,
       "is_active": true,
-      "created_at": "2023-04-24T11:58:22.484Z"
+      "created_at": "2023-03-22T21:12:38.239Z"
+    }
+  },
+  {
+    "model": "players.player",
+    "pk": "abbd8043-285e-4f41-a2f3-8e36b405954c",
+    "fields": {
+      "nick": "Beata",
+      "rank": 1,
+      "is_bot": false,
+      "is_active": false,
+      "created_at": "2023-03-22T21:13:51.976Z"
+    }
+  },
+  {
+    "model": "players.player",
+    "pk": "d8bddb6b-fc2b-4fb8-9914-10ebb1a91a63",
+    "fields": {
+      "nick": "Janusz",
+      "rank": 3,
+      "is_bot": false,
+      "is_active": true,
+      "created_at": "2023-03-22T21:12:54.736Z"
     }
   },
   {
     "model": "players.profile",
     "pk": 1,
     "fields": {
-      "player": "bcf06c27-4102-4386-8f3b-ed25846c7a5a",
-      "avatar": "players_avatars/49027_z17ig6l.jpg",
+      "player": "045dcc73-a329-4b5e-bb9a-d09fa8ce68e0",
+      "avatar": "players/045dcc73-a329-4b5e-bb9a-d09fa8ce68e0/avatars/resized-to140.jpeg",
       "score": 0,
-      "status": false,
-      "is_push_notification": false,
-      "is_findable": false,
+      "status": true,
+      "is_push_notification": true,
+      "is_findable": true,
       "is_invitable": false
     }
   },
@@ -49,12 +93,12 @@
     "model": "players.profile",
     "pk": 2,
     "fields": {
-      "player": "d24bc55c-cfc4-4b7d-8344-d2b68e5f28c1",
-      "avatar": "players_avatars/56549_0Tuxhev.jpg",
-      "score": 50,
+      "player": "414052bd-d2b1-4ec1-a1aa-ccbc203f73cb",
+      "avatar": "players/414052bd-d2b1-4ec1-a1aa-ccbc203f73cb/avatars/you_get_a_folder-resized-ro-140.jpeg",
+      "score": 0,
       "status": true,
       "is_push_notification": false,
-      "is_findable": false,
+      "is_findable": true,
       "is_invitable": true
     }
   },
@@ -62,10 +106,62 @@
     "model": "players.profile",
     "pk": 3,
     "fields": {
-      "player": "42c021bf-5e5b-40f9-a452-213e7abf0cbf",
-      "avatar": "players_avatars/58526_vRILKP7.jpg",
-      "score": 99,
+      "player": "5c8dd373-444e-4756-b165-807e242628cc",
+      "avatar": "players/5c8dd373-444e-4756-b165-807e242628cc/avatars/resized-to140.jpeg",
+      "score": 0,
       "status": true,
+      "is_push_notification": true,
+      "is_findable": true,
+      "is_invitable": true
+    }
+  },
+  {
+    "model": "players.profile",
+    "pk": 4,
+    "fields": {
+      "player": "7ee349ab-7607-47d9-8610-3cbfc7274d46",
+      "avatar": "players/7ee349ab-7607-47d9-8610-3cbfc7274d46/avatars/resized-to140.jpeg",
+      "score": 0,
+      "status": true,
+      "is_push_notification": false,
+      "is_findable": true,
+      "is_invitable": true
+    }
+  },
+  {
+    "model": "players.profile",
+    "pk": 5,
+    "fields": {
+      "player": "92eb7229-6bd2-4ca0-86cb-2bb56d902125",
+      "avatar": "players/92eb7229-6bd2-4ca0-86cb-2bb56d902125/avatars/you_get_a_folder-resized-ro-140.jpeg",
+      "score": 0,
+      "status": true,
+      "is_push_notification": false,
+      "is_findable": true,
+      "is_invitable": true
+    }
+  },
+  {
+    "model": "players.profile",
+    "pk": 6,
+    "fields": {
+      "player": "abbd8043-285e-4f41-a2f3-8e36b405954c",
+      "avatar": "players/abbd8043-285e-4f41-a2f3-8e36b405954c/avatars/resized-to140.jpeg",
+      "score": 0,
+      "status": false,
+      "is_push_notification": true,
+      "is_findable": true,
+      "is_invitable": true
+    }
+  },
+  {
+    "model": "players.profile",
+    "pk": 7,
+    "fields": {
+      "player": "d8bddb6b-fc2b-4fb8-9914-10ebb1a91a63",
+      "avatar": "players/d8bddb6b-fc2b-4fb8-9914-10ebb1a91a63/avatars/you_get_a_folder-resized-ro-140.jpeg",
+      "score": 0,
+      "status": false,
       "is_push_notification": true,
       "is_findable": true,
       "is_invitable": true
